@@ -1,2 +1,59 @@
+import SwiftUI
 
-asdadwdawdaddwads
+struct ContentView: View {
+    var body: some View {
+        TabView {
+            SearchView()
+                .tabItem {
+                    Label("Wyszukiwanie", systemImage: "magnifyingglass")
+                }
+            
+            FavoritesView()
+                .tabItem {
+                    Label("Ulubione", systemImage: "star")
+                }
+            
+            ProfileView()
+                .tabItem {
+                    Label("Profil", systemImage: "person")
+                }
+        }
+    }
+}
+
+
+struct SearchView: View {
+    var body: some View {
+        NavigationView {
+            VStack {
+                Text("Ekran wyszukiwania")
+                // Reszta Twojego widoku wyszukiwania
+            }
+            .navigationTitle("Wyszukiwanie")
+        }
+    }
+}
+
+struct FavoritesView: View {
+    var body: some View {
+        NavigationView {
+            VStack {
+                Text("Ekran ulubionych")
+                // Reszta Twojego widoku ulubionych
+            }
+            .navigationTitle("Ulubione")
+        }
+    }
+}
+
+struct ProfileView: View {
+    var body: some View {
+        NavigationView {
+            VStack {
+                Text("Ekran profilu")
+                // Reszta Twojego widoku profilu
+            }
+            .navigationTitle("Profil")
+        }
+    }
+}
