@@ -14,6 +14,12 @@ struct SHowView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             }
+            Text(show.title)
+                .font(.title)
+                .padding()
+            Text(show.year)
+                .font(.subheadline)
+                .padding()
         }
     }
 }
