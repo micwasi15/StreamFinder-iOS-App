@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SHowView: View {
+struct ShowView: View {
     var show: Show
 
     var body: some View {
@@ -17,7 +17,7 @@ struct SHowView: View {
             Text(show.title)
                 .font(.title)
                 .padding()
-            Text(show.year)
+            Text("\(show.year)")
                 .font(.subheadline)
                 .padding()
         }
@@ -26,6 +26,6 @@ struct SHowView: View {
 
 struct ShowView_Previews: PreviewProvider {
     static var previews: some View {
-        ShowView()
+        ShowView(show: MockData.shows[0])
     }
 }

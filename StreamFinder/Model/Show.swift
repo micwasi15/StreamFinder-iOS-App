@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct Show: Identifiable {
+struct Show: Identifiable, Decodable {
     var id = UUID()
     var title: String
     var description: String

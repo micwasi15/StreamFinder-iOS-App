@@ -13,7 +13,7 @@ struct FavouritesView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
+            VStack() {
                 TextField("Search...", text: $searchText, onCommit: {
                     Task {
                         await searchShows(for: searchText)
@@ -21,12 +21,10 @@ struct FavouritesView: View {
                 })
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-
+                
+                Spacer()
                 if isLoading {
                     ProgressView("Loading...") 
-                } else if let errorMessage = errorMessage {
-                    Text("Error: \(errorMessage)")
-                        .foregroundColor(.red)
                 } else {
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 16) {
@@ -40,43 +38,46 @@ struct FavouritesView: View {
                     }
                     .background(Constants.GraysGray6)
                 }
+                Spacer()
             }
-            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+            //.searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
         }
     }
     
     func searchShows(for query: String) async {
+        isLoading = true
         await Task.sleep(3 * 1_000_000_000)
+        isLoading = false
         self.shows = MockData.shows
         return
 
-        isLoading = true
-
-        let apiURL = "https://api.example.com/shows/search?query=\(query)"
-        
-        guard let url = URL(string: apiURL) else {
-            isLoading = false
-            return
-        }
-
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let decodedShows = try JSONDecoder().decode([Show].self, from: data)
-            DispatchQueue.main.async {
-                self.shows = decodedShows
-                self.isLoading = false
-            }
-        } catch {
-            DispatchQueue.main.async {
-                self.isLoading = false
-            }
-        }
+//        isLoading = true
+//
+//        let apiURL = "https://api.example.com/shows/search?query=\(query)"
+//        
+//        guard let url = URL(string: apiURL) else {
+//            isLoading = false
+//            return
+//        }
+//
+//        do {
+//            let (data, _) = try await URLSession.shared.data(from: url)
+//            let decodedShows = try JSONDecoder().decode([Show].self, from: data)
+//            DispatchQueue.main.async {
+//                self.shows = decodedShows
+//                self.isLoading = false
+//            }
+//        } catch {
+//            DispatchQueue.main.async {
+//                self.isLoading = false
+//            }
+//        }
     }
 }
 
 
 struct FavoritesView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoritesView()
+        FavouritesView()
     }
 }

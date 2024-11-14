@@ -19,7 +19,7 @@ struct ContentView: View {
                     Label("Search", systemImage: "magnifyingglass")
                 }
             
-            FavoritesView()
+            FavouritesView()
                 .tabItem {
                     Label("Favourites", systemImage: "star")
                 }
