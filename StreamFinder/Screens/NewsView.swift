@@ -1,14 +1,19 @@
 import SwiftUI
 
 struct NewsView: View {
+    var vm = NewsViewModel()
+
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Ekran z newsami")
-                // Reszta Twojego widoku z newsami
+            List(vm.articles) { article in
+                NavigationLink(destination: ArticleDetailView(article: article)) {
+                    ArticleListCell(article: article)
+                }
             }
-            .navigationTitle("Newsy")
         }
+        // .onAppear {
+        //     vm.fetchArticles()
+        // }
     }
 }
 

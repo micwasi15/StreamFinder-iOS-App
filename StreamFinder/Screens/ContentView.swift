@@ -8,33 +8,17 @@ struct Constants {
     static let BodyLargeTracking: CGFloat = 0.5
     static let SchemesInverseSurface: Color = Color(red: 0.2, green: 0.18, blue: 0.21)
     static let BodyLargeSize: CGFloat = 16
-    static let BodyLargeFont: String = "Roboto"
+    //static let BodyLargeFont: String = "Roboto"
+    static let bgColor = Color(red: 0.12, green: 0.12, blue: 0.12)
 }
 
 struct ContentView: View {
     var body: some View {
-        TabView {
-            SearchView()
-                .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
-                }
-            
-            FavouritesView()
-                .tabItem {
-                    Label("Favourites", systemImage: "star")
-                }
-
-            NewsView()
-                .tabItem {
-                    Label("News", systemImage: "newspaper")
-                }
-            
-            OptionsView()
-                .tabItem {
-                    Label("Options", systemImage: "person")
-                }
+        ZStack {
+            Constants.bgColor
+                .ignoresSafeArea()
+            MainTabView()
         }
-        .background(Color(red: 0.5, green: 0.12, blue: 0.12))
     }
 }
 

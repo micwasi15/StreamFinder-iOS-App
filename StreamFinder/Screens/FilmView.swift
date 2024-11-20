@@ -20,6 +20,6 @@ struct FilmView: View {
 
 struct FilmView_Previews: PreviewProvider {
     static var previews: some View {
-        FilmView(show: MockData.shows[0])
+        FilmView(show: MockData.shows[1])
     }
 }

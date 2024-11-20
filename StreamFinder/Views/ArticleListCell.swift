@@ -1,11 +1,11 @@
 import SwiftUI
 
-struct ShowView: View {
-    var show: Show
+struct ArticleListCell: View {
+    var article: Article
 
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: show.imageURL)) { image in
+            AsyncImage(url: URL(string: article.imageURL)) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -14,19 +14,19 @@ struct ShowView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             }
-            Text(show.title)
+            Text(article.title)
                 .font(.title)
                 .padding()
-            Text(show.yearRange)
+            Text(article.description)
                 .font(.subheadline)
                 .padding()
         }
-        .frame(allignment: .top-leading)
+        .frame(alignment: .top-leading)
     }
 }
 
-struct ShowView_Previews: PreviewProvider {
+struct ArticleListCell_Previews: PreviewProvider {
     static var previews: some View {
-        ShowView(show: MockData.shows[0])
+        ArticleListCell(article: MockData.articles[0])
     }
 }
