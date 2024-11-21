@@ -21,7 +21,7 @@ struct ArticleListCell: View {
                 .font(.subheadline)
                 .padding()
         }
-        .frame(alignment: .top-leading)
+        .frame(alignment: .topLeading)
     }
 }
 

@@ -2,7 +2,7 @@ import SwiftUI
 
 class FavouritesViewModel: ObservableObject, ShowsGridViewModel {
     @Published var searchText = ""
-    @Published var shows: [Show] = getFavourites()
+    @Published var shows: [Show] = MockData.shows
     @Published var isLoading = false
     @Published var showsEmptyText = "No favourites yet. Tap the heart icon on a show to add it to your favourites."
 

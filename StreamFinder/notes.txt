@@ -1,59 +1,7 @@
-import SwiftUI
-https://cdn.movieofthenight.com/show/132/poster/horizontal/en/360.jpg?Expires=1749513583&Signature=ItDrN1-Xkm3OkscKo8j44cBbMvGamEW46uPbOgjgy919P5k~9iDSwObcQHWcJI3K84tCcDoqWGhPQ4-limd~HGVrgZebtlt1fK9uohUShuD6iM~teHWcMepm-AZ~RcMZl5Vn7Uum-t8Fqa9n84qJgUdFBsjEK-wIIooMZfY33H7N0bIwB6A1HtzvLlOt9nAMfMG5eAE2IceFnGTWAbEJQhVl4LJne2xM5TH5bFDfYL~RED6XAoP68sq840eblc0gtMoH5ZCLBm23VJMi1dErLiUwac~3iVnPFFtuGq~H1n8n2Q6aCB-qSVgk0HpKD75sZXBLhwLl435vZ7TdBs~EXA__&Key-Pair-Id=KK4HN3OO4AT5R
-struct ContentView: View {
-    var body: some View {
-        TabView {
-            SearchView()
-                .tabItem {
-                    Label("Wyszukiwanie", systemImage: "magnifyingglass")
-                }
-            
-            FavoritesView()
-                .tabItem {
-                    Label("Ulubione", systemImage: "star")
-                }
-            
-            ProfileView()
-                .tabItem {
-                    Label("Profil", systemImage: "person")
-                }
-        }
-    }
-}
-
-
-struct SearchView: View {
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Ekran wyszukiwania")
-                // Reszta Twojego widoku wyszukiwania
-            }
-            .navigationTitle("Wyszukiwanie")
-        }
-    }
-}
-
-struct FavoritesView: View {
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Ekran ulubionych")
-                // Reszta Twojego widoku ulubionych
-            }
-            .navigationTitle("Ulubione")
-        }
-    }
-}
-
-struct ProfileView: View {
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Ekran profilu")
-                // Reszta Twojego widoku profilu
-            }
-            .navigationTitle("Profil")
-        }
-    }
-}
+niebieska czcionka w favView
+strzalka w newsView
+Publishing changes from background threads is not allowed; make sure to publish values from the main thread (via operators like receive(on:)) on model updates.
+\SearchViewModel.searchText is isolated to the main actor. Accessing it via Binding from a different actor will cause undefined behaviors, and potentioal data races; This warning will become a runtime crash in a future version of SwiftUI.
+\SearchViewModel.searchText is isolated to the main actor. Accessing it via Binding from a different actor will cause undefined behaviors, and potentioal data races; This warning will become a runtime crash in a future version of SwiftUI.
+Publishing changes from background threads is not allowed; make sure to publish values from the main thread (via operators like receive(on:)) on model updates.
+Publishing changes from background threads is not allowed; make sure to publish values from the main thread (via operators like receive(on:)) on model updates.

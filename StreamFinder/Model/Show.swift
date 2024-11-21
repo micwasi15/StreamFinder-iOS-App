@@ -9,7 +9,7 @@ struct Show: Identifiable, Decodable {
     var ShowType: ShowType
 }
 
-struct Movie: Identifiable, Decodable {
+struct Film: Identifiable, Decodable {
     var id = UUID()
     var apiId: Int
     var title: String
@@ -78,51 +78,6 @@ enum Country: String, Decodable {
     case it
     case es
     case jp
-    case in
-    case br
-    case mx
-    case nl
-    case se
-    case no
-    case dk
-    case fi
-    case ru
-    case kr
-    case cn
-    case tw
-    case hk
-    case sg
-    case id
-    case th
-    case ph
-    case my
-    case vn
-    case pl
-    case cz
-    case hu
-    case sk
-    case at
-    case ch
-    case be
-    case pt
-    case ie
-    case gr
-    case tr
-    case ar
-    case cl
-    case co
-    case pe
-    case ve
-    case ec
-    case bo
-    case uy
-    case py
-    case pa
-    case cr
-    case gt
-    case sv
-    case hn
-    case ni
     case br
     case mx
     case nl

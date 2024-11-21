@@ -1,25 +1,25 @@
 import SwiftUI
 
 struct FilmView: View {
-    let show: Show
+    let film: Film
     
     var body: some View {
         VStack {
-            Text(show.title)
+            Text(film.title)
                 .font(.title)
                 .padding()
             
-            Text(show.description)
+            Text(film.description)
                 .padding()
             
             Spacer()
         }
-        .navigationTitle(show.title)
+        .navigationTitle(film.title)
     }
 }
 
 struct FilmView_Previews: PreviewProvider {
     static var previews: some View {
-        FilmView(show: MockData.shows[1])
+        FilmView(film: MockData.films[0])
     }
 }

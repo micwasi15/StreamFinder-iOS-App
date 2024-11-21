@@ -1,25 +1,25 @@
 import SwiftUI
 
 struct SeriesView: View {
-    let show: Show
+    let series: Series
     
     var body: some View {
         VStack {
-            Text(show.title)
+            Text(series.title)
                 .font(.title)
                 .padding()
             
-            Text(show.description)
+            Text("\(series.year)")
                 .padding()
             
             Spacer()
         }
-        .navigationTitle(show.title)
+        .navigationTitle(series.title)
     }
 }
 
 struct SeriesView_Previews: PreviewProvider {
     static var previews: some View {
-        SeriesView(show: MockData.shows[0])
+        SeriesView(series: MockData.series[0])
     }
 }
