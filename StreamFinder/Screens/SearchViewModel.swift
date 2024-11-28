@@ -11,6 +11,7 @@ class SearchViewModel: ShowsGridViewModel, ObservableObject {
         GridItem(.flexible())
     ]
     
+    @MainActor
     func searchShows(for query: String) async {
         isLoading = true
         await Task.sleep(3 * 1_000_000_000)

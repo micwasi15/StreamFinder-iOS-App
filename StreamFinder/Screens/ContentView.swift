@@ -22,6 +22,14 @@ struct ContentView: View {
     }
 }
 
+struct BackGroundView: View {
+    var body: some View {
+        ContainerRelativeShape()
+            .fill(Constants.bgColor)
+            .ignoresSafeArea()
+    }
+}
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

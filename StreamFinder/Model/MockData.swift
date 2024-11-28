@@ -48,10 +48,18 @@ struct MockData {
     
     static let articles = [
         Article(
+            apiId: 1,
             title: "Tytuł artykułu",
-            description: "Opis artykułu",
             imageURL: "https://via.placeholder.com/150",
             body: "Treść artykułu"
+        )
+    ]
+
+    static let news = [
+        News(
+            apiId: 1,
+            title: "Tytuł artykułu",
+            imageURL: "https://via.placeholder.com/150"
         )
     ]
     

@@ -11,9 +11,9 @@ struct NewsView: View {
                 }
             }
         }
-        // .onAppear {
-        //     vm.fetchArticles()
-        // }
+        .onAppear {
+            vm.fetchArticles()
+        }
     }
 }
 
