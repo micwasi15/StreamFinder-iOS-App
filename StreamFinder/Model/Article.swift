@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct News: Indetifable {
+struct News: Identifiable {
     var id = UUID()
     var apiId: Int
     var title: String

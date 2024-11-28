@@ -6,7 +6,7 @@ struct Show: Identifiable, Decodable {
     var title: String
     var yearRange: String
     var posterURL: String
-    var ShowType: ShowType
+    var showType: ShowType
 }
 
 struct Film: Identifiable, Decodable {

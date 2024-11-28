@@ -1,7 +1,4 @@
-niebieska czcionka w favView
+niebieska czcionka w favView, wszedzie po wyszukaniu
 strzalka w newsView
-Publishing changes from background threads is not allowed; make sure to publish values from the main thread (via operators like receive(on:)) on model updates.
-\SearchViewModel.searchText is isolated to the main actor. Accessing it via Binding from a different actor will cause undefined behaviors, and potentioal data races; This warning will become a runtime crash in a future version of SwiftUI.
-\SearchViewModel.searchText is isolated to the main actor. Accessing it via Binding from a different actor will cause undefined behaviors, and potentioal data races; This warning will become a runtime crash in a future version of SwiftUI.
-Publishing changes from background threads is not allowed; make sure to publish values from the main thread (via operators like receive(on:)) on model updates.
-Publishing changes from background threads is not allowed; make sure to publish values from the main thread (via operators like receive(on:)) on model updates.
+news sie nie laduja
+tlo sie nie wyswietla

@@ -5,9 +5,9 @@ struct NewsView: View {
 
     var body: some View {
         NavigationView {
-            List(vm.articles) { article in
-                NavigationLink(destination: ArticleDetailView(article: article)) {
-                    ArticleListCell(article: article)
+            List(vm.news) { news in
+                NavigationLink(destination: ArticleDetailView(article: vm.getArticle(id: news.apiId))) {
+                    NewsListCell(news: news)
                 }
             }
         }
