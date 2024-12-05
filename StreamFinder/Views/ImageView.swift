@@ -1,6 +1,8 @@
+import SwiftUI
+
 extension Image {
     static func fromFolder(named name: String, folder: String) -> Image? {
-        if let path = Bundle.main.path(forResource: "\(folder)/\(name)", ofType: "png"),
+        if let path = Bundle.main.path(forResource: "\(name)", ofType: "png"),
            let uiImage = UIImage(contentsOfFile: path) {
             return Image(uiImage: uiImage)
         }

@@ -1,4 +1,5 @@
 niebieska czcionka w favView, wszedzie po wyszukaniu
 strzalka w newsView
-news sie nie laduja
+//news sie nie laduja
 tlo sie nie wyswietla
+frame wokol placeholderow search

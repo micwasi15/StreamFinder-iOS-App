@@ -17,8 +17,10 @@ struct ShowView: View {
             }
             Text(show.title)
                 .font(.subheadline)
+                .foregroundStyle(.black)
             Text(show.yearRange)
                 .font(.subheadline)
+                .foregroundStyle(.black)
         }
         .frame(width: 185.0, alignment: .topLeading)
     }

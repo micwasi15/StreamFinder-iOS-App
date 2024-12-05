@@ -58,7 +58,12 @@ struct MockData {
         ),
         News(
             apiId: 2,
-            title: "Tytu2",
+            title: "Tytul2",
+            imageURL: "https://cdn.movieofthenight.com/show/212/poster/horizontal/en/360.jpg?Expires=1749507764&Signature=Zc7nT6SqggsU9gLKOCro3V7NBKo-0bic7TPYUJbUD~6hBTaDE0CsIMnLb4nY3rG604BeK5pKcBt2z3c3hA28mAaHvkaGZc77rINjDtqbxQdOO9u~HxxriLZlc0mPtiLzkMhrAujeAez2UJTXUQraNOGDVI~ND9LeM118slDIxDJPB-c2-I4Cm7VZDZ3Mwcv18CENOxczCJiT0jc1fM7844-Qn959oaJgK99znTSsQJWFRnsbe4AU-lJaPHeiLmgXMNV0A1APgINuk6LuW-ZInYgJSww6ug-csjUJOBHkFR3CUNQrpv5Hmp3XPTxlgB9jsgxTXMjOTXpz5BP2VyYw2g__&Key-Pair-Id=KK4HN3OO4AT5R"
+        ),
+        News(
+            apiId: 3,
+            title: "Tytul3",
             imageURL: "https://cdn.movieofthenight.com/show/212/poster/horizontal/en/360.jpg?Expires=1749507764&Signature=Zc7nT6SqggsU9gLKOCro3V7NBKo-0bic7TPYUJbUD~6hBTaDE0CsIMnLb4nY3rG604BeK5pKcBt2z3c3hA28mAaHvkaGZc77rINjDtqbxQdOO9u~HxxriLZlc0mPtiLzkMhrAujeAez2UJTXUQraNOGDVI~ND9LeM118slDIxDJPB-c2-I4Cm7VZDZ3Mwcv18CENOxczCJiT0jc1fM7844-Qn959oaJgK99znTSsQJWFRnsbe4AU-lJaPHeiLmgXMNV0A1APgINuk6LuW-ZInYgJSww6ug-csjUJOBHkFR3CUNQrpv5Hmp3XPTxlgB9jsgxTXMjOTXpz5BP2VyYw2g__&Key-Pair-Id=KK4HN3OO4AT5R"
         )
     ]
@@ -83,7 +88,7 @@ struct MockData {
             url: ""
         ),
         StreamingOption(
-            service: .disneyPlus,
+            service: .disney,
             country: .us,
             url: ""
         )

@@ -16,6 +16,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             BackGroundView()
+            Color.red.ignoresSafeArea(.all)
             MainTabView()
         }
     }

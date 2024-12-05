@@ -6,8 +6,12 @@ struct NewsView: View {
     var body: some View {
         NavigationView {
             List(vm.news) { news in
-                NavigationLink(destination: ArticleDetailView(article: vm.getArticle(id: news.apiId))) {
+                ZStack{
                     NewsListCell(news: news)
+                    NavigationLink(destination: ArticleDetailView(article: vm.getArticle(id: news.apiId))) {
+                        EmptyView()
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
         }

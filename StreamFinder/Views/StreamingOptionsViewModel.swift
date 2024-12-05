@@ -1,8 +1,8 @@
 import SwiftUI
 
 class StreamingOptionsViewModel: ObservableObject {
-    @Published var streamingOptions: [StreamingOption] = []
-    @Published var currentStreamingOption: StreamingOption? = streamingOptions.count > 0 ? streamingOptions[0] : nil
+    @Published var streamingOptions: [StreamingOption] = MockData.streamingOptions
+    @Published var currentStreamingOption: StreamingOption? = MockData.streamingOptions[0]
 
     func watch() {
         if let url = currentStreamingOption?.url {

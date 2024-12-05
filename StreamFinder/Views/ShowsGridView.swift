@@ -33,7 +33,7 @@ struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
                     ScrollView {
                         LazyVGrid(columns: vm.columns, spacing: 16) {
                             ForEach(vm.shows) { show in
-                                NavigationLink(destination: show.showType == ShowType.series ? AnyView(FilmView(film: MockData.films[0])) : AnyView(SeriesView(series: MockData.series[0]))) {
+                                NavigationLink(destination: show.showType == ShowType.series ? AnyView(FilmView(vm: FilmViewModel())) : AnyView(SeriesView(series: MockData.series[0]))) {
                                     ShowView(show: show)
                                 }
                             }

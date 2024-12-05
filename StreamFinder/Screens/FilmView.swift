@@ -5,8 +5,7 @@ struct FilmView: View {
     
     var body: some View {
         VStack {
-            YoutubePlayer(path: vm.film.trailer)
-                .frame(height: 300)
+            YoutubePlayer(path: vm.film.trailerURL)
 
             VStack(alignment: .center, spacing: 10) { 
                 HStack(alignment: .center) {
@@ -16,41 +15,39 @@ struct FilmView: View {
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
-                    .frame(maxWidth: .infinity, alignment: .center)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
                 // Alternative Views and Spacers
-                View()
+                //View()
                 }
                 .padding(.leading, 0)
                 .padding(.trailing, 5)
                 .padding(.top, 0)
                 .padding(.bottom, 3)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .overlay(
-                Rectangle()
-                    .inset(by: 0.17)
-                    .stroke(Constants.MiscellaneousFloatingTabPillFill, lineWidth: 0.33333)
-                )
-
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
                 HStack(alignment: .center, spacing: 5) { 
                     Text("\(vm.film.year) |")
                         .font(.subheadline)
                         .fontWeight(.regular)
                         .multilineTextAlignment(.center)
                         .lineLimit(1)
-                        .frame(maxWidth: .infinity, alignment: .center)
-
-                    Image.fromIconsFolder(named: "imdb")
+                        .frame(alignment: .leading)
+                    
+                    if let img = Image.fromIconsFolder(named: "imdb") {
+                        img
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 20, height: 20, alignment: .center)
-
+                        .frame(width: 20, height: 20, alignment: .leading)
+                    }
+                    
+                    //format 1 place
                     Text("\(vm.film.imdbRating)")
                         .font(.subheadline)
                         .fontWeight(.regular)
                         .multilineTextAlignment(.center)
                         .lineLimit(1)
-                        .frame(maxWidth: .infinity, alignment: .center)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .padding(.horizontal, 8)
                 .padding(.vertical, 0)
@@ -60,7 +57,7 @@ struct FilmView: View {
             .padding(.vertical, 0)
             .frame(alignment: .top)
 
-            StreamingOptionsView(vm: StreamingOptionsViewModel(streamingOptions: vm.film.streamingOptions))
+            StreamingOptionsView(vm: StreamingOptionsViewModel())
                 .padding(.horizontal, 18)
                 .padding(.vertical, 0)
                 .frame(alignment: .top)
@@ -71,15 +68,15 @@ struct FilmView: View {
                     .fontWeight(.regular)
                     .multilineTextAlignment(.leading)
                     .lineLimit(nil)
+                    .padding(.horizontal, 18)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
-        .navigationTitle(film.title)
     }
 }
 
 struct FilmView_Previews: PreviewProvider {
     static var previews: some View {
-        FilmView(film: MockData.films[0])
+        FilmView(vm: FilmViewModel())
     }
 }

@@ -5,37 +5,56 @@ struct StreamingOptionsView: View {
     
     var body: some View {
         if (vm.streamingOptions.count == 0) {
-            return AnyView(Text("No streaming options available"))
-        }
-        HStack {
-            HStack(alignment: .center, spacing: 10) { 
-                if let streamingOption = vm.currentStreamingOption {
-                    Image.fromLogosFolder(named: streamingOption.logo)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: Constants.Icon, height: Constants.Icon, alignment: .center)
+            AnyView(Text("No streaming options available"))
+        } else {
+            HStack {
+                Spacer()
+                HStack(alignment: .center, spacing: 10) {
+                    if let streamingOption = vm.currentStreamingOption {
+                        if let img = Image.fromLogosFolder(named: streamingOption.service.rawValue) {
+                            img
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(alignment: .center)
+                        }
+                    }
                 }
-            }
-            .padding(0)
-            .frame(alignment: .center)
+                .padding(0)
+                .frame(height: 80, alignment: .center)
 
-            HStack(alignment: .center, spacing: 10) {
-                if let streamingOption = vm.currentStreamingOption {
-                    Image.fromFlagsFolder(named: streamingOption.country)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: Constants.Icon, height: Constants.Icon, alignment: .center)
+                HStack(alignment: .center, spacing: 10) {
+                    if let streamingOption = vm.currentStreamingOption {
+                        if let img = Image.fromFlagsFolder(named: streamingOption.country.rawValue) {
+                            img
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(alignment: .center)
+                        }
+                    }
                 }
+                .padding(0)
+                .frame(height: 80, alignment: .center)
+                
+                Spacer()
+                
+                Text("+\(vm.streamingOptions.count - 1)")
+                
+                Spacer()
+
+                Button("Watch", action: vm.watch)
+                .labelStyle(.titleAndIcon)
+                .buttonStyle(.borderedProminent)
+                .controlSize(.regular)
+                
+                Spacer()
             }
-            .padding(0)
-            .frame(alignment: .center)
-
-            Text("+\(vm.streamingOptions.count - 1)")
-
-            Button("Watch", action: vm.watch)
-            .labelStyle(.titleAndIcon)
-            .buttonStyle(.borderedProminent)
-            .controlSize(.small)
         }
+    }
+}
+
+
+struct StreamingOptionsView_Previews: PreviewProvider {
+    static var previews: some View {
+        StreamingOptionsView(vm: StreamingOptionsViewModel())
     }
 }

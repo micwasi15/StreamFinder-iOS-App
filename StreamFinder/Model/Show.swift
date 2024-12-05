@@ -60,16 +60,17 @@ enum ShowType: String, Decodable {
 }
 
 enum StreamingService: String, Decodable {
-    case netflix
-    case hulu
-    case amazon
-    case disney
-    case hbo
-    case apple
+    case netflix = "netflix"
+    case hulu = "hulu"
+    case amazon = "amazon"
+    case disney = "disney-plus-logo"
+    case hbo = "max-logo"
+    case apple = "apple"
+    case peacock = "peacock"
 }
 
 enum Country: String, Decodable {
-    case us
+    case us = "icons8-usa-96"
     case uk
     case ca
     case au

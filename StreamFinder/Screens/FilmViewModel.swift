@@ -1,5 +1,5 @@
 import SwiftUI
 
 class FilmViewModel: ObservableObject {
-    @Published var films: Film = MockData.films[0]
+    @Published var film: Film = MockData.films[0]
 }

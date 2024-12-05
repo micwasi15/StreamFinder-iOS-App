@@ -19,6 +19,7 @@ struct NewsListCell: View {
                 .padding()
         }
         .frame(alignment: .topLeading)
+        .cornerRadius(10)
     }
 }
 
