@@ -69,11 +69,24 @@ struct MockData {
              title: "Monsters Inc",
              year: 2001,
              posterURL: "https://cdn.movieofthenight.com/show/212/poster/vertical/en/240.jpg?Expires=1749507762&Signature=WLsO4yvTla0KoKOe3YHqYdmd-XZOvcnxiYS~Bm4~7sNzOfJ6ehc9ZYTW73aPTAATytG88rLPnWzQWdKW-2jVmHdO7E5dqGyM5bK1fXzsaAQcinFe61LXg1IH1fxixX6DkYfTjuaNCWj~yLI~U-jsfVpEtkfqLHr8giNCjmbd-707rmzy7KkJQu~XA57DYEcrX1y3~2mz4TiL2vbxfjdiCyVoB07ZE~bv6mEOQDHaeC6Wv26b4KDhab41gsCST8AORtncYKSU8B0fXmhMLbm3X~WMHrQO3Ii2H5hirovslOc2bosxkvsPp9nZ4NnQ3v-usV1Wu0Z8jro5yq6nDUtxlA__&Key-Pair-Id=KK4HN3OO4AT5R",
-             trailerURL: "",
+             trailerURL: "https://www.youtube.com/watch?v=6tCxnHCqqxg",
              imdbRating: 9.0,
              streamingOptions: [],
              description: "Description"
             )
+    ]
+
+    static let streamingOptions = [
+        StreamingOption(
+            service: .netflix,
+            country: .us,
+            url: ""
+        ),
+        StreamingOption(
+            service: .disneyPlus,
+            country: .us,
+            url: ""
+        )
     ]
     
     static let series = [
