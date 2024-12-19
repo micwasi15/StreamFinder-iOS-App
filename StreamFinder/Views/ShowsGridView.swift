@@ -44,6 +44,7 @@ struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
                 }
                 Spacer()
             }
+            .background(Constants.GraysGray6)
             //.searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
         }
     }

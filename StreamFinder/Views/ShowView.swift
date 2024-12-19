@@ -14,6 +14,7 @@ struct ShowView: View {
                 Image(systemName: "photo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .frame(height: 100)
             }
             Text(show.title)
                 .font(.subheadline)

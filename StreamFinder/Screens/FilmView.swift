@@ -72,6 +72,7 @@ struct FilmView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
+        .onAppear(perform: vm.fetchFilm)
     }
 }
 

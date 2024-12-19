@@ -3,3 +3,4 @@ strzalka w newsView
 //news sie nie laduja
 tlo sie nie wyswietla
 frame wokol placeholderow search
+placeholder sie nie rozciaga wszerz

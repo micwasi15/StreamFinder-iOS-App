@@ -24,7 +24,15 @@ struct AnyDecodable: Decodable {
     }
 }
 
-func fetchShow(from url: String, completion: @escaping (Result<Show, Error>) -> Void) {
+struct ShowJson: Decodable {
+    let id: Int
+    let apiId: Int
+    let title: String
+    let showType: String
+    let jsonData: [String: AnyDecodable]
+}
+
+func fetchShow(from url: String, completion: @escaping (Result<ShowJson, Error>) -> Void) {
     guard let apiUrl = URL(string: url) else {
         completion(.failure(NSError(domain: "Invalid URL", code: 1, userInfo: nil)))
         return
@@ -42,8 +50,10 @@ func fetchShow(from url: String, completion: @escaping (Result<Show, Error>) -> 
         }
 
         do {
+            print(data)
+            print(response)
             let decoder = JSONDecoder()
-            let show = try decoder.decode(Show.self, from: data)
+            let show = try decoder.decode(ShowJson.self, from: data)
             completion(.success(show))
         } catch {
             completion(.failure(error))
