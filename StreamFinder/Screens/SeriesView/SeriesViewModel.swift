@@ -1,7 +1,7 @@
 import SwiftUI
 
 class SeriesViewModel: ObservableObject {
-    @Published var series: Series
+    @Published var series: Series?
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
 
