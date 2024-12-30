@@ -1,62 +1,29 @@
 import SwiftUI
 
-struct Show: Identifiable, Decodable {
-    var id = UUID()
-    var apiId: Int
-    var title: String
-    var yearRange: String
-    var posterURL: String
-    var showType: ShowType
-}
-
-struct Film: Identifiable, Decodable {
-    var id = UUID()
-    var apiId: Int
-    var title: String
-    var year: Int
-    var posterURL: String
-    var trailerURL: String
-    var imdbRating: Double
-    var streamingOptions: [StreamingOption]
-    var description: String
-}
-
-struct Series: Identifiable, Decodable {
-    var id = UUID()
-    var apiId: Int
-    var title: String
-    var year: Int
-    var posterURL: String
-    var trailerURL: String
-    var imdbRating: Double
-    var seasons: [Season]
-}
-
-struct Season: Identifiable, Decodable {
-    var id = UUID()
-    var number: Int
-    var year: Int
-    var episodes: [Episode]
-}
-
-struct Episode: Identifiable, Decodable {
-    var id = UUID()
-    var number: Int
-    var title: String
-    var streamingOptions: [StreamingOption]
-    var description: String
-}
-
 struct StreamingOption: Identifiable, Decodable {
     var id = UUID()
     var service: StreamingService
-    var country: Country
     var url: String
-}
 
-enum ShowType: String, Decodable {
-    case movie
-    case series
+    enum CodingKeys: String, CodingKey {
+        case service
+        case url = "link"
+    }
+
+    enum ServiceKeys: String, CodingKey {
+        case id
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let serviceContainer = try container.nestedContainer(keyedBy: ServiceKeys.self, forKey: .service)
+        let serviceId = try serviceContainer.decode(String.self, forKey: .id)
+        guard let parsedService = StreamingService(rawValue: serviceId) else {
+            throw DecodingError.dataCorruptedError(forKey: .id, in: serviceContainer, debugDescription: "Invalid service ID: \(serviceId)")
+        }
+        service = parsedService
+        url = try container.decode(String.self, forKey: .url)
+    }
 }
 
 enum StreamingService: String, Decodable {
