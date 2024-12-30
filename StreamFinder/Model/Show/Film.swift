@@ -37,7 +37,7 @@ struct Film: Identifiable, Decodable {
         year = try container.decode(Int.self, forKey: .year)
         trailerURL = try? container.decodeIfPresent(String.self, forKey: .trailerURL)
         imdbRating = try container.decode(Double.self, forKey: .imdbRating)
-        streamingOptions = try container.decode([StreamingOption].self, forKey: .streamingOptions)
+        streamingOptions = try container.decode([Country: [StreamingOption]].self, forKey: .streamingOptions)
         description = try container.decode(String.self, forKey: .description)
 
         if let posterSetContainer = try? container.nestedContainer(keyedBy: PosterKeys.self, forKey: .posterSet),

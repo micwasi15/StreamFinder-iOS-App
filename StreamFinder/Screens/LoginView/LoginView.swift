@@ -1,7 +1,8 @@
 import SwiftUI
 
-struct LoginView: some View {
-    let vm: LoginViewModel
+struct LoginView: View {
+    @ObservedObject
+    var vm: LoginViewModel
 
     var body: some View {
         VStack {
