@@ -22,6 +22,6 @@ struct Episode: Identifiable, Decodable {
     var id = UUID()
     var number: Int
     var title: String
-    var streamingOptions: [StreamingOption]
+    var streamingOptions: [Country: [StreamingOption]]
     var description: String
 }
