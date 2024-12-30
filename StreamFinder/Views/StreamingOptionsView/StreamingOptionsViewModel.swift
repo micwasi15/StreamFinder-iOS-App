@@ -1,7 +1,7 @@
 import SwiftUI
 
 class StreamingOptionsViewModel: ObservableObject {
-    @Published var streamingOptions: [Country: [StreamingOption]] = MockData.streamingOptions
+    @Published var streamingOptions: [Country: [StreamingOption]] = [:]
     @Published var currentStreamingOption: StreamingOption?
     @Published var currentCountry: Country?
 

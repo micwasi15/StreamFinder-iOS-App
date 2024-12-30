@@ -8,7 +8,7 @@ struct Film: Identifiable, Decodable {
     var posterURL: String
     var trailerURL: String?
     var imdbRating: Double
-    var streamingOptions: [Country: [StreamingOption]]
+    var streamingOptions: [String: [StreamingOption]]
     var description: String
 
     enum CodingKeys: String, CodingKey {
@@ -23,7 +23,7 @@ struct Film: Identifiable, Decodable {
     }
 
     enum PosterKeys: String, CodingKey {
-        case horizontalPoster = "horizontal_poster"
+        case horizontalPoster = "horizontalPoster"
     }
 
     enum HorizontalPosterKeys: String, CodingKey {
@@ -37,7 +37,7 @@ struct Film: Identifiable, Decodable {
         year = try container.decode(Int.self, forKey: .year)
         trailerURL = try? container.decodeIfPresent(String.self, forKey: .trailerURL)
         imdbRating = try container.decode(Double.self, forKey: .imdbRating)
-        streamingOptions = try container.decode([Country: [StreamingOption]].self, forKey: .streamingOptions)
+        streamingOptions = try container.decode([String: [StreamingOption]].self, forKey: .streamingOptions)
         description = try container.decode(String.self, forKey: .description)
 
         if let posterSetContainer = try? container.nestedContainer(keyedBy: PosterKeys.self, forKey: .posterSet),

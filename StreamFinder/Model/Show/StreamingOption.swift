@@ -18,22 +18,25 @@ struct StreamingOption: Identifiable, Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let serviceContainer = try container.nestedContainer(keyedBy: ServiceKeys.self, forKey: .service)
         let serviceId = try serviceContainer.decode(String.self, forKey: .id)
-        guard let parsedService = StreamingService(rawValue: serviceId) else {
-            throw DecodingError.dataCorruptedError(forKey: .id, in: serviceContainer, debugDescription: "Invalid service ID: \(serviceId)")
+        if let parsedService = StreamingService(rawValue: serviceId) {
+            service = parsedService
+        } else {
+            service = .unknown
         }
-        service = parsedService
         url = try container.decode(String.self, forKey: .url)
     }
 }
 
 enum StreamingService: String, Decodable {
+    case unknown = "unknown"
     case netflix = "netflix"
     case hulu = "hulu"
     case amazon = "amazon"
-    case disney = "disney-plus-logo"
-    case hbo = "max-logo"
+    case disney = "disney"
+    case hbo = "hbo"
     case apple = "apple"
     case peacock = "peacock"
+    case paramount = "paramount"
 }
 
 enum Country: String, Decodable {

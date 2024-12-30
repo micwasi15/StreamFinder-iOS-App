@@ -23,7 +23,6 @@ class APIShowHandler: APIHandler {
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
-        
         return try JSONDecoder().decode(Film.self, from: data)
     }
 
