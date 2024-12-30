@@ -1,7 +1,7 @@
 import SwiftUI
 
 class APIHandler {
-    static let url: String = "localhost:8080"
+    static let url: String = "https://dc26-185-253-231-200.ngrok-free.app"
 }
 
 class APIShowHandler: APIHandler {
