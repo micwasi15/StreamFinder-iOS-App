@@ -20,6 +20,12 @@ struct LoginView: some View {
                 .cornerRadius(5.0)
                 .padding(.bottom, 20)
                 .padding(.horizontal, 20)
+
+            if !vm.isEmailValid {
+                Text("Invalid email")
+                    .foregroundColor(.red)
+                    .padding(.bottom, 20)
+            }
             
             SecureField("Password", text: $vm.password)
                 .padding()
@@ -27,6 +33,12 @@ struct LoginView: some View {
                 .cornerRadius(5.0)
                 .padding(.bottom, 20)
                 .padding(.horizontal, 20)
+
+            if !vm.isPasswordValid {
+                Text("Invalid password")
+                    .foregroundColor(.red)
+                    .padding(.bottom, 20)
+            }
             
             Button(action: {
                 vm.login()
@@ -43,7 +55,7 @@ struct LoginView: some View {
             .padding(.bottom, 20)
             
             Button(action: {
-                vm.register()
+                //open register view
             }) {
                 Text("Register")
                     .font(.headline)
