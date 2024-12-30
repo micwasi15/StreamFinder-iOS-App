@@ -11,12 +11,27 @@ class SearchViewModel: ShowsGridViewModel, ObservableObject {
         GridItem(.flexible())
     ]
     
-    @MainActor
-    func searchShows(for query: String) async {
+    func searchShows() {
         isLoading = true
-        await Task.sleep(3 * 1_000_000_000)
-        isLoading = false
-        self.shows = [MockData.shows[0]]
-        return
+        shows = []
+        showsEmptyText = "No shows found."
+        
+        guard !searchText.isEmpty else {
+            isLoading = false
+            return
+        }
+        
+        ShowsService.shared.searchShows(query: searchText) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isLoading = false
+                switch result {
+                case .success(let shows):
+                    self?.shows = shows
+                    self?.showsEmptyText = "No shows found."
+                case .failure(let error):
+                    self?.showsEmptyText = error.localizedDescription
+                }
+            }
+        }
     }
 }
