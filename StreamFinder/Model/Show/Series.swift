@@ -4,24 +4,72 @@ struct Series: Identifiable, Decodable {
     var id = UUID()
     var apiId: Int
     var title: String
-    var year: Int
+    var firstAirYear: Int
+    var lastAirYear: Int
     var posterURL: String
-    var trailerURL: String
+    var trailerURL: String?
     var imdbRating: Double
     var seasons: [Season]
+
+    enum CodingKeys: String, CodingKey {
+        case apiId = "id"
+        case title = "title"
+        case firstAirYear = "firstAirYear"
+        case lastAirYear = "lastAirYear"
+        case trailerURL = "trailerURL"
+        case imdbRating = "rating"
+        case seasons = "seasons"
+        case posterSet = "imageSet"
+    }
+
+    enum PosterKeys: String, CodingKey {
+        case horizontalPoster = "horizontalPoster"
+    }
+
+    enum HorizontalPosterKeys: String, CodingKey {
+        case w480
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        apiId = try container.decode(Int.self, forKey: .apiId)
+        title = try container.decode(String.self, forKey: .title)
+        firstAirYear = try container.decode(Int.self, forKey: .firstAirYear)
+        lastAirYear = try container.decode(Int.self, forKey: .lastAirYear)
+        trailerURL = try? container.decodeIfPresent(String.self, forKey: .trailerURL)
+        imdbRating = try container.decode(Double.self, forKey: .imdbRating)
+        seasons = try container.decode([Season].self, forKey: .seasons)
+
+        if let posterSetContainer = try? container.nestedContainer(keyedBy: PosterKeys.self, forKey: .posterSet),
+           let horizontalPosterContainer = try? posterSetContainer.nestedContainer(keyedBy: HorizontalPosterKeys.self, forKey: .horizontalPoster),
+           let w480 = try? horizontalPosterContainer.decode(String.self, forKey: .w480) {
+            posterURL = w480
+        } else {
+            throw DecodingError.dataCorruptedError(forKey: .posterSet, in: container, debugDescription: "Missing or invalid poster URL")
+        }
+    }
 }
 
 struct Season: Identifiable, Decodable {
     var id = UUID()
-    var number: Int
-    var year: Int
+    var title: String
     var episodes: [Episode]
+
+    enum CodingKeys: String, CodingKey {
+        case title = "title"
+        case episodes = "episodes"
+    }
 }
 
 struct Episode: Identifiable, Decodable {
     var id = UUID()
-    var number: Int
     var title: String
-    var streamingOptions: [Country: [StreamingOption]]
+    var streamingOptions: [String: [StreamingOption]]
     var description: String
+
+    enum CodingKeys: String, CodingKey {
+        case title = "title"
+        case streamingOptions = "streamingOptions"
+        case description = "overview"
+    }
 }

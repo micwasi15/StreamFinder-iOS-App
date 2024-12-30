@@ -1,7 +1,10 @@
 import SwiftUI
 
 struct SeriesView: View {
-    let series: Series
+    @StateObject
+    private var vm: SeriesViewModel = SeriesViewModel()
+
+    let id: Int
     
     var body: some View {
         VStack {
@@ -9,17 +12,20 @@ struct SeriesView: View {
                 .font(.title)
                 .padding()
             
-            Text("\(series.year)")
+            Text("\(series.firstAirYear) - \(series.lastAirYear)")
                 .padding()
             
             Spacer()
         }
-        .navigationTitle(series.title)
+        .onAppear {
+            vm.fetchSeries(id: id)
+        }
     }
+    
 }
 
 struct SeriesView_Previews: PreviewProvider {
     static var previews: some View {
-        SeriesView(series: MockData.series[0])
+        SeriesView(id: 1000)
     }
 }
