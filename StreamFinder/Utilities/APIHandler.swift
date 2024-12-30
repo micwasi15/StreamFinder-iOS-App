@@ -6,7 +6,6 @@ class APIHandler {
 
 class APIShowHandler: APIHandler {
     static func getShows(title: String) async throws -> [Show] {
-        var shows: [Show] = []
         let url = URL(string: "\(self.url)/shows/search/\(title)")!
         let (data, response) = try await URLSession.shared.data(from: url)
         
@@ -68,7 +67,6 @@ class APIUserHandler: APIHandler {
     }
 
     static func getUserFavorites(userId: Int) async throws -> [Show] {
-        var shows: [Show] = []
         let url = URL(string: "\(self.url)/users/\(userId)/favorites")!
         let (data, response) = try await URLSession.shared.data(from: url)
         
@@ -84,7 +82,7 @@ class APIUserHandler: APIHandler {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
@@ -96,7 +94,7 @@ class APIUserHandler: APIHandler {
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
@@ -108,7 +106,7 @@ class APIUserHandler: APIHandler {
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await URLSession.shared.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)

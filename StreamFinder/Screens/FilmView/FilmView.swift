@@ -94,7 +94,7 @@ struct FilmView: View {
             }
         }
         .onAppear {
-            vm.getFilm(id: id)
+            vm.fetchFilm(id: id)
         }
     }
 }

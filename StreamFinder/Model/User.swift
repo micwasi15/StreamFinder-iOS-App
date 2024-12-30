@@ -1,13 +1,11 @@
 import SwiftUI
 
-class User {
+class User: Decodable, Encodable {
     var email: String
     var password: String
-    var favorites: [Show]
 
     init(email: String, password: String) {
         self.email = email
         self.password = password
-        self.favorites = []
     }
 }
