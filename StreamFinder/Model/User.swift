@@ -1,6 +1,6 @@
 import SwiftUI
 
-`class User {
+class User {
     var email: String
     var password: String
     var favorites: [Show]
@@ -10,4 +10,4 @@ import SwiftUI
         self.password = password
         self.favorites = []
     }
-}`
+}

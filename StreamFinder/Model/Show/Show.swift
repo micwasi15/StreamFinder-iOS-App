@@ -17,6 +17,7 @@ class Show: Identifiable, Decodable {
         case firstYear = "firstAirYear"
         case lastYear = "lastAirYear"
         case showType = "showType"
+        case imageSet = "imageSet"
     }
 
     enum ImageSetKeys: String, CodingKey {

@@ -5,7 +5,9 @@ struct FilmView: View {
     
     var body: some View {
         VStack {
-            YoutubePlayer(path: vm.film.trailerURL)
+            if let trailer = vm.film.trailerURL {
+                YoutubePlayer(path: trailer)
+            }
 
             VStack(alignment: .center, spacing: 10) { 
                 HStack(alignment: .center) {

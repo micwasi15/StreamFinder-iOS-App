@@ -23,8 +23,8 @@ struct StreamingOptionsView: View {
                 .frame(height: 80, alignment: .center)
 
                 HStack(alignment: .center, spacing: 10) {
-                    if let streamingOption = vm.currentStreamingOption {
-                        if let img = Image.fromFlagsFolder(named: streamingOption.country.rawValue) {
+                    if let streamingOption = vm.currentStreamingOption, let country = vm.currentCountry {
+                        if let img = Image.fromFlagsFolder(named: country.rawValue) {
                             img
                             .resizable()
                             .aspectRatio(contentMode: .fit)
