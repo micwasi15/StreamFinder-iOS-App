@@ -163,3 +163,43 @@ class UserViewModel: ObservableObject {
         isGuest = val
     }
 }
+
+@MainActor
+class UserViewModelPreview: UserViewModel {
+    override init() {
+        super.init()
+        user = nil
+        userId = nil
+    }
+
+    override func login(email: String, password: String) async {
+        userId = 1
+        user = User(email: email, password: password)
+    }
+
+    override func logout() {
+        userId = nil
+        user = nil
+    }
+
+    override func register(email: String, password: String) async {
+        userId = 1
+        user = User(email: email, password: password)
+    }
+
+    override func getUserFavorites() async -> [Show] {
+        return []
+    }
+
+    override func addUserFavorite(showId: Int) async {
+        return
+    }
+
+    override func removeUserFavorite(showId: Int) async {
+        return
+    }
+
+    override func setIsGuest(val: Bool) {
+        isGuest = val
+    }
+}   
