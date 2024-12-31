@@ -9,7 +9,9 @@ class SeriesViewModel: ObservableObject {
         Task {
             do {
                 print(id)
-                isLoading = true
+                DispatchQueue.main.async {
+                    isLoading = true
+                }
                 let fetchedSeries = try await APIShowHandler.getSeries(id: id)
                 DispatchQueue.main.async {
                     self.series = fetchedSeries

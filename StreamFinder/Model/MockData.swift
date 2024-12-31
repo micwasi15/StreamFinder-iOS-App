@@ -47,14 +47,18 @@ struct MockData {
     ]
     
     static let articles = [
-        Article(apiId: 1, title: "2", imageURL: "3", body: "4")
+        Article(
+            apiId: 1,
+            title: "Tytuł artykułu",
+            imageURL: "https://phenixcitylibrary.com/wp-content/uploads/2017/06/Movie-Night.jpg",
+            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
     ]
 
     static let news = [
         News(
             apiId: 1,
             title: "Tytuł artykułu",
-            imageURL: "https://via.placeholder.com/150"
+            imageURL: "https://phenixcitylibrary.com/wp-content/uploads/2017/06/Movie-Night.jpg"
         ),
         News(
             apiId: 2,

@@ -6,8 +6,6 @@ class FavouritesViewModel: ObservableObject, ShowsGridViewModel {
     @Published var isLoading = false
     @Published var showsEmptyText = "No favourites yet. Tap the heart icon on a show to add it to your favourites."
 
-    @EnvironmentObject var userViewModel: UserViewModel
-
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -16,7 +14,9 @@ class FavouritesViewModel: ObservableObject, ShowsGridViewModel {
     init() {
         Task {
             do {
-                self.shows = await getFavourites()
+                DispatchQueue.main.async {
+                    self.shows = await getFavourites()
+                }
             }
         }
     }
@@ -25,8 +25,12 @@ class FavouritesViewModel: ObservableObject, ShowsGridViewModel {
         Task {
             return
             do {
-                isLoading = true
+                DispatchQueue.main.async {
+                    isLoading = true
+                }
+
                 let fetchedShows = try await APIShowHandler.getShows(title: searchText)
+
                 DispatchQueue.main.async {
                     self.shows = fetchedShows
                     self.isLoading = false
@@ -40,7 +44,7 @@ class FavouritesViewModel: ObservableObject, ShowsGridViewModel {
         }
     }
 
-    func getFavourites() async -> [Show] {
+    func getFavourites(userViewModel: UserViewModel) async -> [Show] {
         return await userViewModel.getUserFavorites()
     }
 }

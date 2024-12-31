@@ -8,7 +8,9 @@ class FilmViewModel: ObservableObject {
     func fetchFilm(id: Int) {
         Task {
             do {
-                isLoading = true
+                DispatchQueue.main.async {
+                    isLoading = true
+                }
                 let fetchedFilm = try await APIShowHandler.getFilm(id: id)
                 DispatchQueue.main.async {
                     self.film = fetchedFilm

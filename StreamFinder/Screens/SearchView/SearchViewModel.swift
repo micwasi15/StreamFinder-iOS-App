@@ -14,7 +14,9 @@ class SearchViewModel: ShowsGridViewModel, ObservableObject {
     func searchShows() {
             Task {
                 do {
-                    isLoading = true
+                    DispatchQueue.main.async {
+                        self.isLoading = true
+                    }
                     let fetchedShows = try await APIShowHandler.getShows(title: searchText)
                     DispatchQueue.main.async {
                         self.shows = fetchedShows

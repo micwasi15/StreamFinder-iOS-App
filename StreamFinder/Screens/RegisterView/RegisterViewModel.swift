@@ -17,9 +17,11 @@ class RegisterViewModel: ObservableObject {
     @EnvironmentObject var userViewModel: UserViewModel
     
     func register() {
-        isEmailValid = LoginDataValidator.validateEmail(email: email)
-        isPasswordValid = LoginDataValidator.validatePassword(password: password)
-        isRepeatedPasswordValid = password == repeatedPassword
+        DispatchQueue.main.async {
+            isEmailValid = LoginDataValidator.validateEmail(email: email)
+            isPasswordValid = LoginDataValidator.validatePassword(password: password)
+            isRepeatedPasswordValid = password == repeatedPassword
+        }
         
         if !isEmailValid || !isPasswordValid || !isRepeatedPasswordValid {
             triedToRegister = false
@@ -30,8 +32,10 @@ class RegisterViewModel: ObservableObject {
                 await userViewModel.register(email: email, password: password)
             }
         }
-        triedToRegister = true
-        
-        isUserRegistered = userViewModel.isUserLoggedIn
+
+        DispatchQueue.main.async {
+            triedToRegister = true
+            isUserRegistered = userViewModel.isUserLoggedIn
+        }
     }
 }
