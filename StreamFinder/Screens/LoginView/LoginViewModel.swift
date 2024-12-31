@@ -7,23 +7,25 @@ class LoginViewModel: ObservableObject {
     @Published var isEmailValid: Bool = false
     @Published var isPasswordValid: Bool = false
     @Published var isUserLoggedIn: Bool = false
-
-    @EnvironmentObject var userViewModel: UserViewModel
     
-    func login() {
+    @MainActor func login(userViewModel: UserViewModel) {
         isEmailValid = LoginDataValidator.validateEmail(email: email)
         isPasswordValid = LoginDataValidator.validatePassword(password: password)
 
         if !isEmailValid || !isPasswordValid {
             return
         }
-
-        userViewModel.login(email: email, password: password)
+        
+        Task {
+            do {
+                await userViewModel.login(email: email, password: password)
+            }
+        }
 
         isUserLoggedIn = userViewModel.isUserLoggedIn
     }
 
-    func enterAsGuest() {
-        userViewModel.isGuest = true
+    @MainActor func enterAsGuest(userViewModel: UserViewModel) {
+        userViewModel.setIsGuest(val: true)
     }
 }

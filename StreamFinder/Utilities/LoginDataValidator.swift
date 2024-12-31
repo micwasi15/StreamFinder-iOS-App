@@ -1,8 +1,8 @@
 import SwiftUI
 
 class LoginDataValidator {
-    let emailErrorInfo = "Invalid email"
-    let passwordErrorInfo = "Password must be between 6 and 20 characters"
+    static let emailErrorInfo = "Invalid email"
+    static let passwordErrorInfo = "Password must be between 6 and 20 characters"
 
     static func validateEmail(email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"

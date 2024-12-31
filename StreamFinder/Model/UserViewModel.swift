@@ -1,9 +1,10 @@
 import SwiftUI
+import SwiftData
 
 @MainActor
 class UserViewModel: ObservableObject {
     @Published var user: User?
-    @Published var isUserLoggedIn: Bool {
+    var isUserLoggedIn: Bool {
         userId != nil
     }
     @Published var userId: Int64?
@@ -11,11 +12,11 @@ class UserViewModel: ObservableObject {
     @Published var isGuest: Bool = false
 
     private let userStorage = UserStorage()
-    @Environment(.\modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
 
     init() {
         Task {
-            loadUser()
+            await loadUser()
         }
     }
 
@@ -45,7 +46,7 @@ class UserViewModel: ObservableObject {
         do {
             userId = try await APIUserHandler.getUserId(email: email, password: password)
             user = User(email: email, password: password)
-            await saveUser(user)
+            await saveUser(user!)
         } catch {
             userId = nil
             print("Failed to login: \(error)")
@@ -64,47 +65,61 @@ class UserViewModel: ObservableObject {
         do {
             userId = try await APIUserHandler.createUser(email: email, password: password)
             user = User(email: email, password: password)
-            await saveUser(user)
+            await saveUser(user!)
         } catch {
             userId = nil
             print("Failed to create user: \(error)")
         }
     }
 
-    private func fetchLocalFavoriteShowIds(from modelContext: ModelContext) throws -> Set<Int64> {
+    private func fetchLocalFavoriteShowIds() throws -> Set<Int> {
         let savedShows = try modelContext.fetch(FetchDescriptor<Show>())
         return Set(savedShows.map { $0.apiId })
     }
 
     func getUserFavorites() async -> [Show] {
-        guard let userId = userId else { return }
+        guard let userId = userId else { return [] }
 
         if favoritesUpdated {
-            return try await modelContext.fetch(FetchDescriptor<Show>())
+            do {
+                return try modelContext.fetch(FetchDescriptor<Show>())
+            } catch {
+                
+            }
         }
 
         do {
             let favoritesIds = try await APIUserHandler.getUserFavoritesIds(userId: userId)
-            let localFavoriteIds = try fetchLocalFavoriteShowIds(from: modelContext)
+            let localFavoriteIds = try fetchLocalFavoriteShowIds()
             let newFavorites = favoritesIds.filter { !localFavoriteIds.contains($0) }
             let removedFavorites = localFavoriteIds.filter { !favoritesIds.contains($0) }
 
             for showId in newFavorites {
                 let show = try await APIShowHandler.getShow(id: Int(showId))
-                try modelContext.save(show)
+                modelContext.insert(show)
+                do {
+                    try modelContext.save()
+                } catch {}
             }
 
             for showId in removedFavorites {
-                let show = try modelContext.fetch(FetchDescriptor<Show>().filtered(by: \.$apiId == showId)).first
-                if let show = show {
-                    try modelContext.delete(show)
+                if let show = try? modelContext.fetch(
+                    FetchDescriptor<Show>(
+                        predicate: #Predicate { $0.apiId == showId }
+                    )
+                ).first {
+                    modelContext.delete(show)
+                    do {
+                        try modelContext.save()
+                    } catch {}
                 }
             }
 
             favoritesUpdated = true
-            return try await modelContext.fetch(FetchDescriptor<Show>())
+            return try modelContext.fetch(FetchDescriptor<Show>())
         } catch {
             print("Failed to get user favorites: \(error)")
+            return []
         }
     }
 
@@ -114,7 +129,10 @@ class UserViewModel: ObservableObject {
         do {
             try await APIUserHandler.addUserFavorite(userId: userId, showId: showId)
             let show = try await APIShowHandler.getShow(id: showId)
-            try modelContext.save(show)
+            do {
+                modelContext.insert(show)
+                try modelContext.save()
+            } catch {}
         } catch {
             print("Failed to add user favorite: \(error)")
         }
@@ -125,11 +143,23 @@ class UserViewModel: ObservableObject {
 
         do {
             try await APIUserHandler.removeUserFavorite(userId: userId, showId: showId)
-            if let show = try modelContext.fetch(FetchDescriptor<Show>().filtered(by: \.$apiId == showId)).first {
-                try modelContext.delete(show)
+            if let show = try? modelContext.fetch(
+                FetchDescriptor<Show>(
+                    predicate: #Predicate { $0.apiId == showId }
+                )
+            ).first {
+                modelContext.delete(show)
+                do {
+                    modelContext.insert(show)
+                    try modelContext.save()
+                } catch {}
             }
         } catch {
             print("Failed to remove user favorite: \(error)")
         }
+    }
+    
+    func setIsGuest(val: Bool) {
+        isGuest = val
     }
 }

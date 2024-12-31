@@ -25,8 +25,11 @@ class RegisterViewModel: ObservableObject {
             triedToRegister = false
             return
         }
-        
-        userViewModel.register(email: email, password: password)
+        Task {
+            do {
+                await userViewModel.register(email: email, password: password)
+            }
+        }
         triedToRegister = true
         
         isUserRegistered = userViewModel.isUserLoggedIn

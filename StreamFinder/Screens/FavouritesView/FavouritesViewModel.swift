@@ -14,7 +14,11 @@ class FavouritesViewModel: ObservableObject, ShowsGridViewModel {
     ]
 
     init() {
-        self.shows = getFavourites()
+        Task {
+            do {
+                self.shows = await getFavourites()
+            }
+        }
     }
 
     func searchShows() async {
@@ -36,7 +40,7 @@ class FavouritesViewModel: ObservableObject, ShowsGridViewModel {
         }
     }
 
-    func getFavourites() -> [Show] {
-        return userViewModel.getUserFavorites()
+    func getFavourites() async -> [Show] {
+        return await userViewModel.getUserFavorites()
     }
 }

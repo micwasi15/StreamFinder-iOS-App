@@ -3,6 +3,9 @@ import SwiftUI
 struct LoginView: View {
     @StateObject
     var vm: LoginViewModel = LoginViewModel()
+    
+    @EnvironmentObject
+    var userViewModel: UserViewModel
 
     var body: some View {
         VStack {
@@ -42,7 +45,7 @@ struct LoginView: View {
             }
             
             Button(action: {
-                vm.login()
+                vm.login(userViewModel: userViewModel)
             }) {
                 Text("Login")
                     .font(.headline)
@@ -55,12 +58,8 @@ struct LoginView: View {
             }
             .padding(.bottom, 20)
             
-            Button(action: {
-                NavigationLink(destination: RegisterView(vm: RegisterViewModel())) {
-                    Text("Don't have an account? Register")
-                        .foregroundColor(.blue)
-                }
-            }) {
+            
+            NavigationLink(destination: RegisterView(vm: RegisterViewModel())){
                 Text("Register")
                     .font(.headline)
                     .foregroundColor(.white)
@@ -73,7 +72,7 @@ struct LoginView: View {
             .padding(.bottom, 20)
 
             Button(action: {
-                vm.enterAsGuest()
+                vm.enterAsGuest(userViewModel: userViewModel)
             }) {
                 Text("Enter as Guest")
                     .font(.headline)
@@ -87,6 +86,7 @@ struct LoginView: View {
         }
         .padding(.horizontal, 20)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .environmentObject(userViewModel)
     }
 }
 

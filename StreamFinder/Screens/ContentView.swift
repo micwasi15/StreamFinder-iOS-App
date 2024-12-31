@@ -9,7 +9,7 @@ struct Constants {
     static let SchemesInverseSurface: Color = Color(red: 0.2, green: 0.18, blue: 0.21)
     static let BodyLargeSize: CGFloat = 16
     //static let BodyLargeFont: String = "Roboto"
-    static let bgColor = Color(red: 0.6, green: 0.12, blue: 0.12)
+    static let bgColor = Color(red: 0.12, green: 0.12, blue: 0.12)
 }
 
 struct ContentView: View {
@@ -18,7 +18,6 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             BackGroundView()
-            Color.red.ignoresSafeArea(.all)
             if userViewModel.isUserLoggedIn || userViewModel.isGuest {
                 MainTabView()
             } else {

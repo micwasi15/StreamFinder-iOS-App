@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct News: Identifiable {
+struct News: Identifiable, Decodable {
     var id = UUID()
     var apiId: Int
     var title: String
@@ -13,7 +13,7 @@ struct News: Identifiable {
     }
 }
 
-struct Article: Identifiable {
+struct Article: Identifiable, Decodable {
     var id = UUID()
     var apiId: Int
     var title: String

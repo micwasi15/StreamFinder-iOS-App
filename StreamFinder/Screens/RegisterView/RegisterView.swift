@@ -7,14 +7,14 @@ struct RegisterView: View {
     var body: some View {
         NavigationView {
             VStack {
-                TextField("Email", text: $registerViewModel.email)
+                TextField("Email", text: $vm.email)
                     .padding()
                     .background(Color(.secondarySystemBackground))
                     .cornerRadius(5.0)
                     .padding(.bottom, 20)
 
                 if !vm.isEmailValid {
-                    Text(RegisterDataValidator.emailErrorInfo)
+                    Text(LoginDataValidator.emailErrorInfo)
                         .foregroundColor(.red)
                         .padding(.bottom, 20)
                 }
@@ -32,7 +32,7 @@ struct RegisterView: View {
                     .padding(.bottom, 20)
 
                 if !vm.isPasswordValid {
-                    Text(RegisterDataValidator.passwordErrorInfo)
+                    Text(LoginDataValidator.passwordErrorInfo)
                         .foregroundColor(.red)
                         .padding(.bottom, 20)
                 }

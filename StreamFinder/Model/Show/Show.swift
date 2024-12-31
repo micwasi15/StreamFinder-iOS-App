@@ -1,12 +1,12 @@
 import SwiftUI
+import SwiftData
 
-import Foundation
 
 @Model
 class Show: Identifiable, Decodable {
     var id = UUID()
     @Attribute(.unique)
-    var apiId: Int64
+    var apiId: Int
     var title: String
     var yearRange: String
     var posterURL: String
@@ -35,11 +35,10 @@ class Show: Identifiable, Decodable {
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = UUID()
-        apiId = try container.decode(Int64.self, forKey: .apiId)
+        apiId = try container.decode(Int.self, forKey: .apiId)
         title = try container.decode(String.self, forKey: .title)
-        showType = try container.decode(ShowType.self, forKey: .showType)
-
+        let showType = try container.decode(ShowType.self, forKey: .showType)
+        self.showType = showType
         if showType == .movie {
             let year = try container.decode(Int.self, forKey: .year)
             yearRange = "\(year)"
@@ -67,7 +66,7 @@ class Show: Identifiable, Decodable {
     }
 }
 
-enum ShowType: String, Decodable {
+enum ShowType: String, Decodable, Encodable, CaseIterable {
     case movie
     case series
 }
