@@ -4,8 +4,7 @@ struct Series: Identifiable, Decodable {
     var id = UUID()
     var apiId: Int
     var title: String
-    var firstAirYear: Int
-    var lastAirYear: Int
+    var year: String
     var posterURL: String
     var trailerURL: String?
     var imdbRating: Double
@@ -34,11 +33,18 @@ struct Series: Identifiable, Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         apiId = try container.decode(Int.self, forKey: .apiId)
         title = try container.decode(String.self, forKey: .title)
-        firstAirYear = try container.decode(Int.self, forKey: .firstAirYear)
-        lastAirYear = try container.decode(Int.self, forKey: .lastAirYear)
+        year = ""
+        if let firstAirYear = try? container.decode(Int.self, forKey: .firstAirYear) {
+            year = "\(firstAirYear)"
+        }
+        if let lastAirYear = try? container.decode(Int.self, forKey: .lastAirYear) {
+            year = "\(self.year) - \(lastAirYear)"
+        }
         trailerURL = try? container.decodeIfPresent(String.self, forKey: .trailerURL)
-        imdbRating = try container.decode(Double.self, forKey: .imdbRating)
+        imdbRating = try container.decode(Double.self, forKey: .imdbRating) / 10
+        print(imdbRating)
         seasons = try container.decode([Season].self, forKey: .seasons)
+        print(1)
 
         if let posterSetContainer = try? container.nestedContainer(keyedBy: PosterKeys.self, forKey: .posterSet),
            let horizontalPosterContainer = try? posterSetContainer.nestedContainer(keyedBy: HorizontalPosterKeys.self, forKey: .horizontalPoster),

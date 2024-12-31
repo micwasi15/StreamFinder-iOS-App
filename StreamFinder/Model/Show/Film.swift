@@ -36,7 +36,7 @@ struct Film: Identifiable, Decodable {
         title = try container.decode(String.self, forKey: .title)
         year = try container.decode(Int.self, forKey: .year)
         trailerURL = try? container.decodeIfPresent(String.self, forKey: .trailerURL)
-        imdbRating = try container.decode(Double.self, forKey: .imdbRating)
+        imdbRating = try container.decode(Double.self, forKey: .imdbRating) / 10
         streamingOptions = try container.decode([String: [StreamingOption]].self, forKey: .streamingOptions)
         description = try container.decode(String.self, forKey: .description)
 

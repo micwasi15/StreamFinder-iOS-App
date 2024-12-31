@@ -7,7 +7,7 @@ protocol ShowsGridViewModel: ObservableObject {
     var columns: [GridItem] { get }
     var showsEmptyText: String { get }
     
-    func searchShows(for query: String) async
+    func searchShows() async
 }
 
 struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
@@ -18,7 +18,7 @@ struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
             VStack() {
                 TextField("Search...", text: $vm.searchText, onCommit: {
                     Task {
-                        await vm.searchShows(for: vm.searchText)
+                        await vm.searchShows()
                     }
                 })
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -33,7 +33,7 @@ struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
                    ScrollView {
                        LazyVGrid(columns: vm.columns, spacing: 16) {
                            ForEach(vm.shows) { show in
-                               NavigationLink(destination: show.showType == ShowType.series ? AnyView(FilmView(vm: FilmViewModel())) : AnyView(SeriesView(series: MockData.series[0]))) {
+                               NavigationLink(destination: show.showType == ShowType.series ? AnyView(SeriesView(id: show.apiId)) : AnyView(FilmView(id: show.apiId))) {
                                    ShowView(show: show)
                                }
                            }

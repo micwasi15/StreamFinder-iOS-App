@@ -15,7 +15,7 @@ struct SeriesView: View {
                     .font(.title)
                     .padding()
                 
-                Text("\(series.firstAirYear) - \(series.lastAirYear)")
+                Text("\(series.year)")
                     .padding()
                 
                 Spacer()

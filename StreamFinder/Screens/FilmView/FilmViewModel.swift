@@ -13,13 +13,11 @@ class FilmViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.film = fetchedFilm
                     self.isLoading = false
-                    print(fetchedFilm)
                 }
             } catch {
                 DispatchQueue.main.async {
                     self.errorMessage = "Failed to fetch film: \(error.localizedDescription)"
                     self.isLoading = false
-                    print(self.errorMessage)
                 }
             }
         }

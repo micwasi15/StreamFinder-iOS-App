@@ -12,9 +12,8 @@ class FavouritesViewModel: ObservableObject, ShowsGridViewModel {
     ]
 
     @MainActor
-    func searchShows(for query: String) async {
+    func searchShows() async {
         isLoading = true
-        await Task.sleep(3 * 1_000_000_000)
         isLoading = false
         self.shows = [MockData.shows[0]]
         return
