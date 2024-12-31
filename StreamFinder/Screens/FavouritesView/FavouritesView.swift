@@ -1,8 +1,15 @@
 import SwiftUI
 
 struct FavouritesView: View {
+    @EnvironmentObject var userViewModel: UserViewModel
+
     var body: some View {
-        ShowsGridView(vm: FavouritesViewModel())
+        if userViewModel.isUserLoggedIn {
+            ShowsGridView(vm: FavouritesViewModel())
+        } else {
+            Text("Please log in to view your favourites.")
+                .padding()
+        }
     }
 }
 

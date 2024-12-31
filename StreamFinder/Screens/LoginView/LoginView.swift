@@ -71,6 +71,19 @@ struct LoginView: View {
                     .padding(.horizontal, 20)
             }
             .padding(.bottom, 20)
+
+            Button(action: {
+                vm.enterAsGuest()
+            }) {
+                Text("Enter as Guest")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .cornerRadius(5.0)
+                    .padding(.horizontal, 20)
+            }
         }
         .padding(.horizontal, 20)
         .frame(maxWidth: .infinity, maxHeight: .infinity)

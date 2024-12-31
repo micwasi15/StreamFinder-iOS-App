@@ -8,6 +8,8 @@ class UserViewModel: ObservableObject {
     }
     @Published var userId: Int64?
     @Published var favoritesUpdated = false
+    @Published var isGuest: Bool = false
+
     private let userStorage = UserStorage()
     @Environment(.\modelContext) private var modelContext
 

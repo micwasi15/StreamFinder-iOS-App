@@ -22,4 +22,8 @@ class LoginViewModel: ObservableObject {
 
         isUserLoggedIn = userViewModel.isUserLoggedIn
     }
+
+    func enterAsGuest() {
+        userViewModel.isGuest = true
+    }
 }

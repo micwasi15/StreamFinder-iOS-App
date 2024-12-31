@@ -19,7 +19,7 @@ struct ContentView: View {
         ZStack {
             BackGroundView()
             Color.red.ignoresSafeArea(.all)
-            if userViewModel.isUserLoggedIn {
+            if userViewModel.isUserLoggedIn || userViewModel.isGuest {
                 MainTabView()
             } else {
                 LoginView()
