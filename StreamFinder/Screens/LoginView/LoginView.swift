@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject
-    var vm: LoginViewModel
+    @StateObject
+    var vm: LoginViewModel = LoginViewModel()
 
     var body: some View {
         VStack {
@@ -23,7 +23,7 @@ struct LoginView: View {
                 .padding(.horizontal, 20)
 
             if !vm.isEmailValid {
-                Text("Invalid email")
+                Text(LoginDataValidator.emailErrorInfo)
                     .foregroundColor(.red)
                     .padding(.bottom, 20)
             }
@@ -36,7 +36,7 @@ struct LoginView: View {
                 .padding(.horizontal, 20)
 
             if !vm.isPasswordValid {
-                Text("Invalid password")
+                Text(LoginDataValidator.passwordErrorInfo)
                     .foregroundColor(.red)
                     .padding(.bottom, 20)
             }
@@ -56,7 +56,10 @@ struct LoginView: View {
             .padding(.bottom, 20)
             
             Button(action: {
-                //open register view
+                NavigationLink(destination: RegisterView(vm: RegisterViewModel())) {
+                    Text("Don't have an account? Register")
+                        .foregroundColor(.blue)
+                }
             }) {
                 Text("Register")
                     .font(.headline)
@@ -71,5 +74,11 @@ struct LoginView: View {
         }
         .padding(.horizontal, 20)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+struct LoginView_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginView()
     }
 }

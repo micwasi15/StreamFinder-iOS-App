@@ -13,11 +13,17 @@ struct Constants {
 }
 
 struct ContentView: View {
+    @EnvironmentObject var userViewModel: UserViewModel
+
     var body: some View {
         ZStack {
             BackGroundView()
             Color.red.ignoresSafeArea(.all)
-            MainTabView()
+            if userViewModel.isUserLoggedIn {
+                MainTabView()
+            } else {
+                LoginView()
+            }
         }
     }
 }

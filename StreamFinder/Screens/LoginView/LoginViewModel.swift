@@ -6,12 +6,20 @@ class LoginViewModel: ObservableObject {
 
     @Published var isEmailValid: Bool = false
     @Published var isPasswordValid: Bool = false
+    @Published var isUserLoggedIn: Bool = false
+
+    @EnvironmentObject var userViewModel: UserViewModel
     
     func login() {
-        print("Login")
-    }
-    
-    func register() {
-        print("Register")
+        isEmailValid = LoginDataValidator.validateEmail(email: email)
+        isPasswordValid = LoginDataValidator.validatePassword(password: password)
+
+        if !isEmailValid || !isPasswordValid {
+            return
+        }
+
+        userViewModel.login(email: email, password: password)
+
+        isUserLoggedIn = userViewModel.isUserLoggedIn
     }
 }

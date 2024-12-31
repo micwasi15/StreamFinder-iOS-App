@@ -2,9 +2,11 @@ import SwiftUI
 
 import Foundation
 
+@Model
 class Show: Identifiable, Decodable {
     var id = UUID()
-    var apiId: Int
+    @Attribute(.unique)
+    var apiId: Int64
     var title: String
     var yearRange: String
     var posterURL: String
@@ -34,7 +36,7 @@ class Show: Identifiable, Decodable {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = UUID()
-        apiId = try container.decode(Int.self, forKey: .apiId)
+        apiId = try container.decode(Int64.self, forKey: .apiId)
         title = try container.decode(String.self, forKey: .title)
         showType = try container.decode(ShowType.self, forKey: .showType)
 

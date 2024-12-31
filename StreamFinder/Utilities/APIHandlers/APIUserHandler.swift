@@ -1,8 +1,8 @@
 import SwiftUI
 
 class APIUserHandler: APIHandler {
-    static func getUserId(username: String, password: String) async throws -> Int {
-        let url = URL(string: "\(self.url)/users?username=\(username)&password=\(password)")!
+    static func getUserId(email: String, password: String) async throws -> Int {
+        let url = URL(string: "\(self.url)/users?email=\(email)&password=\(password)")!
         let (data, response) = try await URLSession.shared.data(from: url)
         
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
@@ -27,7 +27,7 @@ class APIUserHandler: APIHandler {
         return try JSONDecoder().decode(Int.self, from: data)
     }
 
-    static func getUserFavorites(userId: Int) async throws -> [Show] {
+    static func getUserFavoritesIds(userId: Int64) async throws -> [Int64] {
         let url = URL(string: "\(self.url)/users/\(userId)/favorites")!
         let (data, response) = try await URLSession.shared.data(from: url)
         
@@ -35,10 +35,10 @@ class APIUserHandler: APIHandler {
             throw URLError(.badServerResponse)
         }
         
-        return try JSONDecoder().decode([Show].self, from: data)
+        return try JSONDecoder().decode([Int64].self, from: data)
     }
 
-    static func addUserFavorite(userId: Int, showId: Int) async throws {
+    static func addUserFavorite(userId: Int64, showId: Int) async throws {
         let url = URL(string: "\(self.url)/users/\(userId)/favorites/\(showId)")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -50,7 +50,7 @@ class APIUserHandler: APIHandler {
         }
     }
 
-    static func removeUserFavorite(userId: Int, showId: Int) async throws {
+    static func removeUserFavorite(userId: Int64, showId: Int) async throws {
         let url = URL(string: "\(self.url)/users/\(userId)/favorites/\(showId)")!
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
