@@ -4,3 +4,9 @@ strzalka w newsView
 tlo sie nie wyswietla
 frame wokol placeholderow search
 placeholder sie nie rozciaga wszerz
+
+
+user zapis/odczyt
+favorites zapis/odczyt
+options -> zmiana hasła, preferowany kraj, usługa
+preferencje zapis/odczyt
