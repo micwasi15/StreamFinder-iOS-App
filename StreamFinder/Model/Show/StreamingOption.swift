@@ -42,5 +42,28 @@ enum StreamingService: String, Decodable, Encodable {
     case apple = "apple"
     case peacock = "peacock"
     case paramount = "paramount"
+
+    func getFullName() -> String {
+        switch self {
+        case .unknown:
+            return "Unknown"
+        case .netflix:
+            return "Netflix"
+        case .hulu:
+            return "Hulu"
+        case .amazon:
+            return "Amazon Prime Video"
+        case .disney:
+            return "Disney+"
+        case .hbo:
+            return "HBO Max"
+        case .apple:
+            return "Apple TV+"
+        case .peacock:
+            return "Peacock"
+        case .paramount:
+            return "Paramount+"
+        }
+    }
 }
 
