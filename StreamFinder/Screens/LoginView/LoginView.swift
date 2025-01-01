@@ -17,19 +17,23 @@ struct LoginView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.top, 50)
                 .padding(.bottom, 20)
-            
-            TextField("Email", text: $vm.email)
-                .padding()
-                .background(Color(.secondarySystemBackground))
-                .cornerRadius(5.0)
+
+            LoginFieldView(text: $vm.email, isValid: $vm.isEmailValid, title: "Email", errorMessage: LoginDataValidator.emailErrorInfo)
                 .padding(.bottom, 20)
                 .padding(.horizontal, 20)
+            
+            // TextField("Email", text: $vm.email)
+            //     .padding()
+            //     .background(Color(.secondarySystemBackground))
+            //     .cornerRadius(5.0)
+            //     .padding(.bottom, 20)
+            //     .padding(.horizontal, 20)
 
-            if !vm.isEmailValid {
-                Text(LoginDataValidator.emailErrorInfo)
-                    .foregroundColor(.red)
-                    .padding(.bottom, 20)
-            }
+            // if !vm.isEmailValid {
+            //     Text(LoginDataValidator.emailErrorInfo)
+            //         .foregroundColor(.red)
+            //         .padding(.bottom, 20)
+            // }
             
             SecureField("Password", text: $vm.password)
                 .padding()

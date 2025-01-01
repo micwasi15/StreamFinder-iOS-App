@@ -4,8 +4,8 @@ class LoginViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
 
-    @Published var isEmailValid: Bool = false
-    @Published var isPasswordValid: Bool = false
+    @Published var isEmailValid: Bool = true
+    @Published var isPasswordValid: Bool = true
     @Published var isUserLoggedIn: Bool = false
     
     @MainActor func login(userViewModel: UserViewModel) {
