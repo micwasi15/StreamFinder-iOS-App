@@ -11,7 +11,7 @@ struct MockData {
         ),
         Show(
             apiId: 132,
-            title: "Back to the Future",
+            title: "Star Wars: Tales of the Jedi",
             yearRange: "1985",
             posterURL: "https://cdn.movieofthenight.com/show/132/poster/horizontal/en/360.jpg?Expires=1749513583&Signature=ItDrN1-Xkm3OkscKo8j44cBbMvGamEW46uPbOgjgy919P5k~9iDSwObcQHWcJI3K84tCcDoqWGhPQ4-limd~HGVrgZebtlt1fK9uohUShuD6iM~teHWcMepm-AZ~RcMZl5Vn7Uum-t8Fqa9n84qJgUdFBsjEK-wIIooMZfY33H7N0bIwB6A1HtzvLlOt9nAMfMG5eAE2IceFnGTWAbEJQhVl4LJne2xM5TH5bFDfYL~RED6XAoP68sq840eblc0gtMoH5ZCLBm23VJMi1dErLiUwac~3iVnPFFtuGq~H1n8n2Q6aCB-qSVgk0HpKD75sZXBLhwLl435vZ7TdBs~EXA__&Key-Pair-Id=KK4HN3OO4AT5R",
             showType: .movie
@@ -78,7 +78,7 @@ struct MockData {
         Country.us.rawValue: [StreamingOption(service: .netflix, url: "sfdd")]
     ]
     static let streamingOptions1:[String: [StreamingOption]] = [
-        Country.rs.rawValue: [StreamingOption(service: .netflix, url: "sfdd")]
+        Country.rs.rawValue: [StreamingOption(service: .hbo, url: "sfdd")]
     ]
     
     static let series = [Series]()

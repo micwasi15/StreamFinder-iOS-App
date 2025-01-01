@@ -52,8 +52,20 @@ class StreamingOptionsViewModel: ObservableObject {
 
 
     func watch() {
-        if let url = currentStreamingOption?.url {
-            UIApplication.shared.open(URL(string: url)!)
+        guard let urlString = currentStreamingOption?.url,
+              let url = URL(string: urlString) else {
+            print("Invalid URL")
+            return
+        }
+        DispatchQueue.main.async {
+            UIApplication.shared.open(url, options: [:]) { success in
+                if success {
+                    print("Opened URL successfully")
+                } else {
+                    print("Failed to open URL")
+                }
+            }
         }
     }
+
 }

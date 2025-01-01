@@ -6,6 +6,10 @@ struct StreamingOptionsView: View {
     var body: some View {
         if (vm.streamingOptions.count == 0) {
             AnyView(Text("No streaming options available"))
+                .padding()
+                .frame(width: .infinity, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/)
+                .background(Constants.bgColor)
+                .foregroundStyle(Constants.fgColor)
         } else {
             HStack {
                 Spacer()
@@ -16,6 +20,7 @@ struct StreamingOptionsView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(alignment: .center)
+                            .cornerRadius(15)
                         }
                     }
                 }
@@ -55,6 +60,6 @@ struct StreamingOptionsView: View {
 
 struct StreamingOptionsView_Previews: PreviewProvider {
     static var previews: some View {
-        StreamingOptionsView(vm: StreamingOptionsViewModel(streamingOptions: MockData.streamingOptions1, appSettings: AppSettings()))
+        StreamingOptionsView(vm: StreamingOptionsViewModel(streamingOptions: [:], appSettings: AppSettings()))
     }
 }

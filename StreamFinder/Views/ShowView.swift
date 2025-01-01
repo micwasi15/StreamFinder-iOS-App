@@ -17,13 +17,16 @@ struct ShowView: View {
                     .frame(height: 100)
             }
             Text(show.title)
+                .lineLimit(2)
                 .font(.subheadline)
-                .foregroundStyle(.black)
+                .multilineTextAlignment(.leading)
+                .foregroundStyle(Constants.fgColor)
             Text(show.yearRange)
-                .font(.subheadline)
-                .foregroundStyle(.black)
+                .font(.caption)
+                .foregroundStyle(Constants.fgColor.opacity(0.75))
         }
-        .frame(width: 185.0, alignment: .topLeading)
+        .frame(width: .infinity, height: 160, alignment: .topLeading)
+        .background(Constants.bgColor)
     }
 }
 

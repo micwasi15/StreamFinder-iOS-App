@@ -30,7 +30,7 @@ struct FilmView: View {
                     }
                 }
 
-                VStack(alignment: .center, spacing: 10) { 
+                VStack(alignment: .center, spacing: 5.0) { 
                     HStack(alignment: .center) {
                     // Space Between
                     Text(film.title)
@@ -48,6 +48,10 @@ struct FilmView: View {
                     .padding(.top, 0)
                     .padding(.bottom, 3)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Divider()
+                        .background(Constants.fgColor)
+                        .padding(.bottom, 5.0)
                 
                     HStack(alignment: .center, spacing: 5) { 
                         Text("\(film.year) |")
@@ -100,6 +104,8 @@ struct FilmView: View {
                     .padding()
             }
         }
+        .foregroundStyle(Constants.fgColor)
+        .background(Constants.bgColor)
         .onAppear {
             vm.fetchFilm(id: id)
         }

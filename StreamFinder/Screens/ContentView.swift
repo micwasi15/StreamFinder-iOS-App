@@ -1,16 +1,11 @@
 import SwiftUI
 
 struct Constants {
-    static let Space0: CGFloat = 0
-    static let Space150: CGFloat = 6
-    static let GraysGray6: Color = Color(red: 0.95, green: 0.95, blue: 0.97)
-    static let IconSmall: CGFloat = 24
-    static let BodyLargeTracking: CGFloat = 0.5
-    static let SchemesInverseSurface: Color = Color(red: 0.2, green: 0.18, blue: 0.21)
-    static let BodyLargeSize: CGFloat = 16
-    //static let BodyLargeFont: String = "Roboto"
     static let bgColor = Color(red: 0.12, green: 0.12, blue: 0.12)
     static let fgColor = Color(red: 0.96, green: 0.94, blue: 0.97)
+    static let selectedItemColor = Color(.white)
+    static let unselectedItemColor = Color(.white.opacity(0.55))
+    static let tabBgColor = Color(red: 0.14, green: 0.14, blue: 0.14)
 }
 
 struct ContentView: View {
@@ -25,7 +20,6 @@ struct ContentView: View {
                 LoginView()
             }
         }
-        .background(Constants.bgColor)
     }
 }
 

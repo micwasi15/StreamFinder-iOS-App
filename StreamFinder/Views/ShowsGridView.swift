@@ -22,6 +22,7 @@ struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
                     }
                 })
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                .foregroundStyle(.black.opacity(0.6))
                 .padding()
                 
                Spacer()
@@ -40,11 +41,11 @@ struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
                        }
                        .padding()
                    }
-                   //.background(Constants.GraysGray6)
                }
                Spacer()
             }
-            .background(Constants.GraysGray6)
+            .background(Constants.bgColor)
+            .foregroundStyle(Constants.fgColor)
             //.searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
         }
     }
