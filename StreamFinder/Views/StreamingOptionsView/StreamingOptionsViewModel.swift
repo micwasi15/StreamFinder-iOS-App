@@ -34,6 +34,7 @@ class StreamingOptionsViewModel: ObservableObject {
                     print(currentCountry?.getImageName() ?? "err")
                     print(options.key)
                     currentStreamingOption = options.value.first
+                    print(options.value.first ?? "1")
                 }
             }
         }

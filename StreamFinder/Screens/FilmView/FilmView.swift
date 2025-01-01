@@ -95,8 +95,9 @@ struct FilmView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             } else {
-                Text("Failed to load film from server.")
-                Text("Please check your internet connection and try again.")
+                Text("Failed to load film from server. \nPlease check your internet connection and try again.")
+                    .multilineTextAlignment(.center)
+                    .padding()
             }
         }
         .onAppear {
