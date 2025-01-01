@@ -10,6 +10,7 @@ struct NewsListCell: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .cornerRadius(10)
                 } placeholder: {
                     Image(systemName: "photo")
                         .resizable()

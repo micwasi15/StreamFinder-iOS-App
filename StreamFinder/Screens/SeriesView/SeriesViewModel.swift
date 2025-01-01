@@ -10,7 +10,7 @@ class SeriesViewModel: ObservableObject {
             do {
                 print(id)
                 DispatchQueue.main.async {
-                    isLoading = true
+                    self.isLoading = true
                 }
                 let fetchedSeries = try await APIShowHandler.getSeries(id: id)
                 DispatchQueue.main.async {

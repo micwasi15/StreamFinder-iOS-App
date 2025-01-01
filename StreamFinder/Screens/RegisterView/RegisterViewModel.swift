@@ -5,22 +5,20 @@ class RegisterViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var repeatedPassword: String = ""
     
-    @Published var isEmailValid: Bool = false
-    @Published var isPasswordValid: Bool = false
-    @Published var isRepeatedPasswordValid: Bool = false
+    @Published var isEmailValid: Bool = true
+    @Published var isPasswordValid: Bool = true
+    @Published var isRepeatedPasswordValid: Bool = true
     @Published var isUserRegistered: Bool = false
     @Published var triedToRegister: Bool = false
 
     let repeatedPasswordErrorInfo = "Passwords do not match"
     let accountAlreadyExistsErrorInfo = "Account with this email already exists"
-    
-    @EnvironmentObject var userViewModel: UserViewModel
-    
-    func register() {
+        
+    func register(userViewModel: UserViewModel) {
         DispatchQueue.main.async {
-            isEmailValid = LoginDataValidator.validateEmail(email: email)
-            isPasswordValid = LoginDataValidator.validatePassword(password: password)
-            isRepeatedPasswordValid = password == repeatedPassword
+            self.isEmailValid = LoginDataValidator.validateEmail(email: self.email)
+            self.isPasswordValid = LoginDataValidator.validatePassword(password: self.password)
+            self.isRepeatedPasswordValid = self.password == self.repeatedPassword
         }
         
         if !isEmailValid || !isPasswordValid || !isRepeatedPasswordValid {
@@ -34,8 +32,8 @@ class RegisterViewModel: ObservableObject {
         }
 
         DispatchQueue.main.async {
-            triedToRegister = true
-            isUserRegistered = userViewModel.isUserLoggedIn
+            self.triedToRegister = true
+            self.isUserRegistered = userViewModel.isUserLoggedIn
         }
     }
 }

@@ -1,7 +1,7 @@
 import SwiftUI
 
 class NewsViewModel: ObservableObject {
-    @Published var news: [News] = []
+    @Published var news: [News]?
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
 
@@ -9,12 +9,13 @@ class NewsViewModel: ObservableObject {
         Task {
             do {
                 DispatchQueue.main.async {
-                    isLoading = true
+                    self.isLoading = true
                 }
-                let fetchedNews = try await APIShowHandler.getNews()
+                let fetchedNews = try await APINewsHandler.getNews()
                 DispatchQueue.main.async {
                     self.news = fetchedNews
                     self.isLoading = false
+                    print(self.news!)
                 }
             } catch {
                 DispatchQueue.main.async {

@@ -10,11 +10,13 @@ import SwiftUI
 @main
 struct StreamFinderApp: App {
     @StateObject private var userViewModel = UserViewModel()
+    @StateObject private var appSettings = AppSettings()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(userViewModel)
+                .environmentObject(appSettings)
         }
         .modelContainer(for: Show.self)
     }

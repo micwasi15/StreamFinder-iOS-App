@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct StreamingOptionsView: View {
-    let vm: StreamingOptionsViewModel
+    @StateObject var vm: StreamingOptionsViewModel
     
     var body: some View {
         if (vm.streamingOptions.count == 0) {
@@ -24,7 +24,7 @@ struct StreamingOptionsView: View {
 
                 HStack(alignment: .center, spacing: 10) {
                     if let streamingOption = vm.currentStreamingOption, let country = vm.currentCountry {
-                        if let img = Image.fromFlagsFolder(named: country.rawValue) {
+                        if let img = Image.fromFlagsFolder(named: country.getImageName()) {
                             img
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -55,6 +55,6 @@ struct StreamingOptionsView: View {
 
 struct StreamingOptionsView_Previews: PreviewProvider {
     static var previews: some View {
-        StreamingOptionsView(vm: StreamingOptionsViewModel())
+        StreamingOptionsView(vm: StreamingOptionsViewModel(streamingOptions: MockData.streamingOptions1, appSettings: AppSettings()))
     }
 }

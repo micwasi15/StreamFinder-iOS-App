@@ -4,6 +4,9 @@ struct RegisterView: View {
     @StateObject 
     var vm = RegisterViewModel()
     
+    @EnvironmentObject
+    var userViewModel: UserViewModel
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -50,7 +53,7 @@ struct RegisterView: View {
                 }
                 
                 Button(action: {
-                    vm.register()
+                    vm.register(userViewModel: userViewModel)
                 }) {
                     Text("Register")
                         .foregroundColor(.white)

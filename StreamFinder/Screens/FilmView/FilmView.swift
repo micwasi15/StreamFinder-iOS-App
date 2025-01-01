@@ -3,6 +3,9 @@ import SwiftUI
 struct FilmView: View {
     @StateObject
     private var vm: FilmViewModel = FilmViewModel()
+    
+    @EnvironmentObject
+    private var appSettings: AppSettings
 
     let id: Int
     
@@ -62,7 +65,7 @@ struct FilmView: View {
                         }
                         
                         //format 1 place
-                        Text("\(film.imdbRating)")
+                        Text((film.imdbRating), format: .number.precision(.fractionLength(1)))
                             .font(.subheadline)
                             .fontWeight(.regular)
                             .multilineTextAlignment(.center)
@@ -77,7 +80,7 @@ struct FilmView: View {
                 .padding(.vertical, 0)
                 .frame(alignment: .top)
 
-                StreamingOptionsView(vm: StreamingOptionsViewModel())
+                StreamingOptionsView(vm: StreamingOptionsViewModel(streamingOptions: film.streamingOptions, appSettings: appSettings))
                     .padding(.horizontal, 18)
                     .padding(.vertical, 0)
                     .frame(alignment: .top)
@@ -102,5 +105,6 @@ struct FilmView: View {
 struct FilmView_Previews: PreviewProvider {
     static var previews: some View {
         FilmView(id: 100)
+            .environmentObject(AppSettings())
     }
 }

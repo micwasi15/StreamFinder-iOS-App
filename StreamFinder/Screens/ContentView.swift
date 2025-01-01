@@ -10,6 +10,7 @@ struct Constants {
     static let BodyLargeSize: CGFloat = 16
     //static let BodyLargeFont: String = "Roboto"
     static let bgColor = Color(red: 0.12, green: 0.12, blue: 0.12)
+    static let fgColor = Color(red: 0.96, green: 0.94, blue: 0.97)
 }
 
 struct ContentView: View {
@@ -24,6 +25,7 @@ struct ContentView: View {
                 LoginView()
             }
         }
+        .background(Constants.bgColor)
     }
 }
 

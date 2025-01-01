@@ -1,45 +1,43 @@
 import SwiftUI
 
 struct NewsView: View {
+    @StateObject
     var vm = NewsViewModel()
 
     var body: some View {
         NavigationView {
-            if vm.isLoading {
-                ProgressView()
-            } else if let errorMessage = vm.errorMessage {
-                Text(errorMessage)
-            } else if let news = vm.news {
-                HStack(alignment: .center, spacing: 10) {
-                    Text("News")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                }
-                .padding(.horizontal, 10)
-                .padding(.vertical, 16)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .overlay(
-                    Rectangle()
-                    .inset(by: 0.5)
-                    .stroke(.white, lineWidth: 1))
-                
-
-                List(vm.news) { news in
-                    ZStack{
-                        NewsListCell(news: news)
-                        NavigationLink(destination: ArticleDetailView(article: vm.getArticle(id: news.apiId))) {
-                            EmptyView()
-                        }
-                        .buttonStyle(PlainButtonStyle())
+            VStack {
+                if vm.isLoading {
+                    ProgressView("Loading article")
+                } else if let errorMessage = vm.errorMessage {
+                    Text("Error: \(errorMessage)")
+                } else if let news = vm.news {
+                    HStack(alignment: .center, spacing: 10) {
+                        Text("News")
+                            .font(.title)
+                            .fontWeight(.bold)
                     }
-                    .listRowInsets(EdgeInsets())
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .background(Color(.secondarySystemBackground))
-                    .cornerRadius(8.0)
+                    .padding(.horizontal, 22.0)
+                    .padding(.vertical, 16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    List(news) { newsElem in
+                        ZStack{
+                            NewsListCell(news: newsElem)
+                            NavigationLink(destination: ArticleView(id: newsElem.apiId)) {
+                                EmptyView()
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                        .listRowInsets(EdgeInsets())
+                        .padding(.vertical, 5)
+                        .cornerRadius(8.0)
+                    }
+                    .background(Constants.bgColor)
                 }
             }
+            .background(Constants.bgColor)
+            .foregroundStyle(Constants.fgColor)
         }
         .onAppear {
             vm.fetchArticles()

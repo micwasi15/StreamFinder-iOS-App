@@ -15,12 +15,10 @@ struct ArticleView: View {
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .cornerRadius(8.0)
                     } placeholder: {
                         Image(systemName: "photo")
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 100)
+                            .aspectRatio(contentMode: .fill)
                     }
                     
                     VStack(alignment: .center, spacing: 10) {
@@ -31,23 +29,28 @@ struct ArticleView: View {
                             .lineLimit(2)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        Text(article.content)
+                        Divider()
+                            .background(.white)
+                            .padding(.bottom)
+                        
+                        Text(article.body)
                             .font(.body)
                             .fontWeight(.regular)
-                            .multilineTextAlignment(.center)
+                            .multilineTextAlignment(.leading)
                             .lineLimit(nil)
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            
                     }
-                    .padding(.leading, 10)
-                    .padding(.trailing, 10)
-                    .padding(.top, 10)
-                    .padding(.bottom, 10)
+                    .padding(10)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 } else if let errorMessage = vm.errorMessage {
                     Text(errorMessage)
                         .padding()
                 }
             }
+            .padding(.horizontal)
+            .background(Color(Constants.bgColor))
+            .foregroundStyle(.white)
         }
         .onAppear {
             vm.fetchArticle(id: id)

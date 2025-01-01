@@ -9,11 +9,12 @@ class ArticleViewModel: ObservableObject {
         Task {
             do {
                 isLoading = true
-                let fetchedArticle = try await APIShowHandler.getArticle(id: id)
+                let fetchedArticle = try await APINewsHandler.getArticle(id: id)
                 DispatchQueue.main.async {
                     self.article = fetchedArticle
                     self.isLoading = false
                 }
+                print(fetchedArticle)
             } catch {
                 DispatchQueue.main.async {
                     self.errorMessage = "Failed to fetch article: \(error.localizedDescription)"

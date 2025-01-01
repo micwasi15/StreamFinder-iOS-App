@@ -51,7 +51,7 @@ struct MockData {
             apiId: 1,
             title: "Tytuł artykułu",
             imageURL: "https://phenixcitylibrary.com/wp-content/uploads/2017/06/Movie-Night.jpg",
-            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+            body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
     ]
 
     static let news = [
@@ -74,7 +74,12 @@ struct MockData {
     
     static let films = [Film]()
 
-    static let streamingOptions = [Country: [StreamingOption]]()
+    static let streamingOptions:[String: [StreamingOption]] = [
+        Country.us.rawValue: [StreamingOption(service: .netflix, url: "sfdd")]
+    ]
+    static let streamingOptions1:[String: [StreamingOption]] = [
+        Country.rs.rawValue: [StreamingOption(service: .netflix, url: "sfdd")]
+    ]
     
     static let series = [Series]()
 }

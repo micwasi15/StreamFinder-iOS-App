@@ -11,11 +11,12 @@ class FavouritesViewModel: ObservableObject, ShowsGridViewModel {
         GridItem(.flexible())
     ]
 
-    init() {
+    init(userViewModel: UserViewModel) {
         Task {
             do {
+                let favorites = await getFavourites(userViewModel: userViewModel)
                 DispatchQueue.main.async {
-                    self.shows = await getFavourites()
+                    self.shows = favorites
                 }
             }
         }
@@ -26,7 +27,7 @@ class FavouritesViewModel: ObservableObject, ShowsGridViewModel {
             return
             do {
                 DispatchQueue.main.async {
-                    isLoading = true
+                    self.isLoading = true
                 }
 
                 let fetchedShows = try await APIShowHandler.getShows(title: searchText)
