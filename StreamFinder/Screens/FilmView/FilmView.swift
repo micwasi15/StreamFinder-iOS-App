@@ -15,7 +15,7 @@ struct FilmView: View {
                 ProgressView("Loading film...")
             } else if let film = vm.film {
                 if let trailer = film.trailerURL {
-                    YoutubePlayer(path: trailer)
+                    YouTubePlayerView(videoURL: trailer)
                 } else {
                     AsyncImage(url: URL(string: film.posterURL)) { image in
                         image
