@@ -13,6 +13,5 @@ struct SimpleButtonView: View {
             .frame(maxWidth: .infinity)
             .background(bgColor)
             .cornerRadius(8.0)
-            .padding(.horizontal, 20)
     }
 }

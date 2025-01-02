@@ -59,6 +59,7 @@ struct LoginView: View {
                     }
                     
                 }
+                .padding(.horizontal, 20)
                 .navigationDestination(isPresented: $vm.showRegisterView) {
                     RegisterView()
                 }

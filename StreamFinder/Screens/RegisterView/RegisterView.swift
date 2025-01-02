@@ -9,7 +9,16 @@ struct RegisterView: View {
     
     var body: some View {
         NavigationView {
-            VStack (alignment: .leading, spacing: 0) {
+            VStack (alignment: .leading, spacing: 20) {
+                Text("Register")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, 50)
+                    .padding(.bottom, 40)
+                
                 LoginFieldView(
                     text: $vm.email,
                     isValid: $vm.isEmailValid,
@@ -17,7 +26,6 @@ struct RegisterView: View {
                     errorMessage: LoginDataValidator.emailErrorInfo,
                     isSecure: false
                 )
-                .padding(.horizontal, 20)
                 
                 if vm.triedToRegister && !vm.isUserRegistered {
                     Text(vm.accountAlreadyExistsErrorInfo)
@@ -34,8 +42,6 @@ struct RegisterView: View {
                     errorMessage: LoginDataValidator.invalidPasswordErrorInfo,
                     isSecure: true
                 )
-                .padding(.vertical, 20)
-                .padding(.horizontal, 20)
 
                 LoginFieldView(
                     text: $vm.repeatedPassword,
@@ -45,7 +51,6 @@ struct RegisterView: View {
                     isSecure: true
                 )
                 .padding(.bottom, 80)
-                .padding(.horizontal, 20)
                 
                 Button(action: {
                     vm.register(userViewModel: userViewModel)
@@ -54,8 +59,7 @@ struct RegisterView: View {
                         .padding(.top, 20)
                 }
             }
-            .navigationTitle("Register")
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 40)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Constants.bgColor)
             .foregroundStyle(Constants.fgColor)
