@@ -15,10 +15,12 @@ struct ArticleView: View {
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
+                            .cornerRadius(8)
                     } placeholder: {
                         Image(systemName: "photo")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
+                            .cornerRadius(8)
                     }
                     
                     VStack(alignment: .center, spacing: 10) {
@@ -28,10 +30,11 @@ struct ArticleView: View {
                             .multilineTextAlignment(.center)
                             .lineLimit(2)
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.top, 10)
                         
                         Divider()
                             .background(.white)
-                            .padding(.bottom)
+                            .padding(.bottom, 5)
                         
                         Text(article.body)
                             .font(.body)
@@ -41,7 +44,7 @@ struct ArticleView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             
                     }
-                    .padding(10)
+                    .padding(12.0)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 } else if let errorMessage = vm.errorMessage {
                     Text(errorMessage)
@@ -49,9 +52,9 @@ struct ArticleView: View {
                 }
             }
             .padding(.horizontal)
-            .background(Color(Constants.bgColor))
-            .foregroundStyle(.white)
         }
+        .background(Color(Constants.bgColor))
+        .foregroundStyle(.white)
         .onAppear {
             vm.fetchArticle(id: id)
         }

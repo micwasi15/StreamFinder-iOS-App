@@ -15,7 +15,6 @@ class NewsViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.news = fetchedNews
                     self.isLoading = false
-                    print(self.news!)
                 }
             } catch {
                 DispatchQueue.main.async {

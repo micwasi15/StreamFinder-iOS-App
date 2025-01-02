@@ -7,14 +7,14 @@ class LoginViewModel: ObservableObject {
     @Published var isEmailValid: Bool = true
     @Published var isPasswordValid: Bool = true
     @Published var isUserLoggedIn: Bool = false
+    @Published var showRegisterView: Bool = false
     
     @MainActor func login(userViewModel: UserViewModel) {
         DispatchQueue.main.async {
             self.isEmailValid = LoginDataValidator.validateEmail(email: self.email)
-            self.isPasswordValid = LoginDataValidator.validatePassword(password: self.password)
         }
 
-        if !isEmailValid || !isPasswordValid {
+        if !isEmailValid {
             return
         }
         
@@ -26,6 +26,8 @@ class LoginViewModel: ObservableObject {
 
         DispatchQueue.main.async {
             self.isUserLoggedIn = userViewModel.isUserLoggedIn
+            self.isPasswordValid = self.isUserLoggedIn
+            print(userViewModel.isUserLoggedIn)
         }
     }
 

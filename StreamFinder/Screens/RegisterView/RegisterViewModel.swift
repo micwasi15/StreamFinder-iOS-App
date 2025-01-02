@@ -14,13 +14,11 @@ class RegisterViewModel: ObservableObject {
     let repeatedPasswordErrorInfo = "Passwords do not match"
     let accountAlreadyExistsErrorInfo = "Account with this email already exists"
         
-    func register(userViewModel: UserViewModel) {
-        DispatchQueue.main.async {
-            self.isEmailValid = LoginDataValidator.validateEmail(email: self.email)
-            self.isPasswordValid = LoginDataValidator.validatePassword(password: self.password)
-            self.isRepeatedPasswordValid = self.password == self.repeatedPassword
-        }
-        
+    @MainActor func register(userViewModel: UserViewModel) {
+        self.isEmailValid = LoginDataValidator.validateEmail(email: self.email)
+        self.isPasswordValid = LoginDataValidator.validatePassword(password: self.password)
+        self.isRepeatedPasswordValid = self.password == self.repeatedPassword
+                
         if !isEmailValid || !isPasswordValid || !isRepeatedPasswordValid {
             triedToRegister = false
             return
@@ -31,9 +29,7 @@ class RegisterViewModel: ObservableObject {
             }
         }
 
-        DispatchQueue.main.async {
-            self.triedToRegister = true
-            self.isUserRegistered = userViewModel.isUserLoggedIn
-        }
+        self.triedToRegister = true
+        self.isUserRegistered = userViewModel.isUserLoggedIn
     }
 }

@@ -30,6 +30,8 @@ struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
                    ProgressView("Loading...") 
                } else if vm.shows.isEmpty {
                    Text(vm.showsEmptyText)
+                       .multilineTextAlignment(.center)
+                       .padding()
                } else {
                    ScrollView {
                        LazyVGrid(columns: vm.columns, spacing: 16) {

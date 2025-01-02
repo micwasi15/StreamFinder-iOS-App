@@ -1,51 +1,31 @@
 import Foundation
-import Security
 
 class UserStorage {
-    private let serviceName = "com.streamfinder.user"
+    private let userDefaultsKey = "user"
 
     func saveUser(_ user: User) throws {
         let encoder = JSONEncoder()
-        let userData = try encoder.encode(user)
-
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: serviceName,
-            kSecValueData as String: userData
-        ]
-
-        SecItemDelete(query as CFDictionary) 
-        let status = SecItemAdd(query as CFDictionary, nil)
-        if status != errSecSuccess {
-            throw NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
+        do {
+            let userData = try encoder.encode(user)
+            UserDefaults.standard.set(userData, forKey: userDefaultsKey)
+        } catch {
+            throw error
         }
     }
 
     func loadUser() throws -> User? {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: serviceName,
-            kSecReturnData as String: true,
-            kSecMatchLimit as String: kSecMatchLimitOne
-        ]
-
-        var item: CFTypeRef?
-        let status = SecItemCopyMatching(query as CFDictionary, &item)
-        if status == errSecSuccess, let data = item as? Data {
-            let decoder = JSONDecoder()
-            return try decoder.decode(User.self, from: data)
-        } else if status == errSecItemNotFound {
+        guard let userData = UserDefaults.standard.data(forKey: userDefaultsKey) else {
             return nil
-        } else {
-            throw NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
+        }
+        let decoder = JSONDecoder()
+        do {
+            return try decoder.decode(User.self, from: userData)
+        } catch {
+            throw error
         }
     }
 
     func deleteUser() {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: serviceName
-        ]
-        SecItemDelete(query as CFDictionary)
+        UserDefaults.standard.removeObject(forKey: userDefaultsKey)
     }
 }

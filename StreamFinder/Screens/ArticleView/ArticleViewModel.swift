@@ -14,7 +14,6 @@ class ArticleViewModel: ObservableObject {
                     self.article = fetchedArticle
                     self.isLoading = false
                 }
-                print(fetchedArticle)
             } catch {
                 DispatchQueue.main.async {
                     self.errorMessage = "Failed to fetch article: \(error.localizedDescription)"

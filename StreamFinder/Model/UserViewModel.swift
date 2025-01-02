@@ -22,7 +22,7 @@ class UserViewModel: ObservableObject {
 
     func loadUser() async {
         do {
-            user = try await userStorage.loadUser()
+            self.user = try userStorage.loadUser()
         } catch {
             print("Failed to load user: \(error)")
         }
@@ -30,7 +30,7 @@ class UserViewModel: ObservableObject {
 
     func saveUser(_ user: User) async {
         do {
-            try await userStorage.saveUser(user)
+            try userStorage.saveUser(user)
             self.user = user
         } catch {
             print("Failed to save user: \(error)")
@@ -38,8 +38,8 @@ class UserViewModel: ObservableObject {
     }
 
     func deleteUser() async {
-        user = nil
-        await userStorage.deleteUser()
+        self.user = nil
+        userStorage.deleteUser()
     }
 
     func login(email: String, password: String) async {
@@ -54,8 +54,8 @@ class UserViewModel: ObservableObject {
     }
 
     func logout() {
-        userId = nil
-        user = nil
+        self.userId = nil
+        self.user = nil
         Task {
             await deleteUser()
         }
@@ -63,11 +63,11 @@ class UserViewModel: ObservableObject {
 
     func register(email: String, password: String) async {
         do {
-            userId = try await APIUserHandler.createUser(email: email, password: password)
-            user = User(email: email, password: password)
+            self.userId = try await APIUserHandler.createUser(email: email, password: password)
+            self.user = User(email: email, password: password)
             await saveUser(user!)
         } catch {
-            userId = nil
+            self.userId = nil
             print("Failed to create user: \(error)")
         }
     }

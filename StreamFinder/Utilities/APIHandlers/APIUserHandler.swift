@@ -16,6 +16,7 @@ class APIUserHandler: APIHandler {
         let url = URL(string: "\(self.url)/users")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONEncoder().encode(User(email: email, password: password))
         
         let (data, response) = try await URLSession.shared.data(for: request)

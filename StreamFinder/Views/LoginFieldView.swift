@@ -5,21 +5,35 @@ struct LoginFieldView: View {
     @Binding var isValid: Bool
     let title: String
     let errorMessage: String
+    let isSecure: Bool // Dodane do rozróżnienia typu pola
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 10) {
             Text(title)
-                .font(.caption)
-                .foregroundColor(.gray)
+                .font(.headline)
+                .foregroundColor(Constants.fgColor)
             
-            TextField("", text: $text)
-                .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(errorMessage == nil ? Color.clear : Color.red, lineWidth: 1)
-                )
+            if isSecure {
+                SecureField("", text: $text)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .foregroundStyle(.black)
+                    .cornerRadius(8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(isValid ? Color.clear : Color.red, lineWidth: 1)
+                    )
+            } else {
+                TextField("", text: $text)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .foregroundStyle(.black)
+                    .cornerRadius(8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(isValid ? Color.clear : Color.red, lineWidth: 1)
+                    )
+            }
             
             if !isValid {
                 Text(errorMessage)
@@ -32,6 +46,7 @@ struct LoginFieldView: View {
 
 struct LoginFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginFieldView(text: .constant(""), isValid: .constant(true), title: "Email", errorMessage: "Invalid email")
+        LoginFieldView(text: .constant(""), isValid: .constant(true), title: "Email", errorMessage: "Invalid email", isSecure: false)
+            .background(.black)
     }
 }
