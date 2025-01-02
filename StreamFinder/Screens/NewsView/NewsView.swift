@@ -12,17 +12,21 @@ struct NewsView: View {
                 } else if let errorMessage = vm.errorMessage {
                     Text("Error: \(errorMessage)")
                 } else if let news = vm.news {
-                    HStack(alignment: .center, spacing: 10) {
+                    HStack(alignment: .center) {
                         Text("News")
-                            .font(.title)
+                            .font(.largeTitle)
                             .fontWeight(.bold)
                     }
                     .padding(.horizontal, 22.0)
-                    .padding(.vertical, 16)
+                    .padding(.vertical, 10)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     
+                    Divider()
+                        .background(Constants.fgColor)
+                        .padding(.horizontal, 20)
+                    
                     List(news) { newsElem in
-                        ZStack{
+                        ZStack {
                             NewsListCell(news: newsElem)
                             NavigationLink(destination: ArticleView(id: newsElem.apiId)) {
                                 EmptyView()
@@ -30,9 +34,11 @@ struct NewsView: View {
                             .buttonStyle(PlainButtonStyle())
                         }
                         .listRowInsets(EdgeInsets())
-                        .padding(.vertical, 5)
+                        .padding(.vertical, 10)
                         .cornerRadius(8.0)
+                        .listRowBackground(Constants.bgColor)
                     }
+                    .scrollContentBackground(.hidden)
                     .background(Constants.bgColor)
                 }
             }

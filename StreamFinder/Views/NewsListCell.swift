@@ -32,28 +32,10 @@ struct NewsListCell: View {
             .padding(.horizontal, 10)
             .padding(.vertical, 15)
             .frame(maxWidth: .infinity, alignment: .top)
-            .background(Color(red: 0.15, green: 0.15, blue: 0.15))
+            .background(Color(red: 0.18, green: 0.18, blue: 0.18))
 
             .cornerRadius(10)
 
-
-
-        // VStack {
-        //     AsyncImage(url: URL(string: news.imageURL)) { image in
-        //         image
-        //             .resizable()
-        //             .aspectRatio(contentMode: .fit)
-        //     } placeholder: {
-        //         Image(systemName: "photo")
-        //             .resizable()
-        //             .aspectRatio(contentMode: .fit)
-        //     }
-        //     Text(news.title)
-        //         .font(.title)
-        //         .padding()
-        // }
-        // .frame(alignment: .topLeading)
-        // .cornerRadius(10)
     }
 }
 
