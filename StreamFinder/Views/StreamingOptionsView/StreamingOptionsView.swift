@@ -60,6 +60,8 @@ struct StreamingOptionsView: View {
 
 struct StreamingOptionsView_Previews: PreviewProvider {
     static var previews: some View {
-        StreamingOptionsView(vm: StreamingOptionsViewModel(streamingOptions: [:], appSettings: AppSettings()))
+        StreamingOptionsView(vm: StreamingOptionsViewModel(streamingOptions: MockData.streamingOptions1, appSettings: AppSettings()))
+            .background(Constants.bgColor)
+            .foregroundStyle(Constants.fgColor)
     }
 }
