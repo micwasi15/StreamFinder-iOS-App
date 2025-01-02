@@ -4,6 +4,7 @@ class SeriesViewModel: ObservableObject {
     @Published var series: Series?
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
+    @Published var selectedSeason: Season?
 
     func fetchSeries(id: Int) {
         Task {
