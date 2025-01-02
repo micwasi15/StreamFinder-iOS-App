@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 struct Constants {
     static let bgColor = Color(red: 0.12, green: 0.12, blue: 0.12)

@@ -85,8 +85,9 @@ struct MockData {
         Series(
             apiId: 1,
             title: "Friends",
-            yearRange: "1994-2004",
-            posterURL: "https://cdn.movieofthenight.com/show/1/poster/vertical/en/240.jpg?Expires=1749515751&Signature=MxXk6yMlUav54Vs5R1Nm-tUK6aAoAX3AEvsLfAnEMAZ-~MXJCgA-1w6U2nj~AEEXiK9eFg7slp6mB4Af9owSnZOmDlIau-H1p~6OCOjkqiC64tRsvm3Ro9pskQKCyy4H-fJR~w10-lzDpznxyywR-NtpKawntWrvkwOxcLWpoWPFm~LraTA0QBfhNtywU2jR217YlYiHlgSQI~0Lz8ZOnPt46fTqBKFfYiBBLMjUaLqkkSePcP~UWX-qn07Ogsc8JkYStzgJDAWgpnoisVZj6DLrCwaANkx5FJ2pVdGGwckElYr4oWy-YUe2pBFEPdnv1xF6tMv474OqSID-V31H9g__&Key-Pair-Id=KK4HN3OO4AT5R",
+            year: "1994-2004",
+            posterUrl: "https://cdn.movieofthenight.com/show/1/poster/vertical/en/240.jpg?Expires=1749515751&Signature=MxXk6yMlUav54Vs5R1Nm-tUK6aAoAX3AEvsLfAnEMAZ-~MXJCgA-1w6U2nj~AEEXiK9eFg7slp6mB4Af9owSnZOmDlIau-H1p~6OCOjkqiC64tRsvm3Ro9pskQKCyy4H-fJR~w10-lzDpznxyywR-NtpKawntWrvkwOxcLWpoWPFm~LraTA0QBfhNtywU2jR217YlYiHlgSQI~0Lz8ZOnPt46fTqBKFfYiBBLMjUaLqkkSePcP~UWX-qn07Ogsc8JkYStzgJDAWgpnoisVZj6DLrCwaANkx5FJ2pVdGGwckElYr4oWy-YUe2pBFEPdnv1xF6tMv474OqSID-V31H9g__&Key-Pair-Id=KK4HN3OO4AT5R",
+            imdbRating: 8.0,
             seasons: [
                 Season(
                     title: "Season 1",
@@ -109,19 +110,19 @@ struct MockData {
             title: "Episode 1",
             streamingOptions: [
                 Country.us.rawValue: [StreamingOption(service: .netflix, url: "sfdd")]
-            ]
+            ], description: "Desc1"
         ),
         Episode(
             title: "Episode 2",
             streamingOptions: [
                 Country.us.rawValue: [StreamingOption(service: .netflix, url: "sfdd")]
-            ]
+            ], description: "Desc2"
         ),
         Episode(
             title: "Episode 3",
             streamingOptions: [
                 Country.us.rawValue: [StreamingOption(service: .netflix, url: "sfdd")]
-            ]
+            ], description: "Desc3"
         )
     ]
 }

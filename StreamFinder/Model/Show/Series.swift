@@ -54,18 +54,37 @@ struct Series: Identifiable, Decodable {
             throw DecodingError.dataCorruptedError(forKey: .posterSet, in: container, debugDescription: "Missing or invalid poster URL")
         }
     }
+    
+    init(apiId: Int, title: String, year: String, posterUrl: String, imdbRating: Double, seasons: [Season]) {
+        self.id = UUID()
+        self.apiId = apiId
+        self.title = title
+        self.year = year
+        self.posterURL = posterUrl
+        self.imdbRating = imdbRating
+        self.seasons = seasons
+    }
 }
 
-struct Season: Identifiable, Decodable {
+struct Season: Identifiable, Decodable, Hashable {
     var id = UUID()
     var title: String
     var episodes: [Episode]
 
     enum CodingKeys: String, CodingKey {
-        case title = "title"
-        case episodes = "episodes"
+        case title
+        case episodes
+    }
+    
+    static func == (lhs: Season, rhs: Season) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
+
 
 struct Episode: Identifiable, Decodable {
     var id = UUID()

@@ -17,6 +17,7 @@ struct FilmView: View {
                 ScrollView {
                     if let trailer = film.trailerURL {
                         YouTubePlayerView(videoURL: trailer)
+                            .frame(height: 250)
                     } else {
                         AsyncImage(url: URL(string: film.posterURL)) { image in
                             image

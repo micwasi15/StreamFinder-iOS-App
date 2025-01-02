@@ -16,6 +16,7 @@ class SeriesViewModel: ObservableObject {
                 let fetchedSeries = try await APIShowHandler.getSeries(id: id)
                 DispatchQueue.main.async {
                     self.series = fetchedSeries
+                    self.selectedSeason = self.series?.seasons.first
                     self.isLoading = false
                 }
             } catch {

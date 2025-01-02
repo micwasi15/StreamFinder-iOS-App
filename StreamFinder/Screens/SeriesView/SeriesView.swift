@@ -14,6 +14,7 @@ struct SeriesView: View {
                 ScrollView {
                     if let trailer = series.trailerURL {
                         YouTubePlayerView(videoURL: trailer)
+                            .frame(height: 250)
                     } else {
                         AsyncImage(url: URL(string: series.posterURL)) { image in
                             image
@@ -82,15 +83,33 @@ struct SeriesView: View {
                     .frame(alignment: .top)
 
                     if series.seasons.count > 0 {
-                        Picker("Seasons", selection: $vm.selectedSeason) {
-                            ForEach(series.seasons) { season in
-                                Text(season.title).tag(season)
+                        ZStack() {
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color(white: 0.3))
+                            .stroke(.black, lineWidth: 1)
+                            HStack {
+                                Text("Season")
+                                
+                                Spacer()
+                                
+                                Picker("Seasons", selection: $vm.selectedSeason) {
+                                    ForEach(series.seasons) { season in
+                                        Text(season.title)
+                                            .scaledToFill()
+                                            .tag(season)
+                                    }
+                                }
+                                .pickerStyle(MenuPickerStyle())
+                                .accentColor(Color(white: 0.85))
                             }
+                            .padding(.horizontal)
                         }
+                        .padding(.horizontal)
 
                         if let selectedSeason = vm.selectedSeason {
                             ForEach(selectedSeason.episodes) { episode in
                                 EpisodeView(episode: episode)
+                                    .padding(.vertical)
                             }
                         }
                     } else {
@@ -104,6 +123,8 @@ struct SeriesView: View {
                     .padding()
             }
         }
+        .foregroundStyle(Constants.fgColor)
+        .background(Constants.bgColor)
         .onAppear {
             vm.fetchSeries(id: id)
         }
@@ -114,5 +135,6 @@ struct SeriesView: View {
 struct SeriesView_Previews: PreviewProvider {
     static var previews: some View {
         SeriesView(id: 1000)
+            .environmentObject(AppSettings())
     }
 }
