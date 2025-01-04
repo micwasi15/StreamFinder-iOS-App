@@ -37,7 +37,7 @@ struct EpisodeView: View {
 
 struct EpisodeView_Previews: PreviewProvider {
     static var previews: some View {
-        EpisodeView(episode: MockData.episodes[1])
+        EpisodeView(episode: MockData.episodes[0])
         .foregroundStyle(Constants.fgColor)
         .background(Constants.bgColor)
         .environmentObject(AppSettings())

@@ -12,7 +12,7 @@ struct FilmView: View {
     var body: some View {
         VStack {
             if vm.isLoading {
-                ProgressView("Loading film...")
+                LoadingScreenView(text: "Loading film...")
             } else if let film = vm.film {
                 ScrollView {
                     if let trailer = film.trailerURL {
@@ -99,9 +99,7 @@ struct FilmView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             } else {
-                Text("Failed to load film from server. \nPlease check your internet connection and try again.")
-                    .multilineTextAlignment(.center)
-                    .padding()
+                NoInternetView()
             }
         }
         .foregroundStyle(Constants.fgColor)

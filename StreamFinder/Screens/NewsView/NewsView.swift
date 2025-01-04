@@ -9,8 +9,8 @@ struct NewsView: View {
             VStack {
                 if vm.isLoading {
                     ProgressView("Loading article")
-                } else if let errorMessage = vm.errorMessage {
-                    Text("Error: \(errorMessage)")
+                } else if let _ = vm.errorMessage {
+                    NoInternetView()
                 } else if let news = vm.news {
                     HStack(alignment: .center) {
                         Text("News")

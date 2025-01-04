@@ -118,9 +118,7 @@ struct SeriesView: View {
                     }
                 }
             } else {
-                Text("Failed to load series from server. \nPlease check your internet connection and try again.")
-                    .multilineTextAlignment(.center)
-                    .padding()
+                NoInternetView()
             }
         }
         .foregroundStyle(Constants.fgColor)

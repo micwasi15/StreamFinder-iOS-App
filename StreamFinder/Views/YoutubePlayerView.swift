@@ -12,12 +12,12 @@ struct YouTubePlayerView: UIViewRepresentable {
 
     func makeUIView(context: Context) -> WKWebView {
         let configuration = WKWebViewConfiguration()
-        configuration.allowsInlineMediaPlayback = true // Pozwala na odtwarzanie w miejscu
-        configuration.mediaTypesRequiringUserActionForPlayback = [] // Automatyczne odtwarzanie (jeśli dozwolone)
+        configuration.allowsInlineMediaPlayback = true
+        configuration.mediaTypesRequiringUserActionForPlayback = []
 
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.isUserInteractionEnabled = true
-        webView.uiDelegate = context.coordinator // Ustawienie delegata
+        webView.uiDelegate = context.coordinator
         return webView
     }
 
@@ -42,15 +42,13 @@ struct YouTubePlayerView: UIViewRepresentable {
         return nil
     }
 
-    // Coordinator to handle UI-related interactions
     func makeCoordinator() -> Coordinator {
         return Coordinator()
     }
 
     class Coordinator: NSObject, WKUIDelegate {
-        // Handle attempts to present content in a new window (e.g., full-screen video)
         func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-            return nil // Block opening new windows (including full-screen)
+            return nil
         }
     }
 }

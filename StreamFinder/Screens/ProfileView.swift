@@ -12,7 +12,6 @@ struct ProfileView: View {
         NavigationView {
             VStack {
                 Text("Ekran profilu")
-                // Reszta Twojego widoku profilu
             }
             .navigationTitle("Profil")
         }

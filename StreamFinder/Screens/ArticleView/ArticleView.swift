@@ -9,7 +9,7 @@ struct ArticleView: View {
         ScrollView {
             VStack {
                 if vm.isLoading {
-                    ProgressView("Loading article...")
+                    LoadingScreenView(text: "Loading article...")
                 } else if let article = vm.article {
                     AsyncImage(url: URL(string: article.imageURL)) { image in
                         image
@@ -46,9 +46,8 @@ struct ArticleView: View {
                     }
                     .padding(12.0)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                } else if let errorMessage = vm.errorMessage {
-                    Text(errorMessage)
-                        .padding()
+                } else if let _ = vm.errorMessage {
+                    NoInternetView()
                 }
             }
             .padding(.horizontal)

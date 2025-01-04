@@ -27,7 +27,7 @@ struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
                 
                Spacer()
                if vm.isLoading {
-                   ProgressView("Loading...") 
+                   LoadingScreenView(text: "Loading...")
                } else if vm.shows.isEmpty {
                    Text(vm.showsEmptyText)
                        .multilineTextAlignment(.center)

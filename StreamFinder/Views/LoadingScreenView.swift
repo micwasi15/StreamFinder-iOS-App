@@ -7,6 +7,8 @@ struct LoadingScreenView: View {
     @State private var rotation2: Double = 0
     
     @State private var trapezoidOpacity: Double = 1.0
+    
+    let imageColor: Color = Color(white: 0.7)
 
     var body: some View {
         VStack {
@@ -20,7 +22,7 @@ struct LoadingScreenView: View {
                         ))
                         .opacity(trapezoidOpacity)
                         .frame(width: geometry.size.width * 0.35, height: geometry.size.height * 0.09)
-                        .position(x: -20, y: 430)
+                        .position(x: -10, y: 430)
                 }
                 
                 if let img = Image.fromFolder(named: "projector") {
@@ -28,6 +30,7 @@ struct LoadingScreenView: View {
                         .resizable()
                         .scaledToFit()
                         .position(x: 100, y: 385)
+                        .colorMultiply(imageColor)
                     
                 }
                 
@@ -39,6 +42,7 @@ struct LoadingScreenView: View {
                             .frame(width: 75)
                             .rotationEffect(.degrees(rotation1))
                             .position(x: 75, y: 335)
+                            .colorMultiply(imageColor)
                     }
                     
                     if let img = Image.fromFolder(named: "tape") {
@@ -48,6 +52,7 @@ struct LoadingScreenView: View {
                             .frame(width: 75)
                             .rotationEffect(.degrees(rotation2))
                             .position(x: 50, y: 335)
+                            .colorMultiply(imageColor)
                     }
                 }
             }
@@ -74,6 +79,9 @@ struct LoadingScreenView: View {
                     .font(.title2)
             }
         }
+        .frame(maxWidth: .infinity)
+        .background(Constants.bgColor)
+        .foregroundStyle(Constants.fgColor)
     }
 }
 

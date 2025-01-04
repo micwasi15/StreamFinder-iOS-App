@@ -9,7 +9,6 @@ class SeriesViewModel: ObservableObject {
     func fetchSeries(id: Int) {
         Task {
             do {
-                print(id)
                 DispatchQueue.main.async {
                     self.isLoading = true
                 }
