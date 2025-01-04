@@ -23,7 +23,7 @@ struct LoadingScreenView: View {
                         .position(x: -20, y: 430)
                 }
                 
-                if let img = Image.fromIconsFolder(named: "projector") {
+                if let img = Image.fromFolder(named: "projector") {
                     img
                         .resizable()
                         .scaledToFit()
@@ -32,7 +32,7 @@ struct LoadingScreenView: View {
                 }
                 
                 HStack {
-                    if let img = Image.fromIconsFolder(named: "tape") {
+                    if let img = Image.fromFolder(named: "tape") {
                         img
                             .resizable()
                             .scaledToFit()
@@ -41,7 +41,7 @@ struct LoadingScreenView: View {
                             .position(x: 75, y: 335)
                     }
                     
-                    if let img = Image.fromIconsFolder(named: "tape") {
+                    if let img = Image.fromFolder(named: "tape") {
                         img
                             .resizable()
                             .scaledToFit()
@@ -92,7 +92,7 @@ struct Trapezoid: Shape {
     }
 }
 
-struct RotatingImagesView_Previews: PreviewProvider {
+struct LoadingScreenView_Previews: PreviewProvider {
     static var previews: some View {
         LoadingScreenView(text: "Preview is loading")
     }

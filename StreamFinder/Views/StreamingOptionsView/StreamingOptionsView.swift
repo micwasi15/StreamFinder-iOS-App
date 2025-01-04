@@ -16,7 +16,7 @@ struct StreamingOptionsView: View {
                     Spacer()
                     HStack(alignment: .center, spacing: 10) {
                         if let streamingOption = vm.currentStreamingOption {
-                            if let img = Image.fromLogosFolder(named: streamingOption.service.rawValue) {
+                            if let img = Image.fromFolder(named: streamingOption.service.rawValue) {
                                 img
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
@@ -30,7 +30,7 @@ struct StreamingOptionsView: View {
                     
                     HStack(alignment: .center, spacing: 10) {
                         if let country = vm.currentCountry {
-                            if let img = Image.fromFlagsFolder(named: country.getImageName()) {
+                            if let img = Image.fromFolder(named: country.getImageName()) {
                                 img
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)

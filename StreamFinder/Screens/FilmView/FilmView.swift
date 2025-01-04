@@ -63,7 +63,7 @@ struct FilmView: View {
                                 .lineLimit(1)
                                 .frame(alignment: .leading)
                             
-                            if let img = Image.fromIconsFolder(named: "imdb") {
+                            if let img = Image.fromFolder(named: "imdb") {
                                 img
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)

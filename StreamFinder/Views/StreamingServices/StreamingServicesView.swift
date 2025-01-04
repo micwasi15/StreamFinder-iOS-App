@@ -15,7 +15,7 @@ struct StreamingServicesView: View {
             List {
                 ForEach(streamingData.keys.sorted(), id: \.self) { key in
                     HStack {
-                        if let img = Image.fromFlagsFolder(named: (Country(rawValue: key)?.getImageName())!){
+                        if let img = Image.fromFolder(named: (Country(rawValue: key)?.getImageName())!){
                             // Pierwsza kolumna: Klucz (obrazek)
                             img
                                 .resizable()
@@ -33,7 +33,7 @@ struct StreamingServicesView: View {
                                         dismiss()
                                     }) {
                                         // Obrazek StreamingOption
-                                        if let img = Image.fromFlagsFolder(named: option.service.rawValue) {
+                                        if let img = Image.fromFolder(named: option.service.rawValue) {
                                             img
                                                 .resizable()
                                                 .frame(width: 50, height: 50)
