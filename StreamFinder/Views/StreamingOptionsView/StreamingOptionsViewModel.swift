@@ -10,6 +10,12 @@ class StreamingOptionsViewModel: ObservableObject {
     init(streamingOptions: [String : [StreamingOption]], appSettings: AppSettings) {
         self.streamingOptions = streamingOptions
         let countryKey = appSettings.preferedCountry.rawValue
+        var countries: [String] = []
+        
+        for country in streamingOptions.keys {
+            countries.append(country)
+        }
+        
         if streamingOptions[countryKey] != nil {
             currentCountry = appSettings.preferedCountry
         }
@@ -17,7 +23,7 @@ class StreamingOptionsViewModel: ObservableObject {
             self.currentStreamingOption = findStreamingOptionForKey(key: country.rawValue, acceptableServices: appSettings.streamingServices)
         }
         if (currentStreamingOption == nil) {
-            for country in streamingOptions.keys {
+            for country in Country.getPreffered(countries: countries, preffered: appSettings.preferedCountry) {
                 if currentCountry == nil || currentStreamingOption == nil {
                     if let streamingOption = findStreamingOptionForKey(key: country, acceptableServices: appSettings.streamingServices) {
                         currentCountry = Country(rawValue: country)
@@ -31,12 +37,9 @@ class StreamingOptionsViewModel: ObservableObject {
                 currentCountry = appSettings.preferedCountry
                 currentStreamingOption = options.first
             } else {
-                if let options = streamingOptions.first {
-                    currentCountry = Country(rawValue: options.key)
-                    print(currentCountry?.getImageName() ?? "err")
-                    print(options.key)
-                    currentStreamingOption = options.value.first
-                    print(options.value.first ?? "1")
+                if let country = Country.getPreffered(countries: countries, preffered: appSettings.preferedCountry).first, let options = streamingOptions[country] {
+                    currentCountry = Country(rawValue: country)
+                    currentStreamingOption = options.first
                 }
             }
         }

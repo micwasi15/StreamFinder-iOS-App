@@ -11,7 +11,7 @@ struct StreamingOptionsView: View {
                 .background(Constants.bgColor)
                 .foregroundStyle(Constants.fgColor)
         } else {
-            NavigationView {
+            //NavigationView {
                 HStack {
                     Spacer()
                     HStack(alignment: .center, spacing: 10) {
@@ -26,7 +26,7 @@ struct StreamingOptionsView: View {
                         }
                     }
                     .padding(0)
-                    .frame(height: 70, alignment: .center)
+                    .frame(height: 60, alignment: .center)
                     
                     HStack(alignment: .center, spacing: 10) {
                         if let country = vm.currentCountry {
@@ -39,18 +39,23 @@ struct StreamingOptionsView: View {
                         }
                     }
                     .padding(0)
-                    .frame(height: 70, alignment: .center)
+                    .frame(height: 60, alignment: .center)
                     
                     Spacer()
                     
-                    NavigationLink(destination: StreamingServicesView(streamingData: vm.streamingOptions, onSelect: {
-                        key, option in
-                        vm.currentCountry = Country(rawValue: key)
-                        vm.currentStreamingOption = option
-                    })) {
-                        Text("+\(vm.streamingOptions.count - 1)")
-                            .padding()
-                    }
+                    Button(action: {
+                        vm.isStreamingServicesPresented = true
+                        }) {
+                            Text("+\(vm.streamingOptions.count - 1)")
+                                .padding()
+                        }
+                        .sheet(isPresented: $vm.isStreamingServicesPresented) {
+                            StreamingServicesView(streamingData: vm.streamingOptions, onSelect: { key, option in
+                                vm.currentCountry = Country(rawValue: key)
+                                vm.currentStreamingOption = option
+                                vm.isStreamingServicesPresented = false
+                            })
+                        }
                     
                     Spacer()
                     
@@ -62,7 +67,7 @@ struct StreamingOptionsView: View {
                     Spacer()
                 }
                 .background(Constants.bgColor)
-            }
+            //}
         }
     }
 }

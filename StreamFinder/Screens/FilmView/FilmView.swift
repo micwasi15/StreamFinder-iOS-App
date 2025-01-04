@@ -102,6 +102,8 @@ struct FilmView: View {
                 NoInternetView()
             }
         }
+        .background(Constants.bgColor)
+        .foregroundStyle(Constants.fgColor)
         .onAppear {
             vm.fetchFilm(id: id)
         }
@@ -112,7 +114,5 @@ struct FilmView_Previews: PreviewProvider {
     static var previews: some View {
         FilmView(id: 100)
             .environmentObject(AppSettings())
-            .background(Constants.bgColor)
-            .foregroundStyle(Constants.fgColor)
     }
 }

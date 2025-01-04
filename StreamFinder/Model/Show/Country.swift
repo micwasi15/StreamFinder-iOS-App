@@ -224,6 +224,23 @@ enum Country: String, Decodable, Encodable {
         case .ro: return "Romania"
         }
     }
+    
+    static func getPreffered(countries: [String], preffered: Country) -> [String] {
+        var beggining: [String] = []
+        
+        if (countries.contains(preffered.rawValue)) {
+            beggining.append(preffered.rawValue)
+        }
+        
+        if (countries.contains(Country.us.rawValue)) {
+            beggining.append(Country.us.rawValue)
+        }
+        if (countries.contains(Country.gb.rawValue)) {
+            beggining.append(Country.gb.rawValue)
+        }
+        
+        return beggining + countries.sorted()
+    }
 }
 
 
