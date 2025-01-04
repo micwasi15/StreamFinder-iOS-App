@@ -11,47 +11,57 @@ struct StreamingOptionsView: View {
                 .background(Constants.bgColor)
                 .foregroundStyle(Constants.fgColor)
         } else {
-            HStack {
-                Spacer()
-                HStack(alignment: .center, spacing: 10) {
-                    if let streamingOption = vm.currentStreamingOption {
-                        if let img = Image.fromLogosFolder(named: streamingOption.service.rawValue) {
-                            img
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(alignment: .center)
-                            .cornerRadius(15)
+            NavigationView {
+                HStack {
+                    Spacer()
+                    HStack(alignment: .center, spacing: 10) {
+                        if let streamingOption = vm.currentStreamingOption {
+                            if let img = Image.fromLogosFolder(named: streamingOption.service.rawValue) {
+                                img
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(alignment: .center)
+                                    .cornerRadius(15)
+                            }
                         }
                     }
-                }
-                .padding(0)
-                .frame(height: 80, alignment: .center)
-
-                HStack(alignment: .center, spacing: 10) {
-                    if let streamingOption = vm.currentStreamingOption, let country = vm.currentCountry {
-                        if let img = Image.fromFlagsFolder(named: country.getImageName()) {
-                            img
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(alignment: .center)
+                    .padding(0)
+                    .frame(height: 80, alignment: .center)
+                    
+                    HStack(alignment: .center, spacing: 10) {
+                        if let country = vm.currentCountry {
+                            if let img = Image.fromFlagsFolder(named: country.getImageName()) {
+                                img
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(alignment: .center)
+                            }
                         }
                     }
+                    .padding(0)
+                    .frame(height: 80, alignment: .center)
+                    
+                    Spacer()
+                    
+                    NavigationLink(destination: StreamingServicesView(streamingData: vm.streamingOptions, onSelect: {
+                        key, option in
+                        vm.currentCountry = Country(rawValue: key)
+                        vm.currentStreamingOption = option
+                    })) {
+                        Text("+\(vm.streamingOptions.count - 1)")
+                            .padding()
+                    }
+                    
+                    Spacer()
+                    
+                    Button("Watch", action: vm.watch)
+                        .labelStyle(.titleAndIcon)
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.regular)
+                    
+                    Spacer()
                 }
-                .padding(0)
-                .frame(height: 80, alignment: .center)
-                
-                Spacer()
-                
-                Text("+\(vm.streamingOptions.count - 1)")
-                
-                Spacer()
-
-                Button("Watch", action: vm.watch)
-                .labelStyle(.titleAndIcon)
-                .buttonStyle(.borderedProminent)
-                .controlSize(.regular)
-                
-                Spacer()
+                .background(Constants.bgColor)
             }
         }
     }
@@ -60,7 +70,7 @@ struct StreamingOptionsView: View {
 
 struct StreamingOptionsView_Previews: PreviewProvider {
     static var previews: some View {
-        StreamingOptionsView(vm: StreamingOptionsViewModel(streamingOptions: MockData.streamingOptions1, appSettings: AppSettings()))
+        StreamingOptionsView(vm: StreamingOptionsViewModel(streamingOptions: MockData.streamingOptions, appSettings: AppSettings()))
             .background(Constants.bgColor)
             .foregroundStyle(Constants.fgColor)
     }

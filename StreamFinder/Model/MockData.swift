@@ -75,7 +75,20 @@ struct MockData {
     static let films = [Film]()
 
     static let streamingOptions:[String: [StreamingOption]] = [
-        Country.us.rawValue: [StreamingOption(service: .netflix, url: "sfdd")]
+        Country.us.rawValue: [StreamingOption(service: .netflix, url: "sfdd"),
+                              StreamingOption(service: .hbo, url: "sdafaf"),
+                              StreamingOption(service: .amazon, url: "asddaw"),
+                              StreamingOption(service: .apple, url: "afwwfa"),
+                              StreamingOption(service: .disney, url: "fsffse")],
+        Country.pl.rawValue: [StreamingOption(service: .netflix, url: "sfdd")],
+        Country.de.rawValue: [StreamingOption(service: .netflix, url: "sfdd")],
+        Country.ind.rawValue: [StreamingOption(service: .netflix, url: "sfdd")],
+        Country.ca.rawValue: [StreamingOption(service: .hbo, url: "sfdd")],
+        Country.ro.rawValue: [StreamingOption(service: .netflix, url: "sfdd")],
+        Country.fi.rawValue: [StreamingOption(service: .netflix, url: "sfdd")],
+        Country.fr.rawValue: [StreamingOption(service: .netflix, url: "sfdd")],
+        Country.au.rawValue: [StreamingOption(service: .netflix, url: "sfdd")],
+        Country.md.rawValue: [StreamingOption(service: .netflix, url: "sfdd")],
     ]
     static let streamingOptions1:[String: [StreamingOption]] = [
         Country.rs.rawValue: [StreamingOption(service: .hbo, url: "sfdd")]

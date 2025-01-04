@@ -2,10 +2,12 @@ import SwiftUI
 
 struct StreamingServicesView: View {
     // Przykładowy słownik z danymi
-    @State private var streamingData: [String: [StreamingOption]] = MockData.streamingOptions
+    var streamingData: [String: [StreamingOption]]
     
-    // Przechowujemy informacje o klikniętym elemencie
-    @State private var selectedOption: (key: String, option: StreamingOption)?
+    var onSelect: ((_ key: String, _ option: StreamingOption) -> Void)
+    
+    @Environment(\.dismiss) var dismiss
+
 
     var body: some View {
         VStack {
@@ -13,9 +15,9 @@ struct StreamingServicesView: View {
             List {
                 ForEach(streamingData.keys.sorted(), id: \.self) { key in
                     HStack {
-                        if let img = Image.fromFlagsFolder(named: Country(rawValue: key)?.getImageName()){
+                        if let img = Image.fromFlagsFolder(named: (Country(rawValue: key)?.getImageName())!){
                             // Pierwsza kolumna: Klucz (obrazek)
-                            img. // Możesz zamienić na obrazek odpowiadający kluczowi
+                            img
                                 .resizable()
                                 .frame(width: 50, height: 50)
                         }
@@ -26,7 +28,9 @@ struct StreamingServicesView: View {
                                 ForEach(streamingData[key]!, id: \.id) { option in
                                     Button(action: {
                                         // Obsługa kliknięcia na StreamingOption
-                                        selectedOption = (key, option)
+                                        onSelect(key, option)
+                                        print(option)
+                                        dismiss()
                                     }) {
                                         // Obrazek StreamingOption
                                         if let img = Image.fromFlagsFolder(named: option.service.rawValue) {
@@ -45,19 +49,12 @@ struct StreamingServicesView: View {
                     }
                 }
             }
-            
-            // Wyświetlanie informacji o klikniętym elemencie
-            if let selectedOption = selectedOption {
-                Text("Kliknięto: \(selectedOption.option.id) z \(selectedOption.key)")
-                    .padding()
-            }
         }
-        .padding()
     }
 }
 
-struct StreamingOptionsView_Previews: PreviewProvider {
+struct StreamingServicesView_Previews: PreviewProvider {
     static var previews: some View {
-        StreamingServicesView()
+        StreamingServicesView(streamingData: MockData.streamingOptions, onSelect: {key,option in print(key, option)})
     }
 }
