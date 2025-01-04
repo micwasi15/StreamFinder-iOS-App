@@ -6,11 +6,11 @@ struct ArticleView: View {
     let id: Int
     
     var body: some View {
-        ScrollView {
-            VStack {
-                if vm.isLoading {
-                    LoadingScreenView(text: "Loading article...")
-                } else if let article = vm.article {
+        VStack {
+            if vm.isLoading {
+                LoadingScreenView(text: "Loading article...")
+            } else if let article = vm.article {
+                ScrollView {
                     AsyncImage(url: URL(string: article.imageURL)) { image in
                         image
                             .resizable()
@@ -42,18 +42,16 @@ struct ArticleView: View {
                             .multilineTextAlignment(.leading)
                             .lineLimit(nil)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            
+                        
                     }
                     .padding(12.0)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                }
                 } else if let _ = vm.errorMessage {
                     NoInternetView()
                 }
-            }
-            .padding(.horizontal)
         }
-        .background(Color(Constants.bgColor))
-        .foregroundStyle(.white)
+        .padding(.horizontal)
         .onAppear {
             vm.fetchArticle(id: id)
         }
@@ -63,5 +61,7 @@ struct ArticleView: View {
 struct ArticleView_Previews: PreviewProvider {
     static var previews: some View {
         ArticleView(id: 11)
+            .background(Constants.bgColor)
+            .foregroundStyle(.white)
     }
 }
