@@ -85,25 +85,23 @@ struct FilmView: View {
                     .padding(.vertical, 0)
                     .frame(alignment: .top)
 
-                    StreamingOptionsView(vm: StreamingOptionsViewModel(streamingOptions: film.streamingOptions, appSettings: appSettings))
-                        .padding(.horizontal, 18)
-                        .padding(.vertical, 0)
-                        .frame(alignment: .top)
-
-                    Text(film.description)
-                        .font(.body)
-                        .fontWeight(.regular)
-                        .multilineTextAlignment(.leading)
-                        .lineLimit(nil)
-                        .padding(.horizontal, 18)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    VStack {
+                        StreamingOptionsView(vm: StreamingOptionsViewModel(streamingOptions: film.streamingOptions, appSettings: appSettings))
+                            .padding(.vertical, 0)
+                        
+                        Text(film.description)
+                            .font(.body)
+                            .fontWeight(.regular)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(nil)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .padding(.horizontal, 18)
                 }
             } else {
                 NoInternetView()
             }
         }
-        .foregroundStyle(Constants.fgColor)
-        .background(Constants.bgColor)
         .onAppear {
             vm.fetchFilm(id: id)
         }
@@ -114,5 +112,7 @@ struct FilmView_Previews: PreviewProvider {
     static var previews: some View {
         FilmView(id: 100)
             .environmentObject(AppSettings())
+            .background(Constants.bgColor)
+            .foregroundStyle(Constants.fgColor)
     }
 }

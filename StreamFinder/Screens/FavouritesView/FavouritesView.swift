@@ -18,5 +18,7 @@ struct FavoritesView_Previews: PreviewProvider {
     static var previews: some View {
         FavouritesView()
             .environmentObject(UserViewModelPreview() as UserViewModel)
+            .background(Constants.bgColor)
+            .foregroundStyle(Constants.fgColor)
     }
 }

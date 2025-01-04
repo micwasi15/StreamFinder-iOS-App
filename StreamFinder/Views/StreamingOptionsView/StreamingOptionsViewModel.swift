@@ -5,6 +5,8 @@ class StreamingOptionsViewModel: ObservableObject {
     @Published var currentStreamingOption: StreamingOption?
     @Published var currentCountry: Country?
     
+    @Published var isStreamingServicesPresented = false
+    
     init(streamingOptions: [String : [StreamingOption]], appSettings: AppSettings) {
         self.streamingOptions = streamingOptions
         let countryKey = appSettings.preferedCountry.rawValue

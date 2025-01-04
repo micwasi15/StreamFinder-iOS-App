@@ -2,7 +2,6 @@ import SwiftUI
 
 enum Country: String, Decodable, Encodable {
     case us
-    case uk
     case ca
     case au
     case de
@@ -72,11 +71,12 @@ enum Country: String, Decodable, Encodable {
     case ee
     case island = "is"
     case ro
+    case gb
 
     func getImageName() -> String {
         switch self {
         case .us: return "icons8-usa-96"
-        case .uk: return "icons8-uk-96"
+        case .gb: return "icons8-great-britain-96"
         case .ca: return "icons8-canada-96"
         case .au: return "icons8-australia-96"
         case .de: return "icons8-germany-96"
@@ -152,7 +152,7 @@ enum Country: String, Decodable, Encodable {
     func getCountryName() -> String {
         switch self {
         case .us: return "United States"
-        case .uk: return "United Kingdom"
+        case .gb: return "Great Britain"
         case .ca: return "Canada"
         case .au: return "Australia"
         case .de: return "Germany"

@@ -26,7 +26,7 @@ struct StreamingOptionsView: View {
                         }
                     }
                     .padding(0)
-                    .frame(height: 80, alignment: .center)
+                    .frame(height: 70, alignment: .center)
                     
                     HStack(alignment: .center, spacing: 10) {
                         if let country = vm.currentCountry {
@@ -39,7 +39,7 @@ struct StreamingOptionsView: View {
                         }
                     }
                     .padding(0)
-                    .frame(height: 80, alignment: .center)
+                    .frame(height: 70, alignment: .center)
                     
                     Spacer()
                     
