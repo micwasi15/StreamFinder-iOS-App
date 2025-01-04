@@ -29,12 +29,13 @@ struct StreamingServicesView: View {
                                         selectedOption = (key, option)
                                     }) {
                                         // Obrazek StreamingOption
-                                        AsyncImage(url: URL(string: option.imageUrl)) { image in
-                                            image.resizable()
-                                                 .aspectRatio(contentMode: .fill)
-                                                 .frame(width: 50, height: 50)
-                                        } placeholder: {
-                                            ProgressView()
+                                        if let img = Image.fromFlagsFolder(named: option.service.rawValue) {
+                                            img
+                                                .resizable()
+                                                .frame(width: 50, height: 50)
+                                        } else {
+                                            Image(systemName: "questionmark")
+                                                .resizable()
                                                 .frame(width: 50, height: 50)
                                         }
                                     }
