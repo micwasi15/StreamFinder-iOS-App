@@ -95,7 +95,7 @@ enum Country: String, Decodable, Encodable {
         case .kr: return "icons8-south-korea-96"
         case .cn: return "icons8-china-96"
         case .tw: return "icons8-taiwan-96"
-        case .hk: return "icons8-hong-kong-96"
+        case .hk: return "icons8-hongkong-96"
         case .sg: return "icons8-singapore-96"
         case .id: return "icons8-indonesia-96"
         case .th: return "icons8-thailand-96"
