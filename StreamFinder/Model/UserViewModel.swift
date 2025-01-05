@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftData
 
 @MainActor
 class UserViewModel: ObservableObject {
@@ -10,19 +9,21 @@ class UserViewModel: ObservableObject {
     @Published var userId: Int64?
     @Published var favoritesUpdated = false
     @Published var isGuest: Bool = false
-
+    @Published var favoriteShows: [Show] = []
+    
     private let userStorage = UserStorage()
-    @Environment(\.modelContext) private var modelContext
-
+    
     init() {
         Task {
             await loadUser()
+            await loadFavorites()
         }
     }
-
+    
     func loadUser() async {
         do {
             self.user = try userStorage.loadUser()
+            await login(email: user!.email, password: user!.password)
         } catch {
             print("Failed to load user: \(error)")
         }
@@ -71,98 +72,59 @@ class UserViewModel: ObservableObject {
             print("Failed to create user: \(error)")
         }
     }
-
-    private func fetchLocalFavoriteShowIds() throws -> Set<Int> {
-        let savedShows = try modelContext.fetch(FetchDescriptor<Show>())
-        return Set(savedShows.map { $0.apiId })
+    
+    func saveFavorites() {
+        FavoritesStorage.saveFavorites(favoriteShows)
     }
-
-    func getUserFavorites() async -> [Show] {
-        guard let userId = userId else { return [] }
-
+    
+    func loadFavorites() async {
         if favoritesUpdated {
-            do {
-                return try modelContext.fetch(FetchDescriptor<Show>())
-            } catch {
-                
-            }
+            return
         }
+        
+        favoriteShows = FavoritesStorage.getFavorites()
 
         do {
-            let favoritesIds = try await APIUserHandler.getUserFavoritesIds(userId: userId)
-            let localFavoriteIds = try fetchLocalFavoriteShowIds()
-            let newFavorites = favoritesIds.filter { !localFavoriteIds.contains($0) }
-            let removedFavorites = localFavoriteIds.filter { !favoritesIds.contains($0) }
+            let serverFavoritesSet = Set(try await APIUserHandler.getUserFavoritesIds(userId: userId!))
+            favoriteShows.removeAll { !serverFavoritesSet.contains($0.apiId) }
 
-            for showId in newFavorites {
-                let show = try await APIShowHandler.getShow(id: Int(showId))
-                modelContext.insert(show)
-                do {
-                    try modelContext.save()
-                } catch {}
-            }
-
-            for showId in removedFavorites {
-                if let show = try? modelContext.fetch(
-                    FetchDescriptor<Show>(
-                        predicate: #Predicate { $0.apiId == showId }
-                    )
-                ).first {
-                    modelContext.delete(show)
-                    do {
-                        try modelContext.save()
-                    } catch {}
+            for showId in serverFavoritesSet {
+                if !favoriteShows.contains(where: { $0.apiId == showId }) {
+                    let show = try await APIShowHandler.getShow(id: showId)
+                    favoriteShows.append(show)
                 }
             }
 
+            FavoritesStorage.saveFavorites(favoriteShows)
             favoritesUpdated = true
-            return try modelContext.fetch(FetchDescriptor<Show>())
         } catch {
-            print("Failed to get user favorites: \(error)")
-            return []
+            print("Failed to load or update favorites: \(error)")
         }
     }
 
-    func addUserFavorite(showId: Int) async {
-        guard let userId = userId else { return }
-
+    
+    func addUserFavorite(show: Show) async {
         do {
-            try await APIUserHandler.addUserFavorite(userId: userId, showId: showId)
-            let show = try await APIShowHandler.getShow(id: showId)
-            do {
-                modelContext.insert(show)
-                try modelContext.save()
-            } catch {}
+            try await APIUserHandler.addUserFavorite(userId: userId!, showId: show.apiId)
+            favoriteShows.append(show)
+            saveFavorites()
         } catch {
-            print("Failed to add user favorite: \(error)")
-        }
-    }
-
-    func removeUserFavorite(showId: Int) async {
-        guard let userId = userId else { return }
-
-        do {
-            try await APIUserHandler.removeUserFavorite(userId: userId, showId: showId)
-            if let show = try? modelContext.fetch(
-                FetchDescriptor<Show>(
-                    predicate: #Predicate { $0.apiId == showId }
-                )
-            ).first {
-                modelContext.delete(show)
-                do {
-                    modelContext.insert(show)
-                    try modelContext.save()
-                } catch {}
-            }
-        } catch {
-            print("Failed to remove user favorite: \(error)")
+            print("Failed to add \(show)")
         }
     }
     
-    func setIsGuest(val: Bool) {
-        isGuest = val
+    func removeUserFavorite(show: Show) async {
+        do {
+            try await APIUserHandler.removeUserFavorite(userId: userId!, showId: show.apiId)
+            favoriteShows.removeAll { $0.apiId == show.apiId }
+            saveFavorites()
+        } catch {
+            print("Failed to save \(show)")
+        }
     }
 }
+
+
 
 @MainActor
 class UserViewModelPreview: UserViewModel {
@@ -187,19 +149,19 @@ class UserViewModelPreview: UserViewModel {
         user = User(email: email, password: password)
     }
 
-    override func getUserFavorites() async -> [Show] {
-        return []
-    }
-
-    override func addUserFavorite(showId: Int) async {
+    override func saveFavorites() {
         return
     }
 
-    override func removeUserFavorite(showId: Int) async {
+    override func loadFavorites() async {
         return
     }
 
-    override func setIsGuest(val: Bool) {
-        isGuest = val
+    override func addUserFavorite(show: Show) async {
+        return
+    }
+
+    override func removeUserFavorite(show: Show) async {
+        return
     }
 }   
