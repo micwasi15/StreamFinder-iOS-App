@@ -12,6 +12,8 @@ struct ContentView: View {
                 LoginView()
             }
         }
+        .background(Constants.bgColor)
+        .foregroundStyle(Constants.fgColor)
     }
 }
 

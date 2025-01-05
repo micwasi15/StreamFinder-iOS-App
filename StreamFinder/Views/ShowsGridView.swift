@@ -5,9 +5,12 @@ protocol ShowsGridViewModel: ObservableObject {
     var shows: [Show] { get set }
     var isLoading: Bool { get set }
     var columns: [GridItem] { get }
-    var showsEmptyText: String { get }
+    var noShowsFoundText: String { get }
+    var additionalCondText: String { get }
     
     func searchShows() async
+    func noShowsFound() -> Bool
+    func additionalCond() -> Bool
 }
 
 struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
@@ -28,8 +31,12 @@ struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
                Spacer()
                if vm.isLoading {
                    LoadingScreenView(text: "Loading...")
-               } else if vm.shows.isEmpty {
-                   Text(vm.showsEmptyText)
+               } else if vm.noShowsFound() {
+                   Text(vm.noShowsFoundText)
+                       .multilineTextAlignment(.center)
+                       .padding()
+               } else if vm.additionalCond() {
+                   Text(vm.additionalCondText)
                        .multilineTextAlignment(.center)
                        .padding()
                } else {
@@ -46,6 +53,7 @@ struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
                }
                Spacer()
             }
+            .onAppear(perform: {Task {await vm.searchShows()}})
             .background(Constants.bgColor)
             .foregroundStyle(Constants.fgColor)
             //.searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))

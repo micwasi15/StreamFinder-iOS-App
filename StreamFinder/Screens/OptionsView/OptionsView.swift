@@ -23,8 +23,8 @@ struct OptionsView: View {
                     .background(Constants.fgColor)
                     .padding(.horizontal, 20)
                 
-                if let email = userViewModel.user?.email {
-                    Text("\(email)")
+                if let user = userViewModel.user, userViewModel.isUserLoggedIn {
+                    Text("\(user.email)")
                         .font(.title)
                         .fontWeight(.bold)
                 } else {
@@ -50,7 +50,7 @@ struct OptionsView: View {
                             OptionButtonView(title: "Log out", systemImage: "arrow.right.square")
                         }
                     } else {
-                        Button(action: { userViewModel.setIsGuest(val: false)}) {
+                        Button(action: { userViewModel.isGuest = false}) {
                             OptionButtonView(title: "Log in", systemImage: "person.crop.circle.badge.plus")
                         }
                     }

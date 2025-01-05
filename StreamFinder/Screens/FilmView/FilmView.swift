@@ -6,6 +6,9 @@ struct FilmView: View {
     
     @EnvironmentObject
     private var appSettings: AppSettings
+    
+    @EnvironmentObject
+    private var userViewModel: UserViewModel
 
     let id: Int
     
@@ -38,12 +41,12 @@ struct FilmView: View {
                         Text(film.title)
                             .font(.title)
                             .fontWeight(.bold)
-                            .multilineTextAlignment(.center)
+                            .multilineTextAlignment(.leading)
                             .lineLimit(2)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         Spacer()
-                        // Alternative Views and Spacers
-                        //View()
+                        FavoritesButtonView(apiId: id, userViewModel: userViewModel)
+                            .frame(height: 40)
                         }
                         .padding(.leading, 0)
                         .padding(.trailing, 5)
@@ -100,6 +103,7 @@ struct FilmView: View {
                 }
             } else {
                 NoInternetView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
         .background(Constants.bgColor)
@@ -114,5 +118,6 @@ struct FilmView_Previews: PreviewProvider {
     static var previews: some View {
         FilmView(id: 100)
             .environmentObject(AppSettings())
+            .environmentObject(UserViewModelPreview() as UserViewModel)
     }
 }

@@ -4,6 +4,8 @@ class AppSettings: ObservableObject, Codable {
     @Published var preferedCountry: Country = .us
     @Published var streamingServices: [StreamingService] = []
     
+    let userDefaultsKey = "AppSettings"
+    
     enum CodingKeys: String, CodingKey {
         case preferedCountry
         case streamingServices
@@ -26,7 +28,7 @@ class AppSettings: ObservableObject, Codable {
     }
     
     func loadFromMemory() {
-        if let data = UserDefaults.standard.data(forKey: "AppSettings"),
+        if let data = UserDefaults.standard.data(forKey: userDefaultsKey),
            let decoded = try? JSONDecoder().decode(AppSettings.self, from: data) {
             self.preferedCountry = decoded.preferedCountry
             self.streamingServices = decoded.streamingServices
@@ -35,7 +37,7 @@ class AppSettings: ObservableObject, Codable {
     
     func saveToMemory() {
         if let encoded = try? JSONEncoder().encode(self) {
-            UserDefaults.standard.set(encoded, forKey: "AppSettings")
+            UserDefaults.standard.set(encoded, forKey: userDefaultsKey)
         }
     }
 }

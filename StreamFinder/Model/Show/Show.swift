@@ -1,11 +1,8 @@
 import SwiftUI
-import SwiftData
 
 
-@Model
 class Show: Identifiable, Decodable {
     var id = UUID()
-    @Attribute(.unique)
     var apiId: Int
     var title: String
     var yearRange: String
@@ -69,4 +66,20 @@ class Show: Identifiable, Decodable {
 enum ShowType: String, Decodable, Encodable, CaseIterable {
     case movie
     case series
+}
+
+struct ShowStruct: Codable {
+    var apiId: Int
+    var title: String
+    var yearRange: String
+    var posterURL: String
+    var showType: ShowType
+    
+    static func fromClass(show: Show) -> ShowStruct {
+        return ShowStruct(apiId: show.apiId, title: show.title, yearRange: show.yearRange, posterURL: show.posterURL, showType: show.showType)
+    }
+    
+    func toClass() -> Show {
+        return Show(apiId: self.apiId, title: self.title, yearRange: self.yearRange, posterURL: self.posterURL, showType: self.showType)
+    }
 }

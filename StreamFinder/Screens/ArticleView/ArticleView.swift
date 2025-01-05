@@ -52,6 +52,8 @@ struct ArticleView: View {
                 }
         }
         .padding(.horizontal)
+        .background(Constants.bgColor)
+        .foregroundStyle(.white)
         .onAppear {
             vm.fetchArticle(id: id)
         }
@@ -61,7 +63,5 @@ struct ArticleView: View {
 struct ArticleView_Previews: PreviewProvider {
     static var previews: some View {
         ArticleView(id: 11)
-            .background(Constants.bgColor)
-            .foregroundStyle(.white)
     }
 }

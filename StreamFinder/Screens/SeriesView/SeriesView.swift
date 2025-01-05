@@ -3,13 +3,15 @@ import SwiftUI
 struct SeriesView: View {
     @StateObject
     private var vm: SeriesViewModel = SeriesViewModel()
+    
+    @EnvironmentObject private var userViewModel: UserViewModel
 
     let id: Int
     
     var body: some View {
         VStack {
             if vm.isLoading {
-                ProgressView("Series is loading...")
+                LoadingScreenView(text: "Series is loading")
             } else if let series = vm.series {
                 ScrollView {
                     if let trailer = series.trailerURL {
@@ -35,12 +37,12 @@ struct SeriesView: View {
                         Text(series.title)
                             .font(.title)
                             .fontWeight(.bold)
-                            .multilineTextAlignment(.center)
+                            .multilineTextAlignment(.leading)
                             .lineLimit(2)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         Spacer()
-                        // Alternative Views and Spacers
-                        //View()
+                        FavoritesButtonView(apiId: id, userViewModel: userViewModel)
+                            .frame(height: 40)
                         }
                         .padding(.leading, 0)
                         .padding(.trailing, 5)
@@ -110,6 +112,9 @@ struct SeriesView: View {
                             ForEach(selectedSeason.episodes) { episode in
                                 EpisodeView(episode: episode)
                                     .padding(.vertical)
+                                    .listRowSeparatorTint(Constants.fgColor)
+                                Divider()
+                                    .background(.white)
                             }
                         }
                     } else {
@@ -119,6 +124,7 @@ struct SeriesView: View {
                 }
             } else {
                 NoInternetView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
         .foregroundStyle(Constants.fgColor)
@@ -132,7 +138,8 @@ struct SeriesView: View {
 
 struct SeriesView_Previews: PreviewProvider {
     static var previews: some View {
-        SeriesView(id: 1000)
+        SeriesView(id: 1040)
             .environmentObject(AppSettings())
+            .environmentObject(UserViewModelPreview() as UserViewModel)
     }
 }

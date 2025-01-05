@@ -10,6 +10,7 @@ class RegisterViewModel: ObservableObject {
     @Published var isRepeatedPasswordValid: Bool = true
     @Published var isUserRegistered: Bool = false
     @Published var triedToRegister: Bool = false
+    @Published var isLoading: Bool = false
 
     let repeatedPasswordErrorInfo = "Passwords do not match"
     let accountAlreadyExistsErrorInfo = "Account with this email already exists"
@@ -23,11 +24,13 @@ class RegisterViewModel: ObservableObject {
             triedToRegister = false
             return
         }
+        self.isLoading = true
         Task {
             do {
                 await userViewModel.register(email: email, password: password)
             }
         }
+        self.isLoading = false
 
         self.triedToRegister = true
         self.isUserRegistered = userViewModel.isUserLoggedIn

@@ -42,9 +42,11 @@ struct Series: Identifiable, Decodable {
         }
         trailerURL = try? container.decodeIfPresent(String.self, forKey: .trailerURL)
         imdbRating = try container.decode(Double.self, forKey: .imdbRating) / 10
-        print(imdbRating)
-        seasons = try container.decode([Season].self, forKey: .seasons)
-        print(1)
+        do {
+            seasons = try container.decode([Season].self, forKey: .seasons)
+        } catch {
+            seasons = []
+        }
 
         if let posterSetContainer = try? container.nestedContainer(keyedBy: PosterKeys.self, forKey: .posterSet),
            let horizontalPosterContainer = try? posterSetContainer.nestedContainer(keyedBy: HorizontalPosterKeys.self, forKey: .horizontalPoster),

@@ -7,8 +7,20 @@ struct FavouritesView: View {
         if userViewModel.isUserLoggedIn {
             ShowsGridView(vm: FavouritesViewModel(userViewModel: userViewModel))
         } else {
-            Text("Please log in to view your favourites.")
-                .padding()
+            VStack {
+                Text("Please log in to view your favourites.")
+                    .padding()
+                
+                Button(action: {
+                    userViewModel.isGuest = false
+                }) {
+                    SimpleButtonView(text: "Log in", bgColor: Constants.secBgColor)
+                        .padding(.horizontal, 50)
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Constants.bgColor)
+            .foregroundStyle(Constants.fgColor)
         }
     }
 }

@@ -8,30 +8,29 @@ class LoginViewModel: ObservableObject {
     @Published var isPasswordValid: Bool = true
     @Published var isUserLoggedIn: Bool = false
     @Published var showRegisterView: Bool = false
+    @Published var isLoading: Bool = false
     
     @MainActor func login(userViewModel: UserViewModel) {
-        DispatchQueue.main.async {
-            self.isEmailValid = LoginDataValidator.validateEmail(email: self.email)
-        }
-
+        self.isEmailValid = LoginDataValidator.validateEmail(email: self.email)
+        
         if !isEmailValid {
             return
         }
         
+        self.isLoading = true
         Task {
             do {
                 await userViewModel.login(email: email, password: password)
             }
         }
+        self.isLoading = false
 
-        DispatchQueue.main.async {
-            self.isUserLoggedIn = userViewModel.isUserLoggedIn
-            self.isPasswordValid = self.isUserLoggedIn
-            print(userViewModel.isUserLoggedIn)
-        }
+        self.isUserLoggedIn = userViewModel.isUserLoggedIn
+        self.isPasswordValid = self.isUserLoggedIn
+        
     }
 
     @MainActor func enterAsGuest(userViewModel: UserViewModel) {
-        userViewModel.setIsGuest(val: true)
+        userViewModel.isGuest = true
     }
 }

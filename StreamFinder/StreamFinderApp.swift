@@ -25,6 +25,5 @@ struct StreamFinderApp: App {
                 .environmentObject(userViewModel)
                 .environmentObject(appSettings)
         }
-        .modelContainer(for: Show.self)
     }
 }
