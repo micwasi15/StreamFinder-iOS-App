@@ -15,3 +15,9 @@ struct SimpleButtonView: View {
             .cornerRadius(8.0)
     }
 }
+
+struct SimpleButtonView_Previews: PreviewProvider {
+    static var previews: some View {
+        SimpleButtonView(text: "Simple Button", bgColor: Constants.bgColor)
+    }
+}
