@@ -25,6 +25,7 @@ struct LoginFieldView: View {
                     )
             } else {
                 TextField("", text: $text)
+                    .textInputAutocapitalization(.never)
                     .padding()
                     .background(Color(.systemGray6))
                     .foregroundStyle(.black)

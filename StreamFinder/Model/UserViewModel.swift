@@ -8,7 +8,7 @@ class UserViewModel: ObservableObject {
     }
     @Published var userId: Int64?
     @Published var favoritesUpdated = false
-    @Published var isGuest: Bool = false
+    @Published var isGuest: Bool = true
     @Published var favoriteShows: [Show] = []
     
     private let userStorage = UserStorage()
@@ -23,7 +23,11 @@ class UserViewModel: ObservableObject {
     func loadUser() async {
         do {
             self.user = try userStorage.loadUser()
-            await login(email: user!.email, password: user!.password)
+            if let user = self.user {
+                await login(email: user.email, password: user.password)
+            } else {
+                throw UserError.noUser
+            }
         } catch {
             print("Failed to load user: \(error)")
         }
@@ -47,6 +51,7 @@ class UserViewModel: ObservableObject {
         do {
             userId = try await APIUserHandler.getUserId(email: email, password: password)
             user = User(email: email, password: password)
+            await loadFavorites()
             await saveUser(user!)
         } catch {
             userId = nil
@@ -85,7 +90,10 @@ class UserViewModel: ObservableObject {
         favoriteShows = FavoritesStorage.getFavorites()
 
         do {
-            let serverFavoritesSet = Set(try await APIUserHandler.getUserFavoritesIds(userId: userId!))
+            guard let id = userId else {
+                throw UserError.noUser
+            }
+            let serverFavoritesSet = Set(try await APIUserHandler.getUserFavoritesIds(userId: id))
             favoriteShows.removeAll { !serverFavoritesSet.contains($0.apiId) }
 
             for showId in serverFavoritesSet {
@@ -124,7 +132,9 @@ class UserViewModel: ObservableObject {
     }
 }
 
-
+enum UserError: Error {
+    case noUser
+}
 
 @MainActor
 class UserViewModelPreview: UserViewModel {

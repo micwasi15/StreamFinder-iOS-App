@@ -50,7 +50,7 @@ struct OptionsView: View {
                             OptionButtonView(title: "Log out", systemImage: "arrow.right.square")
                         }
                     } else {
-                        Button(action: { userViewModel.setIsGuest(val: false)}) {
+                        Button(action: { userViewModel.isGuest = false}) {
                             OptionButtonView(title: "Log in", systemImage: "person.crop.circle.badge.plus")
                         }
                     }

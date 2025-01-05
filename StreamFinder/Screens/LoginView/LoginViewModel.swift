@@ -32,6 +32,6 @@ class LoginViewModel: ObservableObject {
     }
 
     @MainActor func enterAsGuest(userViewModel: UserViewModel) {
-        userViewModel.setIsGuest(val: true)
+        userViewModel.isGuest = true
     }
 }
