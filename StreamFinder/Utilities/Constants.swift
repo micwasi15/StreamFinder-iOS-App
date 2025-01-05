@@ -6,4 +6,5 @@ struct Constants {
     static let selectedItemColor = Color(.white)
     static let unselectedItemColor = Color(.white.opacity(0.55))
     static let tabBgColor = Color(red: 0.14, green: 0.14, blue: 0.14)
+    static let secBgColor = Color(red: 0.18, green: 0.18, blue: 0.18)
 }

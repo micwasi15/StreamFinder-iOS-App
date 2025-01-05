@@ -32,7 +32,7 @@ struct NewsListCell: View {
             .padding(.horizontal, 10)
             .padding(.vertical, 15)
             .frame(maxWidth: .infinity, alignment: .top)
-            .background(Color(red: 0.18, green: 0.18, blue: 0.18))
+            .background(Constants.secBgColor)
 
             .cornerRadius(10)
 

@@ -32,7 +32,7 @@ struct StreamingOption: Identifiable, Decodable {
     }
 }
 
-enum StreamingService: String, Decodable, Encodable {
+enum StreamingService: String, Decodable, Encodable, Comparable {
     case unknown = "unknown"
     case netflix = "netflix"
     case hulu = "hulu"
@@ -64,6 +64,23 @@ enum StreamingService: String, Decodable, Encodable {
         case .paramount:
             return "Paramount+"
         }
+    }
+    
+    static func < (lhs: StreamingService, rhs: StreamingService) -> Bool {
+        return lhs.getFullName() < rhs.getFullName()
+    }
+    
+    static func allServices() -> [StreamingService] {
+        return [
+            .netflix,
+            .hulu,
+            .amazon,
+            .disney,
+            .hbo,
+            .apple,
+            .peacock,
+            .paramount
+        ]
     }
 }
 

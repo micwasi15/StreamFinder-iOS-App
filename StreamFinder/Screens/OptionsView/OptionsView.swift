@@ -1,44 +1,58 @@
 import SwiftUI
 
 struct OptionsView: View {
-    @State private var isLoggedIn: Bool = false // Stan zalogowania użytkownika
-    @State private var username: String? = "Użytkownik123" // Nazwa użytkownika, jeśli zalogowany
+    @EnvironmentObject
+    private var userViewModel: UserViewModel
+    
+    @EnvironmentObject
+    private var appSettings: AppSettings
     
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
-                // Wyświetlanie nazwy użytkownika
-                if let username = username, isLoggedIn {
-                    Text("Witaj, \(username)!")
+                HStack(alignment: .center) {
+                    Text("Options")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                }
+                .padding(.horizontal, 22.0)
+                .padding(.vertical, 0)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Divider()
+                    .background(Constants.fgColor)
+                    .padding(.horizontal, 20)
+                
+                if let email = userViewModel.user?.email {
+                    Text("\(email)")
                         .font(.title)
                         .fontWeight(.bold)
-                        .padding(.top)
                 } else {
-                    Text("Nie jesteś zalogowany")
+                    Text("You're not logged in")
                         .font(.title2)
                         .foregroundColor(.gray)
-                        .padding(.top)
                 }
                 
                 Divider()
+                    .background(Constants.fgColor)
+                    .padding(.horizontal, 20)
                 
-                // Przyciski do opcji
                 VStack(spacing: 15) {
                     NavigationLink(destination: ChangeCountryView()) {
-                        OptionButtonView(title: "Zmień preferowany kraj", systemImage: "globe")
+                        OptionButtonView(title: "Change preffered country", systemImage: "globe")
                     }
                     
-                    NavigationLink(destination: ChangeServicesView()) {
-                        OptionButtonView(title: "Zmień preferowane serwisy", systemImage: "list.dash")
+                    NavigationLink(destination: ChangePrefferedServicesView()) {
+                        OptionButtonView(title: "Change preffered services", systemImage: "list.dash")
                     }
                     
-                    if isLoggedIn {
-                        Button(action: logout) {
-                            OptionButtonView(title: "Wyloguj się", systemImage: "arrow.right.square")
+                    if userViewModel.isUserLoggedIn {
+                        Button(action: userViewModel.logout) {
+                            OptionButtonView(title: "Log out", systemImage: "arrow.right.square")
                         }
                     } else {
-                        Button(action: login) {
-                            OptionButtonView(title: "Zaloguj się", systemImage: "person.crop.circle.badge.plus")
+                        Button(action: { userViewModel.setIsGuest(val: false)}) {
+                            OptionButtonView(title: "Log in", systemImage: "person.crop.circle.badge.plus")
                         }
                     }
                 }
@@ -46,25 +60,13 @@ struct OptionsView: View {
                 
                 Spacer()
             }
-            .navigationTitle("Opcje")
-            .padding()
+            .background(.black)
         }
-    }
-    
-    // Funkcja obsługująca logowanie
-    private func login() {
-        isLoggedIn = true
-        username = "NowyUżytkownik"
-    }
-    
-    // Funkcja obsługująca wylogowanie
-    private func logout() {
-        isLoggedIn = false
-        username = nil
+        .background(Constants.bgColor)
+        .foregroundStyle(Constants.fgColor)
     }
 }
 
-// Widok przycisku opcji
 struct OptionButtonView: View {
     let title: String
     let systemImage: String
@@ -73,22 +75,20 @@ struct OptionButtonView: View {
         HStack {
             Image(systemName: systemImage)
                 .font(.title2)
-                .foregroundColor(.blue)
             Text(title)
                 .font(.headline)
-                .foregroundColor(.primary)
             Spacer()
         }
+        .frame(maxHeight: 25)
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 10)
-                .fill(Color(.systemGray6))
+                .fill(Constants.secBgColor)
         )
         .shadow(radius: 1)
     }
 }
 
-// Przykładowe widoki docelowe
 struct ChangeCountryView: View {
     var body: some View {
         Text("Widok zmiany preferowanego kraju")
@@ -97,17 +97,11 @@ struct ChangeCountryView: View {
     }
 }
 
-struct ChangeServicesView: View {
-    var body: some View {
-        Text("Widok zmiany preferowanych serwisów")
-            .font(.title)
-            .padding()
-    }
-}
-
-// Podgląd
 struct OptionsView_Previews: PreviewProvider {
     static var previews: some View {
         OptionsView()
+            .environmentObject(UserViewModelPreview() as UserViewModel)
+            .environmentObject(AppSettings())
+            .background(Constants.bgColor)
     }
 }

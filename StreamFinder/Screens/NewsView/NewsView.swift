@@ -39,7 +39,6 @@ struct NewsView: View {
                         .listRowBackground(Constants.bgColor)
                     }
                     .scrollContentBackground(.hidden)
-                    .background(Constants.bgColor)
                 }
             }
             .background(Constants.bgColor)
