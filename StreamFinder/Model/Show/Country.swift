@@ -241,6 +241,10 @@ enum Country: String, Decodable, Encodable {
         
         return beggining + countries.sorted()
     }
+    
+    static let allCases: [Country] = [
+            .us, .ca, .au, .de, .fr, .it, .es, .jp, .br, .mx, .nl, .se, .no, .dk, .fi, .ru, .kr, .cn, .tw, .hk, .sg, .id, .th, .ph, .my, .vn, .pl, .cz, .hu, .sk, .at, .ch, .be, .pt, .ie, .gr, .tr, .ar, .cl, .co, .pe, .ve, .ec, .bo, .uy, .py, .pa, .cr, .gt, .sv, .hn, .ni, .rs, .ind, .ua, .az, .lt, .mk, .ae, .il, .md, .za, .bg, .si, .cy, .nz, .hr, .ee, .island, .ro, .gb
+        ]
 }
 
 
