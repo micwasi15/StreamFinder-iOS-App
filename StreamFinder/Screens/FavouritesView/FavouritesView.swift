@@ -18,6 +18,9 @@ struct FavouritesView: View {
                         .padding(.horizontal, 50)
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Constants.bgColor)
+            .foregroundStyle(Constants.fgColor)
         }
     }
 }

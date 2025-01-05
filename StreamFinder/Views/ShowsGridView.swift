@@ -53,6 +53,7 @@ struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
                }
                Spacer()
             }
+            .onAppear(perform: {Task {await vm.searchShows()}})
             .background(Constants.bgColor)
             .foregroundStyle(Constants.fgColor)
             //.searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))

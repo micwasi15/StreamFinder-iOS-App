@@ -23,8 +23,8 @@ struct OptionsView: View {
                     .background(Constants.fgColor)
                     .padding(.horizontal, 20)
                 
-                if let email = userViewModel.user?.email {
-                    Text("\(email)")
+                if let user = userViewModel.user, userViewModel.isUserLoggedIn {
+                    Text("\(user.email)")
                         .font(.title)
                         .fontWeight(.bold)
                 } else {

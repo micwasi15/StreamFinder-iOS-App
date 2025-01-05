@@ -13,6 +13,9 @@ class SearchViewModel: ShowsGridViewModel, ObservableObject {
     ]
     
     func searchShows() {
+        if searchText.isEmpty && shows.isEmpty {
+            return
+        }
         Task {
             do {
                 DispatchQueue.main.async {
@@ -25,7 +28,6 @@ class SearchViewModel: ShowsGridViewModel, ObservableObject {
                 }
             } catch {
                 DispatchQueue.main.async {
-                    self.noShowsFoundText = "Failed to fetch shows: \(error.localizedDescription)"
                     self.isLoading = false
                 }
             }

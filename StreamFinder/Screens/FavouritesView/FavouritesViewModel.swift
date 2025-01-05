@@ -47,7 +47,6 @@ class FavouritesViewModel: ObservableObject, ShowsGridViewModel {
                 }
             } catch {
                 DispatchQueue.main.async {
-                    self.noShowsFoundText = "Failed to fetch shows: \(error.localizedDescription)"
                     self.isLoading = false
                 }
             }

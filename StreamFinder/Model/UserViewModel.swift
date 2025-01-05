@@ -62,6 +62,7 @@ class UserViewModel: ObservableObject {
     func logout() {
         self.userId = nil
         self.user = nil
+        self.favoritesUpdated = false
         Task {
             await deleteUser()
         }
@@ -111,24 +112,39 @@ class UserViewModel: ObservableObject {
     }
 
     
-    func addUserFavorite(show: Show) async {
+    func addUserFavorite(_ apiId: Int) async -> Bool {
+        if userId == nil {
+            return false
+        }
         do {
-            try await APIUserHandler.addUserFavorite(userId: userId!, showId: show.apiId)
+            try await APIUserHandler.addUserFavorite(userId: userId!, showId: apiId)
+            let show = try await APIShowHandler.getShow(id: apiId)
             favoriteShows.append(show)
             saveFavorites()
+            return true
         } catch {
-            print("Failed to add \(show)")
+            print("Failed to add \(apiId)")
+            return false
         }
     }
     
-    func removeUserFavorite(show: Show) async {
-        do {
-            try await APIUserHandler.removeUserFavorite(userId: userId!, showId: show.apiId)
-            favoriteShows.removeAll { $0.apiId == show.apiId }
-            saveFavorites()
-        } catch {
-            print("Failed to save \(show)")
+    func removeUserFavorite(_ apiId: Int) async -> Bool {
+        if userId == nil {
+            return false
         }
+        do {
+            try await APIUserHandler.removeUserFavorite(userId: userId!, showId: apiId)
+            favoriteShows.removeAll { $0.apiId == apiId }
+            saveFavorites()
+            return true
+        } catch {
+            print("Failed to save \(apiId)")
+            return false
+        }
+    }
+    
+    func isFavorite(_ apiId: Int) -> Bool {
+        return favoriteShows.contains(where: {$0.apiId == apiId})
     }
 }
 
@@ -167,11 +183,11 @@ class UserViewModelPreview: UserViewModel {
         return
     }
 
-    override func addUserFavorite(show: Show) async {
-        return
+    override func addUserFavorite(_ apiId: Int) async -> Bool {
+        return true
     }
 
-    override func removeUserFavorite(show: Show) async {
-        return
+    override func removeUserFavorite(_ apiId: Int) async -> Bool {
+        return true
     }
 }   
