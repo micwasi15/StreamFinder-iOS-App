@@ -30,7 +30,6 @@ struct OptionsView: View {
                 } else {
                     Text("You're not logged in")
                         .font(.title2)
-                        .foregroundColor(.gray)
                 }
                 
                 Divider()
@@ -38,7 +37,7 @@ struct OptionsView: View {
                     .padding(.horizontal, 20)
                 
                 VStack(spacing: 15) {
-                    NavigationLink(destination: ChangeCountryView()) {
+                    NavigationLink(destination: ChangePrefferedCountryView()) {
                         OptionButtonView(title: "Change preffered country", systemImage: "globe")
                     }
                     
@@ -60,18 +59,10 @@ struct OptionsView: View {
                 
                 Spacer()
             }
-            .background(.black)
+            .background(Constants.bgColor)
         }
         .background(Constants.bgColor)
         .foregroundStyle(Constants.fgColor)
-    }
-}
-
-struct ChangeCountryView: View {
-    var body: some View {
-        Text("Widok zmiany preferowanego kraju")
-            .font(.title)
-            .padding()
     }
 }
 

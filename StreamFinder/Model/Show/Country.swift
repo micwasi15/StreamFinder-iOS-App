@@ -226,21 +226,20 @@ enum Country: String, Decodable, Encodable {
     }
     
     static func getPreffered(countries: [String], preffered: Country) -> [String] {
-        var beggining: [String] = []
+        var beginning: [String] = []
+        let ending = countries.sorted()
         
-        if (countries.contains(preffered.rawValue)) {
-            beggining.append(preffered.rawValue)
+        let preferredCountries = [preffered.rawValue, Country.us.rawValue, Country.gb.rawValue]
+        
+        for country in preferredCountries {
+            if countries.contains(country) && !beginning.contains(country) {
+                beginning.append(country)
+            }
         }
         
-        if (countries.contains(Country.us.rawValue)) {
-            beggining.append(Country.us.rawValue)
-        }
-        if (countries.contains(Country.gb.rawValue)) {
-            beggining.append(Country.gb.rawValue)
-        }
-        
-        return beggining + countries.sorted()
+        return beginning + ending.filter { !beginning.contains($0) }
     }
+
     
     static let allCases: [Country] = [
             .us, .ca, .au, .de, .fr, .it, .es, .jp, .br, .mx, .nl, .se, .no, .dk, .fi, .ru, .kr, .cn, .tw, .hk, .sg, .id, .th, .ph, .my, .vn, .pl, .cz, .hu, .sk, .at, .ch, .be, .pt, .ie, .gr, .tr, .ar, .cl, .co, .pe, .ve, .ec, .bo, .uy, .py, .pa, .cr, .gt, .sv, .hn, .ni, .rs, .ind, .ua, .az, .lt, .mk, .ae, .il, .md, .za, .bg, .si, .cy, .nz, .hr, .ee, .island, .ro, .gb
