@@ -1,11 +1,8 @@
 import SwiftUI
 
 struct OptionsView: View {
-    @EnvironmentObject
-    private var userViewModel: UserViewModel
-    
-    @EnvironmentObject
-    private var appSettings: AppSettings
+    @EnvironmentObject private var userViewModel: UserViewModel
+    @EnvironmentObject private var appSettings: AppSettings
     
     var body: some View {
         NavigationView {

@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct ArticleView: View {
-    @StateObject 
-    var vm: ArticleViewModel = ArticleViewModel()
+    @StateObject var vm: ArticleViewModel = ArticleViewModel()
     let id: Int
     
     var body: some View {

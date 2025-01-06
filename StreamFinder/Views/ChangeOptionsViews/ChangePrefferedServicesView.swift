@@ -2,9 +2,7 @@ import SwiftUI
 
 struct ChangePrefferedServicesView: View {
     @State private var otherServices: [StreamingService] = StreamingService.allServices()
-    
-    @EnvironmentObject
-    private var appSetting: AppSettings
+    @EnvironmentObject private var appSetting: AppSettings
 
     var body: some View {
         NavigationView {

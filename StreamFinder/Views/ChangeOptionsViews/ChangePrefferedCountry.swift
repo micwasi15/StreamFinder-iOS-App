@@ -1,11 +1,8 @@
 import SwiftUI
 
 struct ChangePrefferedCountryView: View {
-    @EnvironmentObject
-    private var appSettings: AppSettings
-    
-    @State 
-    private var searchQuery: String = ""
+    @EnvironmentObject private var appSettings: AppSettings
+    @State private var searchQuery: String = ""
     
     private let allCountries = Country.allCases.sorted(by: { $0.getCountryName() < $1.getCountryName() })
     

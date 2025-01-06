@@ -1,11 +1,8 @@
 import SwiftUI
 
 struct LoginView: View {
-    @StateObject
-    var vm: LoginViewModel = LoginViewModel()
-    
-    @EnvironmentObject
-    var userViewModel: UserViewModel
+    @StateObject var vm: LoginViewModel = LoginViewModel()
+    @EnvironmentObject var userViewModel: UserViewModel
 
     var body: some View {
         if vm.isLoading {

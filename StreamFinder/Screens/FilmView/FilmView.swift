@@ -1,14 +1,9 @@
 import SwiftUI
 
 struct FilmView: View {
-    @StateObject
-    private var vm: FilmViewModel = FilmViewModel()
-    
-    @EnvironmentObject
-    private var appSettings: AppSettings
-    
-    @EnvironmentObject
-    private var userViewModel: UserViewModel
+    @StateObject private var vm: FilmViewModel = FilmViewModel()
+    @EnvironmentObject private var appSettings: AppSettings
+    @EnvironmentObject private var userViewModel: UserViewModel
 
     let id: Int
     
@@ -37,7 +32,6 @@ struct FilmView: View {
 
                     VStack(alignment: .center, spacing: 5.0) { 
                         HStack(alignment: .center) {
-                        // Space Between
                         Text(film.title)
                             .font(.title)
                             .fontWeight(.bold)

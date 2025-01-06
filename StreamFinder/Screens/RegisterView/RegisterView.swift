@@ -1,11 +1,8 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @StateObject 
-    var vm: RegisterViewModel = RegisterViewModel()
-    
-    @EnvironmentObject
-    var userViewModel: UserViewModel
+    @StateObject var vm: RegisterViewModel = RegisterViewModel()
+    @EnvironmentObject var userViewModel: UserViewModel
     
     var body: some View {
         NavigationView {

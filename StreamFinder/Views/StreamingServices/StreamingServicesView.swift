@@ -2,15 +2,10 @@ import SwiftUI
 
 struct StreamingServicesView: View {
     var streamingData: [String: [StreamingOption]]
-    
     var onSelect: ((_ key: String, _ option: StreamingOption) -> Void)
     
-    @Environment(\.dismiss)
-    var dismiss
-    
-    @EnvironmentObject
-    private var appSettings: AppSettings
-
+    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject private var appSettings: AppSettings
 
     var body: some View {
         VStack {

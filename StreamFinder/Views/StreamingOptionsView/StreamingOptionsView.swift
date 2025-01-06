@@ -11,7 +11,6 @@ struct StreamingOptionsView: View {
                 .background(Constants.bgColor)
                 .foregroundStyle(Constants.fgColor)
         } else {
-            //NavigationView {
                 HStack {
                     Spacer()
                     HStack(alignment: .center, spacing: 10) {
@@ -67,7 +66,6 @@ struct StreamingOptionsView: View {
                     Spacer()
                 }
                 .background(Constants.bgColor)
-            //}
         }
     }
 }

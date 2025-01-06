@@ -1,9 +1,7 @@
 import SwiftUI
 
 struct SeriesView: View {
-    @StateObject
-    private var vm: SeriesViewModel = SeriesViewModel()
-    
+    @StateObject private var vm: SeriesViewModel = SeriesViewModel()
     @EnvironmentObject private var userViewModel: UserViewModel
 
     let id: Int
@@ -33,7 +31,6 @@ struct SeriesView: View {
 
                     VStack(alignment: .center, spacing: 5.0) { 
                         HStack(alignment: .center) {
-                        // Space Between
                         Text(series.title)
                             .font(.title)
                             .fontWeight(.bold)

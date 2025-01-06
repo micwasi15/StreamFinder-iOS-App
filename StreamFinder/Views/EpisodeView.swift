@@ -3,8 +3,7 @@ import SwiftUI
 struct EpisodeView: View {
     let episode: Episode
     
-    @EnvironmentObject
-    var appSettings: AppSettings
+    @EnvironmentObject var appSettings: AppSettings
 
     var body: some View {
         VStack {

@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct NewsView: View {
-    @StateObject
-    var vm = NewsViewModel()
+    @StateObject var vm = NewsViewModel()
 
     var body: some View {
         NavigationView {
