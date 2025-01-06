@@ -41,5 +41,9 @@ class SearchViewModel: ShowsGridViewModel, ObservableObject {
     func additionalCond() -> Bool {
         searchText.isEmpty
     }
+    
+    func onAppear() async {
+        return
+    }
 }
 

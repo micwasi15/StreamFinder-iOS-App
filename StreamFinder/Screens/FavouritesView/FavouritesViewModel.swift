@@ -64,4 +64,8 @@ class FavouritesViewModel: ObservableObject, ShowsGridViewModel {
     func additionalCond() -> Bool {
         return noFavorites
     }
+    
+    func onAppear() async {
+        await searchShows()
+    }
 }

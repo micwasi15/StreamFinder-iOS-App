@@ -5,7 +5,7 @@ struct LoginFieldView: View {
     @Binding var isValid: Bool
     let title: String
     let errorMessage: String
-    let isSecure: Bool // Dodane do rozróżnienia typu pola
+    let isSecure: Bool 
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -15,6 +15,7 @@ struct LoginFieldView: View {
             
             if isSecure {
                 SecureField("", text: $text)
+                    .textContentType(.password)
                     .padding()
                     .background(Color(.systemGray6))
                     .foregroundStyle(.black)

@@ -11,6 +11,7 @@ protocol ShowsGridViewModel: ObservableObject {
     func searchShows() async
     func noShowsFound() -> Bool
     func additionalCond() -> Bool
+    func onAppear() async
 }
 
 struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
@@ -53,7 +54,7 @@ struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
                }
                Spacer()
             }
-            .onAppear(perform: {Task {await vm.searchShows()}})
+            .onAppear(perform: {Task {await vm.onAppear()}})
             .background(Constants.bgColor)
             .foregroundStyle(Constants.fgColor)
             //.searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))

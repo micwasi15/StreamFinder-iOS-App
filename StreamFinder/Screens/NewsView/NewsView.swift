@@ -8,7 +8,7 @@ struct NewsView: View {
         NavigationView {
             VStack {
                 if vm.isLoading {
-                    ProgressView("Loading article")
+                    LoadingScreenView(text: "Loading article")
                 } else if let _ = vm.errorMessage {
                     NoInternetView()
                 } else if let news = vm.news {

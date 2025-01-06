@@ -11,10 +11,11 @@ struct ShowView: View {
                     .aspectRatio(contentMode: .fit)
                     .cornerRadius(8.0)
             } placeholder: {
-                Image(systemName: "photo")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 100)
+                if let img = Image.fromFolder(named: "poster") {
+                    img.resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(8.0)
+                }
             }
             Text(show.title)
                 .lineLimit(2)
