@@ -30,7 +30,7 @@ class FavoritesButtonViewModel: ObservableObject {
                 showError(notLoggedInErr)
                 isLiked.toggle()
             }
-            else if !isLiked {
+            else if isLiked {
                 guard await userViewModel.addUserFavorite(apiId) else {
                     showError(failedToAddErr)
                     isLiked.toggle()

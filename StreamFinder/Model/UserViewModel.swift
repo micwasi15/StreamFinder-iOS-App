@@ -47,15 +47,17 @@ class UserViewModel: ObservableObject {
         userStorage.deleteUser()
     }
 
-    func login(email: String, password: String) async {
+    func login(email: String, password: String) async -> Bool {
         do {
             userId = try await APIUserHandler.getUserId(email: email, password: password)
             user = User(email: email, password: password)
             await loadFavorites()
             await saveUser(user!)
+            return true
         } catch {
             userId = nil
             print("Failed to login: \(error)")
+            return false
         }
     }
 
@@ -68,14 +70,16 @@ class UserViewModel: ObservableObject {
         }
     }
 
-    func register(email: String, password: String) async {
+    func register(email: String, password: String) async -> Bool {
         do {
             self.userId = try await APIUserHandler.createUser(email: email, password: password)
             self.user = User(email: email, password: password)
             await saveUser(user!)
+            return true
         } catch {
             self.userId = nil
             print("Failed to create user: \(error)")
+            return false
         }
     }
     
@@ -160,9 +164,10 @@ class UserViewModelPreview: UserViewModel {
         userId = nil
     }
 
-    override func login(email: String, password: String) async {
+    override func login(email: String, password: String) async -> Bool {
         userId = 1
         user = User(email: email, password: password)
+        return true
     }
 
     override func logout() {
@@ -170,9 +175,10 @@ class UserViewModelPreview: UserViewModel {
         user = nil
     }
 
-    override func register(email: String, password: String) async {
+    override func register(email: String, password: String) async -> Bool {
         userId = 1
         user = User(email: email, password: password)
+        return true
     }
 
     override func saveFavorites() {

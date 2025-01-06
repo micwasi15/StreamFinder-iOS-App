@@ -21,7 +21,7 @@ class SearchViewModel: ShowsGridViewModel, ObservableObject {
                 DispatchQueue.main.async {
                     self.isLoading = true
                 }
-                let fetchedShows = try await APIShowHandler.getShows(title: searchText)
+                let fetchedShows = searchText.isEmpty ? [] : try await APIShowHandler.getShows(title: searchText)
                 DispatchQueue.main.async {
                     self.shows = fetchedShows
                     self.isLoading = false
@@ -39,7 +39,7 @@ class SearchViewModel: ShowsGridViewModel, ObservableObject {
     }
     
     func additionalCond() -> Bool {
-        searchText.isEmpty
+        searchText.isEmpty && shows.isEmpty
     }
     
     func onAppear() async {

@@ -17,17 +17,13 @@ class LoginViewModel: ObservableObject {
             return
         }
         
-        self.isLoading = true
         Task {
             do {
-                await userViewModel.login(email: email, password: password)
+                let loggedIn = await userViewModel.login(email: email, password: password)
+                self.isUserLoggedIn = loggedIn
+                self.isPasswordValid = loggedIn
             }
         }
-        self.isLoading = false
-
-        self.isUserLoggedIn = userViewModel.isUserLoggedIn
-        self.isPasswordValid = self.isUserLoggedIn
-        
     }
 
     @MainActor func enterAsGuest(userViewModel: UserViewModel) {
