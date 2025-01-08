@@ -47,7 +47,7 @@ class FavoritesButtonViewModel: ObservableObject {
     }
 
     private func prepareSound() {
-        guard let url = Bundle.main.url(forResource: "heartClick", withExtension: "mp3") else { return }
+        guard let url = Bundle.main.url(forResource: "click", withExtension: "wav") else { return }
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
         } catch {
