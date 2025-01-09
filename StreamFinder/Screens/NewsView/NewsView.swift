@@ -7,7 +7,7 @@ struct NewsView: View {
         NavigationView {
             VStack {
                 if vm.isLoading {
-                    LoadingScreenView(text: "Loading article")
+                    LoadingScreenView(text: "Loading articles...")
                 } else if let _ = vm.errorMessage {
                     NoInternetView()
                 } else if let news = vm.news {
@@ -27,10 +27,11 @@ struct NewsView: View {
                     List(news) { newsElem in
                         ZStack {
                             NewsListCell(news: newsElem)
+                                .background(
                             NavigationLink(destination: ArticleView(id: newsElem.apiId)) {
                                 EmptyView()
                             }
-                            .buttonStyle(PlainButtonStyle())
+                                .buttonStyle(PlainButtonStyle()).opacity(0))
                         }
                         .listRowInsets(EdgeInsets())
                         .padding(.vertical, 10)

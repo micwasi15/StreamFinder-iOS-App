@@ -9,7 +9,7 @@ struct SeriesView: View {
     var body: some View {
         VStack {
             if vm.isLoading {
-                LoadingScreenView(text: "Series is loading")
+                LoadingScreenView(text: "Series is loading...")
             } else if let series = vm.series {
                 ScrollView {
                     if let trailer = series.trailerURL {
@@ -106,6 +106,11 @@ struct SeriesView: View {
                         .padding(.horizontal)
 
                         if let selectedSeason = vm.selectedSeason {
+                            if selectedSeason.episodes.isEmpty {
+                                Text("No streaming options available")
+                                    .multilineTextAlignment(.leading)
+                                    .padding()
+                            }
                             ForEach(selectedSeason.episodes) { episode in
                                 EpisodeView(episode: episode)
                                     .padding(.vertical)

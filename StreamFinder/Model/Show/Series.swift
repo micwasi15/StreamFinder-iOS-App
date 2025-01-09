@@ -78,6 +78,21 @@ struct Season: Identifiable, Decodable, Hashable {
         case episodes
     }
     
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.title = try container.decode(String.self, forKey: .title)
+        do {
+            self.episodes = try container.decode([Episode].self, forKey: .episodes)
+        } catch {
+            self.episodes = []
+        }
+    }
+    
+    init(title: String, episodes: [Episode]) {
+        self.title = title
+        self.episodes = episodes
+    }
+    
     static func == (lhs: Season, rhs: Season) -> Bool {
         lhs.id == rhs.id
     }
@@ -98,5 +113,23 @@ struct Episode: Identifiable, Decodable {
         case title = "title"
         case streamingOptions = "streamingOptions"
         case description = "overview"
+    }
+    
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.title = try container.decode(String.self, forKey: .title)
+        do {
+            self.streamingOptions = try container.decode([String : [StreamingOption]].self, forKey: .streamingOptions)
+        } catch {
+            self.streamingOptions = [:]
+        }
+        self.description = try container.decode(String.self, forKey: .description)
+    }
+    
+    init(title: String, streamingOptions: [String: [StreamingOption]], description: String) {
+        self.id = UUID()
+        self.title = title
+        self.streamingOptions = streamingOptions
+        self.description = description
     }
 }

@@ -8,7 +8,9 @@ class ArticleViewModel: ObservableObject {
     func fetchArticle(id: Int) {
         Task {
             do {
-                isLoading = true
+                DispatchQueue.main.async {
+                    self.isLoading = true
+                }
                 let fetchedArticle = try await APINewsHandler.getArticle(id: id)
                 DispatchQueue.main.async {
                     self.article = fetchedArticle
