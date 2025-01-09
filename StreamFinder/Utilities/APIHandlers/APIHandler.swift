@@ -1,5 +1,5 @@
 import SwiftUI
 
 class APIHandler {
-    static let url: String = "192.168.125.124:8080"
+    static let url: String = "https://5217-156-17-147-0.ngrok-free.app"
 }
