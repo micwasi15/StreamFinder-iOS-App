@@ -7,7 +7,7 @@ struct StreamingOptionsView: View {
         if (vm.streamingOptions.count == 0) {
             AnyView(Text("No streaming options available"))
                 .padding()
-                .frame(width: .infinity, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/)
+                .frame(height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/)
                 .background(Constants.bgColor)
                 .foregroundStyle(Constants.fgColor)
         } else {
@@ -48,7 +48,11 @@ struct StreamingOptionsView: View {
                         }) {
                             Text("+\(vm.streamingOptions.count - 1)")
                                 .padding(10)
-                                .background(RoundedRectangle(cornerRadius: 10).fill(Constants.secBgColor))
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Constants.secBgColor)
+                                        .frame(width: 45, height: 45)
+                                        .aspectRatio(contentMode: .fill))
                         }
                         .sheet(isPresented: $vm.isStreamingServicesPresented) {
                             StreamingServicesView(streamingData: vm.streamingOptions, onSelect: { key, option in

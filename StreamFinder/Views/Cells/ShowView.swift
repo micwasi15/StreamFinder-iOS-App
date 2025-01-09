@@ -26,7 +26,7 @@ struct ShowView: View {
                 .font(.caption)
                 .foregroundStyle(Constants.fgColor.opacity(0.75))
         }
-        .frame(width: .infinity, height: 160, alignment: .topLeading)
+        .frame(height: 160, alignment: .topLeading)
         .background(Constants.bgColor)
     }
 }
