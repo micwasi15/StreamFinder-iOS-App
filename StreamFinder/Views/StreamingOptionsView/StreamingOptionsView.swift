@@ -27,6 +27,9 @@ struct StreamingOptionsView: View {
                     .padding(0)
                     .frame(height: 60, alignment: .center)
                     
+                    Button(action: {
+                        vm.showCountryHint.toggle()
+                    }) {
                     HStack(alignment: .center, spacing: 10) {
                         if let country = vm.currentCountry {
                             if let img = Image.fromFolder(named: country.getImageName()) {
@@ -39,6 +42,7 @@ struct StreamingOptionsView: View {
                     }
                     .padding(0)
                     .frame(height: 60, alignment: .center)
+                    }
                     
                     Spacer()
                     
@@ -47,6 +51,7 @@ struct StreamingOptionsView: View {
                         }) {
                             Text("+\(vm.streamingOptions.count - 1)")
                                 .padding()
+                                .background(RoundedRectangle(cornerRadius: 10).fill(.blue))
                         }
                         .sheet(isPresented: $vm.isStreamingServicesPresented) {
                             StreamingServicesView(streamingData: vm.streamingOptions, onSelect: { key, option in
@@ -64,6 +69,15 @@ struct StreamingOptionsView: View {
                         .controlSize(.regular)
                     
                     Spacer()
+
+                    if vm.showCountryHint {
+                        if let country = vm.currentCountry {
+                            Text("Country: \(country.rawValue)")
+                                .padding()
+                                .transition(.opacity)
+                                .zIndex(1)
+                        }
+                    }
                 }
                 .background(Constants.bgColor)
         }
