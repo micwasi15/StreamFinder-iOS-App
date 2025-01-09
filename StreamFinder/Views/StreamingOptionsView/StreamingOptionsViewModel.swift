@@ -6,7 +6,6 @@ class StreamingOptionsViewModel: ObservableObject {
     @Published var currentCountry: Country?
     
     @Published var isStreamingServicesPresented = false
-    @Published var showCountryHint = false
     
     init(streamingOptions: [String : [StreamingOption]], appSettings: AppSettings) {
         self.streamingOptions = streamingOptions
@@ -70,20 +69,6 @@ class StreamingOptionsViewModel: ObservableObject {
                 } else {
                     print("Failed to open URL")
                 }
-            }
-        }
-    }
-
-    func displayCountryHint() {
-        DispatchQueue.main.async {
-            withAnimation {
-                showCountryHint = true
-            }
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            withAnimation {
-                showCountryHint = false
             }
         }
     }
