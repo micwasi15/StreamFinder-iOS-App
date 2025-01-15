@@ -41,6 +41,7 @@ struct LoginFieldView: View {
                 Text(errorMessage)
                     .font(.footnote)
                     .foregroundColor(.red)
+                    .accessibilityIdentifier("loginErrorLabel")
             }
         }
     }

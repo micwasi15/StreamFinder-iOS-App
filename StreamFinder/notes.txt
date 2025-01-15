@@ -1,12 +1,9 @@
-niebieska czcionka w favView, wszedzie po wyszukaniu
-strzalka w newsView
-//news sie nie laduja
-tlo sie nie wyswietla
-frame wokol placeholderow search
-placeholder sie nie rozciaga wszerz
+UI:
+- złe dane
 
-
-user zapis/odczyt
-favorites zapis/odczyt
-options -> zmiana hasła, preferowany kraj, usługa
-preferencje zapis/odczyt
+Unit:
+- Parsing Film
+- walidacja maila
+- nieudana walidacja hasła
+- preferowane kraje
+- search vm pusty search
