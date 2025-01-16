@@ -28,7 +28,6 @@ struct LoginView: View {
                     )
                     .padding(.bottom, 20)
                     .padding(.horizontal, 20)
-                    .accessibilityIdentifier("emailTextField")
                     
                     LoginFieldView(
                         text: $vm.password,
@@ -39,7 +38,6 @@ struct LoginView: View {
                     )
                     .padding(.bottom, 40)
                     .padding(.horizontal, 20)
-                    .accessibilityIdentifier("passwordTextField")
                     
                     VStack(spacing: 20) {
                         Button(action: {

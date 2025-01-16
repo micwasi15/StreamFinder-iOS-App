@@ -6,11 +6,40 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		A19A7B852D397084004DA361 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1ACB3092CDD373A009C398B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1ACB3102CDD373A009C398B;
+			remoteInfo = StreamFinder;
+		};
+		A19A7B942D397276004DA361 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1ACB3092CDD373A009C398B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1ACB3102CDD373A009C398B;
+			remoteInfo = StreamFinder;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		A19A7B812D397083004DA361 /* StreamFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreamFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A19A7B8E2D397276004DA361 /* StreamFinderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreamFinderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1ACB3112CDD373A009C398B /* StreamFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreamFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		A19A7B822D397084004DA361 /* StreamFinderTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = StreamFinderTests;
+			sourceTree = "<group>";
+		};
+		A19A7B8F2D397276004DA361 /* StreamFinderUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = StreamFinderUITests;
+			sourceTree = "<group>";
+		};
 		A1ACB3132CDD373A009C398B /* StreamFinder */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = StreamFinder;
@@ -19,6 +48,20 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A19A7B7E2D397083004DA361 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A19A7B8B2D397276004DA361 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A1ACB30E2CDD373A009C398B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -33,6 +76,8 @@
 			isa = PBXGroup;
 			children = (
 				A1ACB3132CDD373A009C398B /* StreamFinder */,
+				A19A7B822D397084004DA361 /* StreamFinderTests */,
+				A19A7B8F2D397276004DA361 /* StreamFinderUITests */,
 				A1ACB3122CDD373A009C398B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				A1ACB3112CDD373A009C398B /* StreamFinder.app */,
+				A19A7B812D397083004DA361 /* StreamFinderTests.xctest */,
+				A19A7B8E2D397276004DA361 /* StreamFinderUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,6 +95,52 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A19A7B802D397083004DA361 /* StreamFinderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A19A7B892D397084004DA361 /* Build configuration list for PBXNativeTarget "StreamFinderTests" */;
+			buildPhases = (
+				A19A7B7D2D397083004DA361 /* Sources */,
+				A19A7B7E2D397083004DA361 /* Frameworks */,
+				A19A7B7F2D397083004DA361 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A19A7B862D397084004DA361 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A19A7B822D397084004DA361 /* StreamFinderTests */,
+			);
+			name = StreamFinderTests;
+			packageProductDependencies = (
+			);
+			productName = StreamFinderTests;
+			productReference = A19A7B812D397083004DA361 /* StreamFinderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A19A7B8D2D397276004DA361 /* StreamFinderUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A19A7B962D397276004DA361 /* Build configuration list for PBXNativeTarget "StreamFinderUITests" */;
+			buildPhases = (
+				A19A7B8A2D397276004DA361 /* Sources */,
+				A19A7B8B2D397276004DA361 /* Frameworks */,
+				A19A7B8C2D397276004DA361 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A19A7B952D397276004DA361 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A19A7B8F2D397276004DA361 /* StreamFinderUITests */,
+			);
+			name = StreamFinderUITests;
+			packageProductDependencies = (
+			);
+			productName = StreamFinderUITests;
+			productReference = A19A7B8E2D397276004DA361 /* StreamFinderUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		A1ACB3102CDD373A009C398B /* StreamFinder */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1ACB31F2CDD373B009C398B /* Build configuration list for PBXNativeTarget "StreamFinder" */;
@@ -80,6 +173,14 @@
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					A19A7B802D397083004DA361 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = A1ACB3102CDD373A009C398B;
+					};
+					A19A7B8D2D397276004DA361 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = A1ACB3102CDD373A009C398B;
+					};
 					A1ACB3102CDD373A009C398B = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -100,11 +201,27 @@
 			projectRoot = "";
 			targets = (
 				A1ACB3102CDD373A009C398B /* StreamFinder */,
+				A19A7B802D397083004DA361 /* StreamFinderTests */,
+				A19A7B8D2D397276004DA361 /* StreamFinderUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A19A7B7F2D397083004DA361 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A19A7B8C2D397276004DA361 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A1ACB30F2CDD373A009C398B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +232,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A19A7B7D2D397083004DA361 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A19A7B8A2D397276004DA361 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A1ACB30D2CDD373A009C398B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,7 +255,106 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A19A7B862D397084004DA361 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1ACB3102CDD373A009C398B /* StreamFinder */;
+			targetProxy = A19A7B852D397084004DA361 /* PBXContainerItemProxy */;
+		};
+		A19A7B952D397276004DA361 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1ACB3102CDD373A009C398B /* StreamFinder */;
+			targetProxy = A19A7B942D397276004DA361 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		A19A7B872D397084004DA361 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pwr.StreamFinderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StreamFinder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StreamFinder";
+				XROS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		A19A7B882D397084004DA361 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pwr.StreamFinderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StreamFinder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StreamFinder";
+				XROS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		A19A7B972D397276004DA361 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pwr.StreamFinderUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = StreamFinder;
+				XROS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		A19A7B982D397276004DA361 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pwr.StreamFinderUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = StreamFinder;
+				XROS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
 		A1ACB31D2CDD373B009C398B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -303,6 +533,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A19A7B892D397084004DA361 /* Build configuration list for PBXNativeTarget "StreamFinderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A19A7B872D397084004DA361 /* Debug */,
+				A19A7B882D397084004DA361 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A19A7B962D397276004DA361 /* Build configuration list for PBXNativeTarget "StreamFinderUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A19A7B972D397276004DA361 /* Debug */,
+				A19A7B982D397276004DA361 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A1ACB30C2CDD373A009C398B /* Build configuration list for PBXProject "StreamFinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

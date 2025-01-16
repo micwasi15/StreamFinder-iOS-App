@@ -6,6 +6,66 @@
 //
 
 import XCTest
+@testable import StreamFinder
+
+
+final class LoginUITests: XCTestCase {
+    private var app: XCUIApplication!
+
+    override func setUp() {
+        app = XCUIApplication()
+        app.launchArguments.append("-loginMode")
+        app.launch()
+    }
+
+    override func tearDown() {
+        app.terminate()
+    }
+
+    func testLogin() {
+        let emailTextField = app.textFields["emailTextField"]
+        let passwordTextField = app.secureTextFields["passwordTextField"]
+        let loginButton = app.buttons["loginButton"]
+
+        emailTextField.tap()
+        emailTextField.typeText("john@gmail.com")
+
+        passwordTextField.tap()
+        passwordTextField.typeText("1234")
+
+        loginButton.tap()
+        
+        let loginErrorLabel = app.staticTexts["loginErrorLabel"]
+        XCTAssertTrue(loginErrorLabel.waitForExistence(timeout: 5))
+    }
+}
+
+
+final class SearchUITests: XCTestCase {
+    private var app: XCUIApplication!
+
+    override func setUp() {
+        app = XCUIApplication()
+        app.launch()
+    }
+
+    override func tearDown() {
+        app.terminate()
+    }
+
+    func testSearch() {
+        let searchField = app.textFields["searchField"]
+        
+        searchField.tap()
+        searchField.typeText("Friends")
+        searchField.typeText("\n")
+        
+        let loadingScreen = app.images["loadingScreen"]
+        
+        XCTAssertTrue(loadingScreen.waitForExistence(timeout: 5))
+    }
+}
+
 
 final class StreamFinderUITests: XCTestCase {
 

@@ -28,6 +28,7 @@ struct ShowsGridView<ViewModel: ShowsGridViewModel>: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .foregroundStyle(.black.opacity(0.6))
                 .padding()
+                .accessibilityIdentifier("searchField")
                 
                Spacer()
                if vm.isLoading {

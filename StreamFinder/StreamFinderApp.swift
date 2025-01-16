@@ -9,8 +9,16 @@ import SwiftUI
 
 @main
 struct StreamFinderApp: App {
-    @StateObject private var userViewModel = UserViewModel()
+    @StateObject private var userViewModel: UserViewModel
     @StateObject private var appSettings = AppSettings()
+    
+    init() {
+        if ProcessInfo.processInfo.arguments.contains("-loginMode") {
+            _userViewModel = StateObject(wrappedValue: UserViewModel(false))
+        } else {
+            _userViewModel = StateObject(wrappedValue: UserViewModel())
+        }
+    }
 
     var body: some Scene {
         WindowGroup {

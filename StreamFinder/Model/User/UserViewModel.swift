@@ -13,10 +13,14 @@ class UserViewModel: ObservableObject {
     
     private let userStorage = UserStorage()
     
-    init() {
-        Task {
-            await loadUser()
-            await loadFavorites()
+    init(_ loggedIn: Bool = true) {
+        if loggedIn {
+            Task {
+                await loadUser()
+                await loadFavorites()
+            }
+        } else {
+            isGuest = false
         }
     }
     
@@ -158,7 +162,7 @@ enum UserError: Error {
 
 @MainActor
 class UserViewModelPreview: UserViewModel {
-    override init() {
+    override init(_ loggedIn: Bool = true) {
         super.init()
         user = nil
         userId = nil

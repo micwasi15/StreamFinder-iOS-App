@@ -15,6 +15,7 @@ struct LoginFieldView: View {
             
             if isSecure {
                 SecureField("", text: $text)
+                    .accessibilityIdentifier("passwordTextField")
                     .textContentType(.password)
                     .padding()
                     .background(Color(.systemGray6))
@@ -26,6 +27,7 @@ struct LoginFieldView: View {
                     )
             } else {
                 TextField("", text: $text)
+                    .accessibilityIdentifier("emailTextField")
                     .textInputAutocapitalization(.never)
                     .padding()
                     .background(Color(.systemGray6))

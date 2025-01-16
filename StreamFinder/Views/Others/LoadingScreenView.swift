@@ -31,6 +31,7 @@ struct LoadingScreenView: View {
                         .scaledToFit()
                         .frame(width: 150)
                         .colorMultiply(imageColor)
+                        .accessibilityIdentifier("loadingScreen")
                 }
                 
                 HStack(spacing: 10) {
